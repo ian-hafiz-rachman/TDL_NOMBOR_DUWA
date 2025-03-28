@@ -1297,6 +1297,41 @@
         margin-right: 8px;
         font-size: 16px;
     }
+
+    /* Styling untuk tombol navigasi kalender */
+    .fc-prev-button,
+    .fc-next-button,
+    .fc-today-button {
+        padding: 8px 16px !important;
+        font-size: 14px !important;
+        border-radius: 6px !important;
+        background-color: #ffffff !important;
+        color: #6c757d !important;
+        border: 1px solid #e9ecef !important;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .fc-prev-button:hover,
+    .fc-next-button:hover,
+    .fc-today-button:hover {
+        background-color: #0b5ed7 !important;
+        color: #ffffff !important;
+        transform: translateY(-2px);
+        border-color: #0b5ed7 !important;
+        box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4) !important;
+    }
+
+    .fc-prev-button:active,
+    .fc-next-button:active,
+    .fc-today-button:active {
+        transform: translateY(0);
+    }
+
+    /* Pastikan icon pada tombol prev/next terlihat */
+    .fc-icon {
+        color: currentColor !important;
+    }
 </style>
 @endsection
 
@@ -1614,12 +1649,28 @@ document.addEventListener('DOMContentLoaded', function() {
             calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 height: 650,
-                headerToolbar: false,
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: ''
+                },
                 events: "{{ route('tasks.get') }}",
                 dayMaxEvents: true,
                 eventDisplay: 'block',
                 displayEventTime: false,
-                firstDay: 1
+                firstDay: 1,
+                customButtons: {
+                    prev: {
+                        click: function() {
+                            calendar.prev();
+                        }
+                    },
+                    next: {
+                        click: function() {
+                            calendar.next();
+                        }
+                    }
+                }
             });
         }
         calendar.render();
@@ -1715,7 +1766,13 @@ document.addEventListener('DOMContentLoaded', function() {
         calendarViewBtn.classList.add('active');
         statsViewBtn.classList.remove('active');
         localStorage.setItem('currentView', 'calendar');
-        initializeCalendar();
+        
+        // Re-render calendar saat beralih ke view calendar
+        if (calendar) {
+            calendar.render();
+        } else {
+            initializeCalendar();
+        }
     });
 
     statsViewBtn.addEventListener('click', function() {
