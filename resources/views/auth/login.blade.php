@@ -67,12 +67,12 @@
                                 <div class="text-center">
                                     <span class="text-muted">atau</span>
                                 </div>
-                                
+
                                 <a href="{{ route('google.login') }}" class="btn btn-outline-secondary">
-                                    <img src="{{ asset('images/google.svg') }}" alt="Google" class="me-2" style="width: 18px;">
+                                    <img src="https://www.google.com/favicon.ico" alt="Google" class="me-2" style="width: 20px;">
                                     Masuk dengan Google
                                 </a>
-
+                                
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link text-muted text-decoration-none" href="{{ route('password.request') }}">
                                         Lupa Password?

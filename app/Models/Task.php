@@ -9,15 +9,13 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'title',
-        'description',
-        'start_date',
-        'end_date',
-        'priority',
-        'status',
-        'user_id'
-    ];
+    protected $fillable = ['title', 'description', 'start_date', 'end_date', 'priority', 'status', 'user_id'];
+    
+    // Tambahkan mutator untuk status jika diperlukan
+    public function setStatusAttribute($value)
+    {
+        $this->attributes['status'] = strtolower($value);
+    }
 
     protected $casts = [
         'start_date' => 'datetime',

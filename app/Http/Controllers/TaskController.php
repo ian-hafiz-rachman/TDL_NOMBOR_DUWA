@@ -175,4 +175,100 @@ class TaskController extends Controller
 
         return response()->json(['success' => true, 'status' => $task->status]);
     }
+
+    public function dashboard()
+    {
+        $user = Auth::user();
+        
+        // Get tasks data
+        $upcomingDeadlines = Task::where('user_id', $user->id)
+            ->where('status', '!=', 'completed')
+            ->orderBy('end_date', 'asc')
+            ->take(5)
+            ->get();
+
+        // Get task statistics
+        $totalTasks = Task::where('user_id', $user->id)->count();
+        $completedTasks = Task::where('user_id', $user->id)
+            ->where('status', 'completed')
+            ->count();
+        $pendingTasks = $totalTasks - $completedTasks;
+
+        // Get priority statistics
+        $highPriorityCount = Task::where('user_id', $user->id)
+            ->where('priority', 'high')
+            ->count();
+        $mediumPriorityCount = Task::where('user_id', $user->id)
+            ->where('priority', 'medium')
+            ->count();
+        $lowPriorityCount = Task::where('user_id', $user->id)
+            ->where('priority', 'low')
+            ->count();
+
+        // Get weekly task counts
+        $weeklyTaskCounts = [];
+        for ($i = 0; $i < 7; $i++) {
+            $date = now()->startOfWeek()->addDays($i);
+            $weeklyTaskCounts[] = Task::where('user_id', $user->id)
+                ->whereDate('created_at', $date)
+                ->count();
+        }
+
+        return view('dashboard', compact(
+            'upcomingDeadlines',
+            'totalTasks',
+            'completedTasks',
+            'pendingTasks',
+            'highPriorityCount',
+            'mediumPriorityCount',
+            'lowPriorityCount',
+            'weeklyTaskCounts'
+        ));
+    }
+
+    public function toggleStatus($id)
+    {
+        try {
+            $task = Task::find($id);
+            
+            if (!$task) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Task not found'
+                ], 404);
+            }
+    
+            $task->status = ($task->status === 'completed') ? 'pending' : 'completed';
+            $task->save();
+    
+            return response()->json([
+                'success' => true,
+                'status' => $task->status,
+                'message' => 'Task status updated successfully'
+            ]);
+    
+        } catch (\Exception $e) {
+            \Log::error('Error updating task status: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update task status'
+            ], 500);
+        }
+    }
+
+    public function getStatistics()
+    {
+        $user = Auth::user();
+        $totalTasks = Task::where('user_id', $user->id)->count();
+        $completedTasks = Task::where('user_id', $user->id)
+            ->where('status', 'completed')
+            ->count();
+        $pendingTasks = $totalTasks - $completedTasks;
+
+        return response()->json([
+            'totalTasks' => $totalTasks,
+            'completedTasks' => $completedTasks,
+            'pendingTasks' => $pendingTasks
+        ]);
+    }
 } 

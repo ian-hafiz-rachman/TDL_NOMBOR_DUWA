@@ -40,6 +40,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
     Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar');
     Route::get('/get-tasks', [TaskController::class, 'getTasks'])->name('tasks.get');
+    Route::post('/tasks/{id}/toggle-status', [TaskController::class, 'toggleStatus'])->name('tasks.toggle-status');
+    Route::get('/tasks/statistics', [TaskController::class, 'getStatistics'])->name('tasks.statistics');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

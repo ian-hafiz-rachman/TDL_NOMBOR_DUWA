@@ -3,60 +3,40 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Exception;
-use Illuminate\Support\Str;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class GoogleController extends Controller
 {
     public function redirectToGoogle()
     {
-        try {
-            return Socialite::driver('google')->redirect();
-        } catch (Exception $e) {
-            \Log::error('Google redirect error: ' . $e->getMessage());
-            return redirect()->route('login')
-                ->with('error', 'Terjadi kesalahan saat menghubungkan ke Google.');
-        }
+        return Socialite::driver('google')->redirect();
     }
 
     public function handleGoogleCallback()
     {
         try {
-            $googleUser = Socialite::driver('google')->user();
-            \Log::info('Google callback received for email: ' . $googleUser->email);
-            
-            $user = User::where('email', $googleUser->email)->first();
+            $user = Socialite::driver('google')->user();
+            $finduser = User::where('google_id', $user->id)->first();
 
-            if (!$user) {
-                // Buat user baru jika belum ada
-                $user = User::create([
-                    'name' => $googleUser->name,
-                    'email' => $googleUser->email,
-                    'google_id' => $googleUser->id,
-                    'password' => bcrypt(Str::random(16)), // Menggunakan Str::random()
-                    'email_verified_at' => now(), // Email sudah terverifikasi dari Google
+            if ($finduser) {
+                Auth::login($finduser);
+                return redirect()->intended('dashboard');
+            } else {
+                $newUser = User::create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'google_id' => $user->id,
+                    'password' => bcrypt('123456dummy')
                 ]);
-                \Log::info('New user created: ' . $user->email);
-            } elseif (!$user->google_id) {
-                // Update google_id hanya jika belum ada
-                $user->update([
-                    'google_id' => $googleUser->id,
-                ]);
-                \Log::info('Updated google_id for user: ' . $user->email);
+
+                Auth::login($newUser);
+                return redirect()->intended('dashboard');
             }
-
-            Auth::login($user);
-            \Log::info('User logged in successfully: ' . $user->email);
-
-            return redirect()->route('dashboard')->with('success', 'Berhasil masuk menggunakan akun Google.');
-
         } catch (Exception $e) {
-            \Log::error('Google callback error: ' . $e->getMessage());
-            return redirect()->route('login')
-                ->with('error', 'Terjadi kesalahan saat login dengan Google. Silakan coba lagi.');
+            return redirect()->route('login')->with('error', 'Something went wrong!');
         }
     }
 } 
