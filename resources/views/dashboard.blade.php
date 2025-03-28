@@ -1131,6 +1131,156 @@
     .upcoming-tasks:hover {
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
     }
+
+    /* Styling untuk cards */
+    .stats-card,
+    .stats-card:hover {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Reset hover effects untuk non-button elements */
+    .upcoming-tasks .list-group-item:hover,
+    .fc-event:hover,
+    .badge:hover {
+        transform: none !important;
+        background-color: inherit !important;
+        cursor: default !important;
+    }
+
+    /* Hover effects untuk buttons */
+    .btn {
+        transition: all 0.3s ease !important;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* Specific button hover effects */
+    .btn-primary:hover {
+        background-color: #0056b3 !important;
+    }
+
+    .btn-success:hover {
+        background-color: #1e7e34 !important;
+    }
+
+    .btn-danger:hover {
+        background-color: #bd2130 !important;
+    }
+
+    .btn-warning:hover {
+        background-color: #d39e00 !important;
+    }
+
+    .btn-info:hover {
+        background-color: #117a8b !important;
+    }
+
+    /* Toggle view buttons hover */
+    #calendarViewBtn:hover,
+    #statsViewBtn:hover {
+        background-color: #f8f9fa !important;
+        color: #0056b3 !important;
+    }
+
+    /* Add task button hover */
+    .add-task-btn:hover {
+        background-color: #0056b3 !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2) !important;
+    }
+
+    /* Checkbox styling */
+    .form-check-input {
+        cursor: pointer !important;
+    }
+
+    /* Reset hover pada list items */
+    .list-group-item {
+        transition: none !important;
+        background-color: white !important;
+    }
+
+    /* Reset hover pada badges */
+    .badge {
+        transition: none !important;
+    }
+
+    /* Pastikan shadow tetap ada */
+    .upcoming-tasks,
+    .upcoming-tasks:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Close button hover effect */
+    .btn-close:hover {
+        opacity: 1 !important;
+        transform: rotate(90deg) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    /* Toggle view buttons styling */
+    #calendarViewBtn,
+    #statsViewBtn {
+        padding: 12px 24px;
+        border-radius: 8px;
+        transition: all 0.3s ease !important;
+        font-weight: 500;
+        border: 2px solid #e9ecef !important;
+        margin: 0 5px;
+    }
+
+    /* Default state */
+    #calendarViewBtn,
+    #statsViewBtn {
+        background-color: #ffffff;
+        color: #6c757d;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Active state untuk Calendar View */
+    #calendarViewBtn.active {
+        background-color: #0d6efd !important;
+        color: #ffffff !important;
+        font-weight: 600;
+        border-color: #0d6efd !important;
+        box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3) !important;
+    }
+
+    /* Active state untuk Statistics View */
+    #statsViewBtn.active {
+        background-color: #0d6efd !important;
+        color: #ffffff !important;
+        font-weight: 600;
+        border-color: #0d6efd !important;
+        box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3) !important;
+    }
+
+    /* Hover state */
+    #calendarViewBtn:hover,
+    #statsViewBtn:hover {
+        background-color: #0b5ed7 !important;
+        color: #ffffff !important;
+        transform: translateY(-2px);
+        border-color: #0b5ed7 !important;
+        box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4) !important;
+    }
+
+    /* Container untuk toggle buttons */
+    .view-toggle-container {
+        background-color: #f8f9fa;
+        padding: 8px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        display: inline-flex;
+        gap: 15px;
+    }
 </style>
 @endsection
 
