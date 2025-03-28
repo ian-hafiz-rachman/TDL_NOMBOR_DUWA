@@ -1228,12 +1228,14 @@
     /* Toggle view buttons styling */
     #calendarViewBtn,
     #statsViewBtn {
-        padding: 12px 24px;
-        border-radius: 8px;
+        padding: 10px 20px;
+        border-radius: 6px;
         transition: all 0.3s ease !important;
         font-weight: 500;
-        border: 2px solid #e9ecef !important;
+        border: 1px solid #e9ecef !important;
         margin: 0 5px;
+        font-size: 15px;
+        min-width: 140px;  /* Menambahkan lebar minimum */
     }
 
     /* Default state */
@@ -1275,11 +1277,25 @@
     /* Container untuk toggle buttons */
     .view-toggle-container {
         background-color: #f8f9fa;
-        padding: 8px;
-        border-radius: 12px;
+        padding: 6px;
+        border-radius: 8px;
         margin-bottom: 20px;
         display: inline-flex;
-        gap: 15px;
+        gap: 10px;
+    }
+
+    /* Today button styling untuk konsistensi */
+    .fc-today-button {
+        padding: 8px 16px !important;
+        font-size: 14px !important;
+        border-radius: 6px !important;
+    }
+
+    /* Icon styling */
+    #calendarViewBtn i,
+    #statsViewBtn i {
+        margin-right: 8px;
+        font-size: 16px;
     }
 </style>
 @endsection
