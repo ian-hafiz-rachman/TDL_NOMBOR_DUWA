@@ -24,26 +24,34 @@
 
     /* Stats Cards Styling */
     .stats-card {
-        background: white;
+        transition: none !important;
         border-radius: 15px;
-        margin-bottom: 20px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
         border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: none;
     }
     
-    .stats-card .card-header {
-        background: white;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-        padding: 1rem 1.5rem;
-    }
-    
-    .stats-card .card-header h5 {
-        color: #2c3e50;
-        font-weight: 600;
-        margin: 0;
+    .stats-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
     }
     
     .stats-card .card-body {
-        padding: 1.5rem;
+        padding: 1.8rem;
+    }
+    
+    .stats-card h6 {
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    
+    .stats-card h4 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--primary-color);
     }
 
     /* Action buttons spacing */
@@ -67,7 +75,7 @@
     .action-buttons .btn-primary {
         background-color: var(--primary-color);
         border: none;
-        box-shadow: 0 2px 5px rgba(0, 153, 255, 0.2);
+        box-shadow: none;
     }
 
     .action-buttons .btn-outline-primary {
@@ -86,7 +94,7 @@
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(0, 0, 0, 0.08);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        box-shadow: none;
         padding: 20px;
         border-radius: 15px;
     }
@@ -96,7 +104,7 @@
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(0, 0, 0, 0.08);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        box-shadow: none;
         height: calc(100% - 260px);
         margin-top: var(--spacing-base); /* Konsisten 25px */
     }
@@ -109,11 +117,11 @@
     .upcoming-deadlines .list-group-item {
         padding: 15px;
         border-bottom: 1px solid rgba(0,0,0,0.05);
-        transition: background-color 0.3s ease;
+        transition: none !important;
     }
     
     .upcoming-deadlines .list-group-item:hover {
-        background-color: rgba(248, 249, 252, 0.8);
+        background-color: white !important;
     }
     
     .upcoming-deadlines .task-actions {
@@ -136,7 +144,7 @@
         z-index: 1000;
         min-width: 300px;
         border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        box-shadow: none;
         animation: slideIn 0.5s ease-out;
         padding: 12px 20px; /* Adjust padding since we removed the close button */
     }
@@ -180,7 +188,7 @@
         background: white;
         padding: 20px;
         border-radius: 15px;
-        box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        box-shadow: none;
         margin-bottom: 20px;
     }
 
@@ -192,7 +200,7 @@
 
     /* Stats card styles */
     .stats-card {
-        transition: all 0.3s ease;
+        transition: none !important;
         border-radius: 15px;
         overflow: hidden;
         margin-bottom: 20px;
@@ -206,8 +214,8 @@
 
     /* Keep your existing styles below */
     .stats-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transform: none !important;
+        box-shadow: none !important;
     }
     .stats-card .card-body {
         padding: 1.5rem;
@@ -240,10 +248,10 @@
         border-color: var(--hover-color) !important;
     }
     .fc-daygrid-day {
-        transition: all 0.2s ease;
+        transition: none !important;
     }
     .fc-daygrid-day:hover {
-        background-color: #f8f9fc !important;
+        background-color: white !important;
     }
     .fc-daygrid-day-number {
         font-size: 0.9em !important;
@@ -280,7 +288,7 @@
     .today-tasks {
         background: white;
         border-radius: 15px;
-        box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        box-shadow: none;
         height: 600px;
         overflow-y: auto;
     }
@@ -428,7 +436,7 @@
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(0, 0, 0, 0.08);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        box-shadow: none;
         margin-bottom: var(--spacing-base); /* Konsisten 25px */
     }
 
@@ -455,7 +463,7 @@
     .upcoming-deadlines {
         background: white;
         border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        box-shadow: none;
         height: calc(100% - 260px);
         margin-top: var(--spacing-base); /* Konsisten 25px */
     }
@@ -473,11 +481,11 @@
     .upcoming-deadlines .list-group-item {
         padding: 15px;
         border-bottom: 1px solid rgba(0,0,0,0.05);
-        transition: background-color 0.3s ease;
+        transition: none !important;
     }
     
     .upcoming-deadlines .list-group-item:hover {
-        background-color: #f8f9fc;
+        background-color: white !important;
     }
     
     /* Checkbox styling */
@@ -485,7 +493,7 @@
         width: 1.2rem;
         height: 1.2rem;
         margin-top: 0.2rem;
-        cursor: pointer;
+        cursor: pointer !important;
         border-color: #e0e3e7;
     }
     
@@ -543,14 +551,14 @@
 
     .progress-bar {
         border-radius: 10px;
-        transition: width 0.5s ease;
+        transition: none !important;
     }
 
     /* Update stats card styling */
     .task-stats {
         background: white;
         border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        box-shadow: none;
     }
 
     .task-stats .card-body {
@@ -575,15 +583,15 @@
 
     /* Add hover effect to stats */
     .stat-item:hover h4 {
-        transform: scale(1.1);
-        transition: transform 0.2s ease;
+        transform: none !important;
+        transition: none !important;
     }
 
     /* Modal styling */
     .modal-content {
         border: none;
         border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        box-shadow: none;
     }
 
     .modal-header {
@@ -608,7 +616,7 @@
 
     .form-control:focus, .form-select:focus {
         border-color: #4e73df;
-        box-shadow: 0 0 0 0.2rem rgba(78,115,223,0.25);
+        box-shadow: none;
     }
 
     .form-label {
@@ -625,7 +633,7 @@
     .modal-content {
         border: none;
         border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        box-shadow: none;
         max-height: 90vh; /* Maksimum tinggi modal 90% dari tinggi viewport */
     }
 
@@ -666,7 +674,7 @@
 
     .form-control:focus, .form-select:focus {
         border-color: #4e73df;
-        box-shadow: 0 0 0 0.2rem rgba(78,115,223,0.25);
+        box-shadow: none;
     }
 
     .form-label {
@@ -723,7 +731,7 @@
     .modal-content {
         border-radius: 15px;
         border: none;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        box-shadow: none;
     }
 
     .modal-header {
@@ -766,12 +774,12 @@
     .stats-card {
         background: white;
         border-radius: 12px;
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-        transition: transform 0.3s ease;
+        box-shadow: none;
+        transition: none !important;
     }
 
     .stats-card:hover {
-        transform: translateY(-5px);
+        transform: none !important;
     }
 
     .card-title {
@@ -800,7 +808,7 @@
         width: 100%;
         top: 0;
         left: 0;
-        transition: opacity 0.3s ease;
+        transition: none !important;
     }
 
     #statisticsView {
@@ -878,7 +886,7 @@
         z-index: 1000;
         min-width: 300px;
         border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        box-shadow: none;
         animation: slideIn 0.5s ease-out;
     }
 
@@ -910,7 +918,7 @@
     }
 
     .form-check-input {
-        cursor: pointer;
+        cursor: pointer !important;
     }
 
     .form-check-input:checked {
@@ -924,7 +932,7 @@
         border-radius: 15px;
         overflow: hidden;
         margin-bottom: 30px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        box-shadow: none;
     }
 
     .upcoming-tasks .card-header {
@@ -940,11 +948,11 @@
     .upcoming-tasks .list-group-item {
         padding: 1rem 1.5rem;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        transition: background-color 0.3s ease;
+        transition: none !important;
     }
 
     .upcoming-tasks .list-group-item:hover {
-        background-color: rgba(0, 0, 0, 0.01);
+        background-color: white !important;
     }
 
     .upcoming-tasks .list-group-item:last-child {
@@ -973,7 +981,7 @@
         width: 1.2rem;
         height: 1.2rem;
         margin-top: 0.2rem;
-        cursor: pointer;
+        cursor: pointer !important;
         border: 2px solid #dee2e6;
     }
 
@@ -984,7 +992,7 @@
 
     .form-check-input:focus {
         border-color: var(--primary-color);
-        box-shadow: 0 0 0 0.2rem rgba(0, 153, 255, 0.25);
+        box-shadow: none;
     }
 
     /* Task completed style */
@@ -1013,7 +1021,7 @@
         border-radius: 15px;
         overflow: hidden;
         margin-bottom: 30px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        box-shadow: none;
     }
 
     .overdue-tasks .text-danger {
@@ -1021,163 +1029,107 @@
     }
 
     .overdue-tasks .list-group-item:hover {
-        background-color: rgba(0, 0, 0, 0.01);
+        background-color: white !important;
     }
 
-    /* Reset dan perbaikan style */
+    /* Reset hover effects tapi pertahankan shadow */
+    .upcoming-tasks .list-group-item:hover,
+    .fc-event:hover,
+    .badge:hover,
+    .btn:hover,
+    .form-check-input:hover {
+        transform: none !important;
+        background-color: inherit !important;
+        cursor: default !important;
+    }
+
+    /* Pertahankan shadow pada cards */
     .stats-card {
         background: white;
         border-radius: 15px;
-        margin-bottom: 20px;
-        border: 1px solid rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+        transition: none !important;
     }
 
-    .stats-card .card-header {
-        background: white;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-        padding: 1rem 1.5rem;
-    }
-
-    .stats-card .card-header h5 {
-        color: #2c3e50;
-        font-weight: 600;
-        margin: 0;
-    }
-
-    .stats-card .card-body {
-        padding: 1.5rem;
-    }
-
-    .list-group-item {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        padding: 1rem 1.5rem;
-        background-color: transparent;
-        transition: none;
-    }
-
-    .list-group-item:last-child {
-        border-bottom: none;
-    }
-
-    /* Menghilangkan hover effect */
-    .list-group-item:hover,
-    .upcoming-tasks .list-group-item:hover,
-    .stats-card:hover {
-        background-color: transparent !important;
-        transform: none !important;
-        box-shadow: none !important;
-    }
-
-    /* Perbaikan tampilan chart */
-    canvas {
-        width: 100% !important;
-        height: 300px !important;
-    }
-
-    /* Task styling */
-    .task-completed {
-        text-decoration: line-through;
-        color: #6c757d;
-    }
-
+    /* Kecuali untuk checkbox tetap bisa diklik */
     .form-check-input {
-        cursor: pointer;
-        border: 2px solid #dee2e6;
+        cursor: pointer !important;
     }
 
-    .form-check-input:checked {
-        background-color: var(--primary-color);
-        border-color: var(--primary-color);
+    /* Reset hover pada calendar events */
+    .fc-event {
+        cursor: default !important;
     }
 
-    /* Badge styling */
+    /* Reset hover pada buttons */
+    .btn {
+        transition: none !important;
+    }
+
+    /* Reset hover pada list items tapi pertahankan background */
+    .list-group-item {
+        transition: none !important;
+        background-color: white !important;
+    }
+
+    /* Reset hover pada badges */
     .badge {
-        padding: 0.5em 0.8em;
-        font-weight: 500;
-        font-size: 0.75rem;
-    }
-
-    .badge.bg-danger {
-        background-color: #e74a3b !important;
-    }
-
-    .badge.bg-warning {
-        background-color: #f6c23e !important;
-        color: #2c3e50;
-    }
-
-    .badge.bg-success {
-        background-color: #1cc88a !important;
-    }
-
-    /* Text colors */
-    .text-danger {
-        color: #e74a3b !important;
-    }
-
-    .text-muted {
-        color: #6c757d !important;
-    }
-
-    /* Override any bootstrap or other framework hover effects */
-    * {
         transition: none !important;
     }
 
+    /* Pastikan shadow tetap ada dalam kondisi apapun */
     .stats-card,
-    .upcoming-tasks,
-    .list-group-item,
-    .card {
-        transition: none !important;
+    .stats-card:hover {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Reset hover effects */
+    .upcoming-tasks .list-group-item:hover,
+    .fc-event:hover,
+    .badge:hover,
+    .btn:hover,
+    .form-check-input:hover {
         transform: none !important;
-        box-shadow: none !important;
+        background-color: inherit !important;
+        cursor: default !important;
     }
 
-    /* Statistics View Container */
-    #statisticsView {
-        height: calc(100vh - 100px); /* Sesuaikan dengan header Anda */
-        overflow-y: auto;
-        padding: 20px;
+    /* Kecuali untuk checkbox tetap bisa diklik */
+    .form-check-input {
+        cursor: pointer !important;
     }
 
-    /* Chart Containers */
-    .chart-wrapper {
-        position: relative;
-        width: 350px; /* Fixed width */
-        height: 350px; /* Fixed height - same as width for perfect circle */
-        margin: 0 auto;
+    /* Reset hover pada calendar events */
+    .fc-event {
+        cursor: default !important;
     }
 
-    .chart-wrapper-large {
-        position: relative;
-        width: 100%;
-        height: 400px;
-        margin: 0 auto;
+    /* Reset hover pada buttons */
+    .btn {
+        transition: none !important;
     }
 
-    /* Scrollbar Styling */
-    #statisticsView::-webkit-scrollbar {
-        width: 8px;
+    /* Reset hover pada list items */
+    .list-group-item {
+        transition: none !important;
+        background-color: white !important;
     }
 
-    #statisticsView::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 4px;
+    /* Reset hover pada badges */
+    .badge {
+        transition: none !important;
     }
 
-    #statisticsView::-webkit-scrollbar-thumb {
-        background: #888;
-        border-radius: 4px;
-    }
-
-    #statisticsView::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
-
-    /* Ensure the canvas maintains aspect ratio */
-    .chart-wrapper canvas {
-        max-width: 100%;
-        max-height: 100%;
+    /* Pastikan shadow tetap ada untuk semua cards */
+    .upcoming-tasks,
+    .upcoming-tasks:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
     }
 </style>
 @endsection
@@ -1221,44 +1173,29 @@
                         <!-- Statistics View -->
                         <div id="statisticsView" class="view-content" style="display: none;">
                             <div class="row g-4">
-                                <!-- Priority Distribution -->
                                 <div class="col-md-6">
-                                    <div class="stats-card">
-                                        <div class="card-header">
-                                            <h5 class="mb-0">Task Distribution by Priority</h5>
-                                        </div>
-                                        <div class="card-body d-flex justify-content-center align-items-center">
-                                            <div class="chart-wrapper">
-                                                <canvas id="priorityChart"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Completion Rate -->
-                                <div class="col-md-6">
-                                    <div class="stats-card">
-                                        <div class="card-header">
-                                            <h5 class="mb-0">Task Completion Rate</h5>
-                                        </div>
-                                        <div class="card-body d-flex justify-content-center align-items-center">
-                                            <div class="chart-wrapper">
-                                                <canvas id="completionChart"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Weekly Overview -->
-                                <div class="col-md-12">
-                                    <div class="stats-card">
-                                        <div class="card-header">
-                                            <h5 class="mb-0">Weekly Task Overview</h5>
-                                        </div>
+                                    <div class="stats-card h-100">
                                         <div class="card-body">
-                                            <div class="chart-wrapper-large">
-                                                <canvas id="weeklyChart"></canvas>
-                                            </div>
+                                            <h5 class="card-title mb-4">Task Distribution by Priority</h5>
+                                            <canvas id="priorityChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="stats-card h-100">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4">Task Completion Rate</h5>
+                                            <canvas id="completionChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-12 mt-4">
+                                    <div class="stats-card">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4">Weekly Task Overview</h5>
+                                            <canvas id="weeklyChart"></canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -1524,39 +1461,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize Charts
     function initializeCharts() {
-        // Set default Chart.js options for better quality
-        Chart.defaults.font.size = 13;
-        Chart.defaults.font.family = "'Inter', sans-serif";
-        Chart.defaults.plugins.tooltip.padding = 10;
-        Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(0,0,0,0.8)';
-        Chart.defaults.plugins.tooltip.titleFont.size = 14;
-        Chart.defaults.plugins.tooltip.bodyFont.size = 13;
-        
         // Priority Chart
         new Chart(document.getElementById('priorityChart'), {
             type: 'doughnut',
             data: {
                 labels: ['High', 'Medium', 'Low'],
                 datasets: [{
-                    data: [{{ $highPriorityCount }}, {{ $mediumPriorityCount }}, {{ $lowPriorityCount }}],
-                    backgroundColor: ['#e74a3b', '#f6c23e', '#1cc88a'],
-                    borderWidth: 0
+                    data: [
+                        {{ $highPriorityCount }}, 
+                        {{ $mediumPriorityCount }}, 
+                        {{ $lowPriorityCount }}
+                    ],
+                    backgroundColor: ['#e74a3b', '#f6c23e', '#1cc88a']
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
-                cutout: '60%',
                 plugins: {
                     legend: {
-                        position: 'bottom',
-                        labels: {
-                            padding: 20,
-                            usePointStyle: true,
-                            font: {
-                                size: 13
-                            }
-                        }
+                        position: 'bottom'
                     }
                 }
             }
@@ -1569,23 +1492,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 labels: ['Completed', 'Pending'],
                 datasets: [{
                     data: [{{ $completedTasks }}, {{ $pendingTasks }}],
-                    backgroundColor: ['#1cc88a', '#858796'],
-                    borderWidth: 0
+                    backgroundColor: ['#1cc88a', '#858796']
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
                 plugins: {
                     legend: {
-                        position: 'bottom',
-                        labels: {
-                            padding: 20,
-                            usePointStyle: true,
-                            font: {
-                                size: 13
-                            }
-                        }
+                        position: 'bottom'
                     }
                 }
             }
@@ -1595,45 +1509,20 @@ document.addEventListener('DOMContentLoaded', function() {
         new Chart(document.getElementById('weeklyChart'), {
             type: 'bar',
             data: {
-                labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
                 datasets: [{
                     label: 'Tasks',
                     data: {{ json_encode($weeklyTaskCounts) }},
-                    backgroundColor: '#0099ff',
-                    borderRadius: 6,
-                    barThickness: 40,
-                    maxBarThickness: 50
+                    backgroundColor: '#0099ff'
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
                 scales: {
                     y: {
                         beginAtZero: true,
                         ticks: {
-                            stepSize: 1,
-                            font: {
-                                size: 13
-                            }
-                        },
-                        grid: {
-                            color: 'rgba(0, 0, 0, 0.05)'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        },
-                        ticks: {
-                            font: {
-                                size: 13
-                            }
+                            stepSize: 1
                         }
                     }
                 }
