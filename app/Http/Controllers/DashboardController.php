@@ -62,6 +62,9 @@ class DashboardController extends Controller
                 ->count();
         }
 
+        // Menghitung persentase dan membulatkannya
+        $percentage = $totalTasks > 0 ? floor(($completedTasks / $totalTasks) * 100) : 0;
+
         return view('dashboard', compact(
             'upcomingDeadlines',
             'overdueTasks',
@@ -71,7 +74,8 @@ class DashboardController extends Controller
             'lowPriorityCount',
             'completedTasks',
             'pendingTasks',
-            'weeklyTaskCounts'
+            'weeklyTaskCounts',
+            'percentage'
         ));
     }
 } 

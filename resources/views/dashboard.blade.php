@@ -19,7 +19,7 @@
         min-height: 100vh;
         position: relative;
         overflow: hidden;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cstyle%3E.todo-list %7B fill: none; stroke: %230099ff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; stroke-opacity: 0.1;%7D%3C/style%3E%3Cg class='todo-list'%3E%3Cpath d='M50 50h100v120H50z' transform='rotate(-2 100 100)' /%3E%3Cpath d='M55 70h90 M55 90h90 M55 110h90 M55 130h90 M55 150h90' transform='rotate(-2 100 100)' /%3E%3Cpath d='M60 75l-5-5 M60 95l-5-5 M60 115l-5-5 M60 135l-5-5' transform='rotate(-2 100 100)' /%3E%3Cpath d='M200 80h80v100h-80z' transform='rotate(3 240 130)' /%3E%3Cpath d='M205 100h70 M205 120h70 M205 140h70 M205 160h70' transform='rotate(3 240 130)' /%3E%3C/g%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cstyle%3E.todo-list %7B fill: none; stroke: %230099ff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; stroke-opacity: 0.1;%7D%3C/style%3E%3Cg class='todo-list'%3E%3Cpath d='M50 50h100v120H50z' transform='rotate(-2 100 100)' /%3E%3Cpath d='M55 70h90 M55 90h90 M55 110h90 M55 130h90' transform='rotate(-2 100 100)' /%3E%3Cpath d='M60 75l-5-5 M60 95l-5-5 M60 115l-5-5 M60 135l-5-5' transform='rotate(-2 100 100)' /%3E%3Cpath d='M200 80h80v100h-80z' transform='rotate(3 240 130)' /%3E%3Cpath d='M205 100h70 M205 120h70 M205 140h70 M205 160h70' transform='rotate(3 240 130)' /%3E%3C/g%3E%3C/svg%3E");
     }
 
     /* Stats Cards Styling */
@@ -97,6 +97,7 @@
         box-shadow: none;
         padding: 20px;
         border-radius: 15px;
+        min-height: 800px !important;
     }
 
     /* Upcoming Deadlines Card */
@@ -194,7 +195,7 @@
 
     #calendar {
         width: 100%;
-        min-height: 600px;
+        min-height: 700px !important;
         font-family: 'Nunito', sans-serif;
     }
 
@@ -337,11 +338,13 @@
     }
     /* Calendar Grid */
     .fc-daygrid-day {
-        height: 120px !important;
+        height: 150px !important;
     }
     .fc-daygrid-day-frame {
         min-height: 100% !important;
-        padding: 4px !important;
+        padding: 8px !important;
+        display: flex !important;
+        flex-direction: column !important;
     }
     .fc-daygrid-day-top {
         flex-direction: row !important;
@@ -408,8 +411,9 @@
     /* Event styling */
     .fc-event {
         border: none !important;
-        padding: 3px 6px !important;
+        padding: 4px 8px !important;
         font-size: 0.85em !important;
+        white-space: normal !important;
     }
     
     .priority-high {
@@ -437,26 +441,58 @@
         backdrop-filter: blur(10px);
         border: 1px solid rgba(0, 0, 0, 0.08);
         box-shadow: none;
-        margin-bottom: var(--spacing-base); /* Konsisten 25px */
+        border-radius: 15px;
+        margin-bottom: var(--spacing-base);
+        padding: 1.5rem;
+    }
+
+    .task-stats .card-body {
+        padding: 0; /* Remove default card-body padding since we added padding to parent */
+    }
+
+    .task-stats h6 {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #2d3748;
     }
 
     .task-stats .progress {
-        border-radius: 10px;
         background-color: #f0f2f5;
-        margin-bottom: var(--spacing-base); /* Konsisten 25px */
+        border-radius: 10px;
+        margin: 1rem 0;
     }
 
-    .task-counts {
+    .task-stats .progress-bar {
+        background-color: var(--primary-color);
+        border-radius: 10px;
+    }
+
+    .task-stats .task-counts {
+        margin-top: 1.5rem;
+    }
+
+    .task-stats .stat-item {
         text-align: center;
     }
 
-    .stat-item h4 {
+    .task-stats .stat-item h4 {
         font-size: 1.5rem;
         font-weight: 600;
+        margin-bottom: 0.3rem;
+        color: #2d3748;
     }
 
-    .stat-item span {
+    .task-stats .stat-item .text-success {
+        color: var(--success-color) !important;
+    }
+
+    .task-stats .stat-item .text-warning {
+        color: var(--warning-color) !important;
+    }
+
+    .task-stats .stat-item span {
         font-size: 0.85rem;
+        color: #6c757d;
     }
 
     /* Update upcoming deadlines card styling */
@@ -860,14 +896,14 @@
     .fc-daygrid-day-events {
         flex: 1;
         min-height: 0;
-        max-height: 50px; /* Batasi tinggi area event */
-        overflow: hidden; /* Sembunyikan event yang berlebih */
+        max-height: none !important;
+        overflow: visible !important;
     }
 
     .fc-daygrid-more-link {
-        font-size: 0.8em;
-        color: var(--primary-color);
-        text-decoration: none;
+        margin: 2px 0 !important;
+        padding: 2px 4px !important;
+        font-size: 0.85em !important;
     }
 
     .fc-day-today {
@@ -1332,6 +1368,312 @@
     .fc-icon {
         color: currentColor !important;
     }
+
+    /* Calendar navigation styling */
+    .fc .fc-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 20px !important;
+    }
+
+    .fc .fc-toolbar-title {
+        font-size: 20px !important;
+        font-weight: 600 !important;
+        margin: 0 15px !important;
+    }
+
+    .fc .fc-prev-button,
+    .fc .fc-next-button {
+        background-color: #fff !important;
+        border: 1px solid #e9ecef !important;
+        color: #6c757d !important;
+        width: 36px !important;
+        height: 36px !important;
+        padding: 0 !important;
+        border-radius: 6px !important;
+    }
+
+    .fc .fc-today-button {
+        background-color: #0d6efd !important;
+        border: none !important;
+        padding: 8px 16px !important;
+        border-radius: 6px !important;
+        font-weight: 500 !important;
+    }
+
+    /* Hover effects */
+    .fc .fc-prev-button:hover,
+    .fc .fc-next-button:hover {
+        background-color: #0b5ed7 !important;
+        color: #fff !important;
+        border-color: #0b5ed7 !important;
+    }
+
+    .fc .fc-today-button:hover {
+        background-color: #0b5ed7 !important;
+        transform: translateY(-2px);
+    }
+
+    /* Hover effects untuk task items */
+    .list-group-item {
+        transition: all 0.2s ease !important;
+        border-radius: 8px !important;
+        margin-bottom: 4px !important;
+        border: 1px solid transparent !important;
+    }
+
+    .list-group-item:hover {
+        transform: translateX(5px) !important;
+        background-color: #f8f9fa !important;
+        border-color: #e9ecef !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+    }
+
+    /* Badge priority styling - tanpa hover effect */
+    .badge {
+        transition: none !important;
+        pointer-events: none !important;
+    }
+
+    /* Hover effect untuk judul tugas */
+    .task-title {
+        transition: color 0.2s ease !important;
+    }
+
+    .list-group-item:hover .task-title {
+        color: #0d6efd !important;
+    }
+
+    /* Style untuk tanggal */
+    .list-group-item small {
+        transition: color 0.2s ease !important;
+        color: #dc3545 !important;
+        font-weight: normal !important;
+        font-size: 0.875rem !important; /* Menyamakan ukuran font */
+    }
+
+    .list-group-item:hover small {
+        color: #dc3545 !important;
+        font-weight: 600 !important;
+    }
+
+    /* Hover effect untuk checkbox */
+    .form-check-input {
+        transition: all 0.2s ease !important;
+        cursor: pointer !important;
+    }
+
+    .form-check-input:hover {
+        border-color: #0d6efd !important;
+        transform: scale(1.1) !important;
+    }
+
+    /* Mempertahankan warna background saat checked dan hover */
+    .form-check-input:checked {
+        background-color: #0d6efd !important;
+        border-color: #0d6efd !important;
+    }
+
+    .form-check-input:checked:hover {
+        background-color: #0b5ed7 !important;
+        border-color: #0b5ed7 !important;
+    }
+
+    /* Container styling */
+    .upcoming-tasks,
+    .overdue-tasks {
+        border-radius: 12px !important;
+        overflow: hidden !important;
+    }
+
+    /* List group container */
+    .list-group {
+        padding: 8px !important;
+    }
+
+    /* Memastikan ukuran font konsisten di semua bagian */
+    .upcoming-tasks small,
+    .overdue-tasks small {
+        font-size: 0.875rem !important; /* 14px */
+        line-height: 1.5 !important;
+    }
+
+    /* Calendar Container Styling */
+    .fc {
+        background: white !important;
+        border-radius: 16px !important;
+        padding: 24px !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+        border: 1px solid #e9ecef !important;
+    }
+
+    /* Header Cells (Hari) Styling */
+    .fc-col-header {
+        margin-bottom: 10px !important;
+    }
+
+    .fc-col-header-cell {
+        padding: 15px 0 !important;
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .fc-col-header-cell-cushion {
+        color: #2c3e50 !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+        text-decoration: none !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+    }
+
+    /* Day Cells Styling */
+    .fc-daygrid-day {
+        transition: all 0.3s ease !important;
+        min-height: 120px !important;
+    }
+
+    .fc-daygrid-day-frame {
+        padding: 12px !important;
+        border-radius: 12px !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .fc-daygrid-day-frame:hover {
+        background-color: #f8f9fa !important;
+        transform: scale(1.02) !important;
+    }
+
+    .fc-daygrid-day-number {
+        font-size: 1.1rem !important;
+        color: #2c3e50 !important;
+        text-decoration: none !important;
+        font-weight: 500 !important;
+        padding: 8px !important;
+    }
+
+    /* Today Styling */
+    .fc-day-today .fc-daygrid-day-frame {
+        background-color: #e3efff !important;
+        border-radius: 12px !important;
+    }
+
+    .fc-day-today .fc-daygrid-day-number {
+        color: #0d6efd !important;
+        font-weight: 700 !important;
+        background: #ffffff !important;
+        border-radius: 50% !important;
+        width: 32px !important;
+        height: 32px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 4px !important;
+    }
+
+    /* Event Styling */
+    .fc-event {
+        border: none !important;
+        padding: 6px 12px !important;
+        margin: 3px 0 !important;
+        border-radius: 8px !important;
+        font-size: 0.9rem !important;
+        font-weight: 500 !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    .fc-event:hover {
+        transform: translateY(-2px) scale(1.02) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+    }
+
+    /* Other Month Days */
+    .fc-day-other .fc-daygrid-day-frame {
+        opacity: 0.4 !important;
+        background-color: #fafbfc !important;
+    }
+
+    /* Weekend Styling */
+    .fc-day-sat .fc-daygrid-day-frame, 
+    .fc-day-sun .fc-daygrid-day-frame {
+        background-color: #f8f9fa !important;
+    }
+
+    /* Event Colors by Priority */
+    .fc-event.high-priority {
+        background: linear-gradient(45deg, #ff6b6b, #ff8787) !important;
+        color: white !important;
+    }
+
+    .fc-event.medium-priority {
+        background: linear-gradient(45deg, #ffd43b, #ffa94d) !important;
+        color: #212529 !important;
+    }
+
+    .fc-event.low-priority {
+        background: linear-gradient(45deg, #69db7c, #38d9a9) !important;
+        color: white !important;
+    }
+
+    /* More Link Styling */
+    .fc-more-link {
+        background: #f8f9fa !important;
+        color: #495057 !important;
+        font-weight: 600 !important;
+        padding: 2px 8px !important;
+        border-radius: 4px !important;
+        margin-top: 4px !important;
+    }
+
+    /* Border Styling */
+    .fc td {
+        border-color: #f1f3f5 !important;
+    }
+
+    /* Popover Styling */
+    .fc-popover {
+        border: none !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        max-height: 400px !important;
+        overflow-y: auto !important;
+    }
+
+    .fc-popover-header {
+        background: #f8f9fa !important;
+        padding: 12px 16px !important;
+        font-weight: 600 !important;
+        border-bottom: 1px solid #e9ecef !important;
+    }
+
+    .fc-popover-body {
+        padding: 12px !important;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .fc {
+            padding: 16px !important;
+        }
+        
+        .fc-daygrid-day {
+            min-height: 100px !important;
+        }
+        
+        .fc-daygrid-day-number {
+            font-size: 0.9rem !important;
+        }
+        
+        .fc-event {
+            font-size: 0.8rem !important;
+            padding: 4px 8px !important;
+        }
+    }
 </style>
 @endsection
 
@@ -1343,17 +1685,7 @@
             <div class="col-md-8">
                 <div class="task-calendar">
                     <!-- Header dengan toggle buttons -->
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <div class="d-flex align-items-center gap-2">
-                            <button class="btn btn-outline-secondary" id="prevBtn">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <h4 class="current-month mb-0 mx-3" id="currentMonth"></h4>
-                            <button class="btn btn-outline-secondary" id="nextBtn">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                            <button class="btn btn-primary ms-2" id="todayBtn">Today</button>
-                        </div>
+                    <div class="d-flex justify-content-end align-items-center mb-4">
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-primary active" id="calendarViewBtn">
                                 <i class="fas fa-calendar-alt"></i> Calendar
@@ -1416,7 +1748,10 @@
                 </div>
                 
                 <!-- Task Statistics Card -->
-                <div class="card task-stats border-0 mb-3">
+                <div class="stats-card upcoming-tasks mb-3">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+                        <h5 class="mb-0">Task Statistics</h5>
+                    </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="text-muted mb-0">Persentase Tugas</h6>
@@ -1466,9 +1801,7 @@
                                                 {{ $task->status === 'completed' ? 'checked' : '' }}>
                                         </div>
                                         <div>
-                                            <h6 class="mb-1 {{ $task->status === 'completed' ? 'task-completed' : '' }}">
-                                                {{ $task->title }}
-                                            </h6>
+                                            <h6 class="mb-1 task-title">{{ $task->title }}</h6>
                                             <small class="text-muted">
                                                 Due: {{ \Carbon\Carbon::parse($task->end_date)->format('M d, Y') }}
                                             </small>
@@ -1503,9 +1836,7 @@
                                                 {{ $task->status === 'completed' ? 'checked' : '' }}>
                                         </div>
                                         <div>
-                                            <h6 class="mb-1 {{ $task->status === 'completed' ? 'task-completed' : '' }}">
-                                                {{ $task->title }}
-                                            </h6>
+                                            <h6 class="mb-1 task-title">{{ $task->title }}</h6>
                                             <small class="text-danger">
                                                 Due: {{ \Carbon\Carbon::parse($task->end_date)->format('M d, Y') }}
                                             </small>
@@ -1648,29 +1979,24 @@ document.addEventListener('DOMContentLoaded', function() {
             const calendarEl = document.getElementById('calendar');
             calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                height: 650,
+                height: 'auto',
                 headerToolbar: {
-                    left: 'prev,next today',
+                    left: 'prev',
                     center: 'title',
-                    right: ''
+                    right: 'next today'
+                },
+                buttonText: {
+                    today: 'Today'
                 },
                 events: "{{ route('tasks.get') }}",
-                dayMaxEvents: true,
+                dayMaxEvents: false,
                 eventDisplay: 'block',
                 displayEventTime: false,
                 firstDay: 1,
-                customButtons: {
-                    prev: {
-                        click: function() {
-                            calendar.prev();
-                        }
-                    },
-                    next: {
-                        click: function() {
-                            calendar.next();
-                        }
-                    }
-                }
+                // Styling untuk calendar
+                dayCellClassNames: 'calendar-day',
+                dayHeaderClassNames: 'calendar-header',
+                viewClassNames: 'calendar-view'
             });
         }
         calendar.render();
