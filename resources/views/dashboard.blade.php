@@ -89,15 +89,211 @@
         color: white;
     }
 
-    /* Calendar Container */
+    /* Outer Container (garis biru) */
     .task-calendar {
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(0, 0, 0, 0.08);
         box-shadow: none;
-        padding: 20px;
         border-radius: 15px;
-        min-height: 800px !important;
+        height: 100%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Calendar Container (garis merah) */
+    .fc {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Calendar Table */
+    .fc-scrollgrid {
+        border: 1px solid #ddd !important;
+    }
+
+    .fc .fc-scrollgrid {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    /* Calendar Cells */
+    .fc-theme-standard td, 
+    .fc-theme-standard th {
+        border: 1px solid #ddd !important;
+    }
+
+    /* Calendar Body */
+    .fc-daygrid-body {
+        width: 100% !important;
+    }
+
+    .fc-daygrid-body table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+    }
+
+    /* Calendar Rows */
+    .fc-daygrid-body tr:last-child td {
+        border-bottom: 1px solid #ddd !important;
+    }
+
+    /* Calendar Cells */
+    .fc .fc-daygrid-day {
+        border: 1px solid #ddd !important;
+    }
+
+    /* Last row border radius */
+    .fc-daygrid-body tr:last-child td:first-child {
+        border-bottom-left-radius: 8px !important;
+    }
+
+    .fc-daygrid-body tr:last-child td:last-child {
+        border-bottom-right-radius: 8px !important;
+    }
+
+    /* First row border radius */
+    .fc-theme-standard thead tr:first-child th:first-child {
+        border-top-left-radius: 8px !important;
+    }
+
+    .fc-theme-standard thead tr:first-child th:last-child {
+        border-top-right-radius: 8px !important;
+    }
+
+    /* Calendar View */
+    .fc-view-harness {
+        flex: 1 !important;
+        min-height: 0 !important;
+    }
+
+    /* Calendar Grid */
+    .fc-scrollgrid {
+        border: none !important;
+    }
+
+    .fc-scrollgrid-section-header,
+    .fc-scrollgrid-section-body {
+        height: 100% !important;
+    }
+
+    .fc-scrollgrid-sync-table {
+        height: 100% !important;
+    }
+
+    /* Calendar Body */
+    .fc-daygrid-body {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .fc-daygrid-body table {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    /* Calendar Rows */
+    .fc-daygrid-body tr {
+        height: 16.666% !important; /* 100% / 6 rows */
+    }
+
+    /* Calendar Cells */
+    .fc .fc-daygrid-day {
+        height: 100% !important;
+    }
+
+    .fc .fc-daygrid-day-frame {
+        height: 100% !important;
+        min-height: unset !important;
+        padding: 8px !important;
+    }
+
+    /* Calendar Header */
+    .fc .fc-toolbar.fc-header-toolbar {
+        margin-bottom: 1rem !important;
+    }
+
+    /* Date Numbers */
+    .fc .fc-daygrid-day-top {
+        flex-direction: row !important;
+    }
+
+    .fc .fc-daygrid-day-number {
+        font-size: 1.2em !important;
+        font-weight: 500 !important;
+        padding: 4px !important;
+    }
+
+    /* View Container */
+    .view-container {
+        flex: 1; /* Mengisi sisa ruang */
+        display: flex;
+        flex-direction: column;
+        min-height: 0; /* Penting untuk flex container */
+    }
+
+    /* Calendar View */
+    #calendarView {
+        flex: 1; /* Mengisi sisa ruang */
+        display: flex;
+        flex-direction: column;
+        min-height: 0; /* Penting untuk flex container */
+    }
+
+    /* Calendar Grid */
+    .fc {
+        height: 100% !important;
+        width: 100% !important;
+    }
+
+    .fc .fc-toolbar.fc-header-toolbar {
+        margin-bottom: 0.5rem !important; /* Mengurangi margin header */
+    }
+
+    .fc .fc-daygrid-day {
+        height: auto !important;
+    }
+
+    .fc .fc-daygrid-day-frame {
+        min-height: 100px !important;
+        height: 100% !important;
+        padding: 8px !important;
+    }
+
+    .fc-view-harness {
+        height: calc(100% - 50px) !important; /* Mengurangi tinggi header */
+    }
+
+    .fc-daygrid-body {
+        width: 100% !important;
+    }
+
+    .fc-scrollgrid-sync-table {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    /* Row spacing */
+    .fc-theme-standard td, .fc-theme-standard th {
+        padding: 1px !important; /* Mengurangi padding antar sel */
+    }
+
+    /* Header cells */
+    .fc-col-header-cell {
+        padding: 6px 0 !important; /* Mengurangi padding header */
+    }
+
+    /* Row Container */
+    .row {
+        min-height: 900px;
+    }
+
+    /* Action Buttons Container */
+    .action-buttons {
+        height: 60px; /* Tinggi tetap untuk action buttons */
+        margin-bottom: var(--spacing-base);
     }
 
     /* Upcoming Deadlines Card */
@@ -223,11 +419,8 @@
     }
     /* Calendar Styling */
     .fc-header-toolbar {
-        padding: 15px 0 !important;
-        margin-bottom: 1.5rem !important;
-        display: flex;
-        align-items: center;
-        gap: 15px;
+        margin-bottom: 1rem !important;
+        padding: 0 !important;
     }
     .fc-toolbar-title {
         font-size: 1.5em !important;
@@ -853,7 +1046,7 @@
 
     /* Tambahan style untuk kalender */
     .fc-view-harness {
-        height: 100% !important;
+        height: calc(100% - 50px) !important;
     }
 
     .fc .fc-daygrid-body {
@@ -877,8 +1070,8 @@
     }
 
     .fc-daygrid-day {
-        height: 90px !important; /* Tinggi tetap untuk setiap sel */
-        max-height: 90px !important;
+        min-height: 100px !important;
+        height: auto !important;
     }
 
     .fc-daygrid-day-frame {
@@ -1681,7 +1874,7 @@
 <div class="dashboard-container">
     <div class="container-fluid">
         <!-- Calendar and Tasks Section -->
-        <div class="row">
+        <div class="row" style="min-height: calc(100vh - 100px);">
             <div class="col-md-8">
                 <div class="task-calendar">
                     <!-- Header dengan toggle buttons -->
@@ -1748,7 +1941,7 @@
                 </div>
                 
                 <!-- Task Statistics Card -->
-                <div class="stats-card upcoming-tasks mb-3">
+                <div class="stats-card upcoming-tasks mb-4">
                     <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
                         <h5 class="mb-0">Task Statistics</h5>
                     </div>
@@ -1783,7 +1976,7 @@
                     </div>
                 </div>
                 
-                <div class="stats-card upcoming-tasks">
+                <div class="stats-card upcoming-tasks mb-4">
                     <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
                         <h5 class="mb-0">Upcoming Deadlines</h5>
                     </div>
@@ -1818,8 +2011,8 @@
                 </div>
 
                 <!-- Overdue Tasks Card -->
-                <div class="stats-card upcoming-tasks mt-4">
-                    <div class="card-header">
+                <div class="stats-card upcoming-tasks">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
                         <h5 class="mb-0">Overdue Tasks</h5>
                     </div>
                     <div class="card-body p-0">
