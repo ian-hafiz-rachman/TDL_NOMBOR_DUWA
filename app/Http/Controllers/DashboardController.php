@@ -17,7 +17,6 @@ class DashboardController extends Controller
             ->where('end_date', '>=', now())
             ->where('status', 'pending')
             ->orderBy('end_date', 'asc')
-            ->take(5)
             ->get();
 
         // Overdue tasks - tugas yang terlewat dan belum selesai
@@ -25,7 +24,6 @@ class DashboardController extends Controller
             ->where('end_date', '<', now())
             ->where('status', 'pending')
             ->orderBy('end_date', 'desc')
-            ->take(5)
             ->get();
 
         // Total tasks

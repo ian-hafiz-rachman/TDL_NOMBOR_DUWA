@@ -89,163 +89,42 @@
         color: white;
     }
 
-    /* Outer Container (garis biru) */
+    /* Calendar Container */
     .task-calendar {
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(0, 0, 0, 0.08);
         box-shadow: none;
+        padding: 15px; /* Mengurangi padding */
         border-radius: 15px;
         height: 100%;
-        padding: 20px;
         display: flex;
         flex-direction: column;
-    }
-
-    /* Calendar Container (garis merah) */
-    .fc {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* Calendar Table */
-    .fc-scrollgrid {
-        border: 1px solid #ddd !important;
-    }
-
-    .fc .fc-scrollgrid {
-        border-radius: 8px;
-        overflow: hidden;
-    }
-
-    /* Calendar Cells */
-    .fc-theme-standard td, 
-    .fc-theme-standard th {
-        border: 1px solid #ddd !important;
-    }
-
-    /* Calendar Body */
-    .fc-daygrid-body {
-        width: 100% !important;
-    }
-
-    .fc-daygrid-body table {
-        width: 100% !important;
-        border-collapse: collapse !important;
-    }
-
-    /* Calendar Rows */
-    .fc-daygrid-body tr:last-child td {
-        border-bottom: 1px solid #ddd !important;
-    }
-
-    /* Calendar Cells */
-    .fc .fc-daygrid-day {
-        border: 1px solid #ddd !important;
-    }
-
-    /* Last row border radius */
-    .fc-daygrid-body tr:last-child td:first-child {
-        border-bottom-left-radius: 8px !important;
-    }
-
-    .fc-daygrid-body tr:last-child td:last-child {
-        border-bottom-right-radius: 8px !important;
-    }
-
-    /* First row border radius */
-    .fc-theme-standard thead tr:first-child th:first-child {
-        border-top-left-radius: 8px !important;
-    }
-
-    .fc-theme-standard thead tr:first-child th:last-child {
-        border-top-right-radius: 8px !important;
-    }
-
-    /* Calendar View */
-    .fc-view-harness {
-        flex: 1 !important;
-        min-height: 0 !important;
-    }
-
-    /* Calendar Grid */
-    .fc-scrollgrid {
-        border: none !important;
-    }
-
-    .fc-scrollgrid-section-header,
-    .fc-scrollgrid-section-body {
-        height: 100% !important;
-    }
-
-    .fc-scrollgrid-sync-table {
-        height: 100% !important;
-    }
-
-    /* Calendar Body */
-    .fc-daygrid-body {
-        width: 100% !important;
-        height: 100% !important;
-    }
-
-    .fc-daygrid-body table {
-        width: 100% !important;
-        height: 100% !important;
-    }
-
-    /* Calendar Rows */
-    .fc-daygrid-body tr {
-        height: 16.666% !important; /* 100% / 6 rows */
-    }
-
-    /* Calendar Cells */
-    .fc .fc-daygrid-day {
-        height: 100% !important;
-    }
-
-    .fc .fc-daygrid-day-frame {
-        height: 100% !important;
-        min-height: unset !important;
-        padding: 8px !important;
-    }
-
-    /* Calendar Header */
-    .fc .fc-toolbar.fc-header-toolbar {
-        margin-bottom: 1rem !important;
-    }
-
-    /* Date Numbers */
-    .fc .fc-daygrid-day-top {
-        flex-direction: row !important;
-    }
-
-    .fc .fc-daygrid-day-number {
-        font-size: 1.2em !important;
-        font-weight: 500 !important;
-        padding: 4px !important;
     }
 
     /* View Container */
     .view-container {
-        flex: 1; /* Mengisi sisa ruang */
-        display: flex;
-        flex-direction: column;
-        min-height: 0; /* Penting untuk flex container */
+        position: relative;
+        height: 1000px !important; /* Tingkatkan lagi tinggi */
+        min-height: 1000px !important;
+        overflow: visible;
     }
 
     /* Calendar View */
     #calendarView {
-        flex: 1; /* Mengisi sisa ruang */
-        display: flex;
-        flex-direction: column;
-        min-height: 0; /* Penting untuk flex container */
+        height: 100% !important;
+        min-height: 1000px !important; /* Tingkatkan lagi tinggi minimum */
     }
 
     /* Calendar Grid */
     .fc {
+        background: white !important;
+        border-radius: 16px !important;
+        padding: 24px !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+        border: 1px solid #e9ecef !important;
+        min-height: 1000px !important; /* Tingkatkan lagi tinggi minimum */
         height: 100% !important;
-        width: 100% !important;
     }
 
     .fc .fc-toolbar.fc-header-toolbar {
@@ -253,26 +132,23 @@
     }
 
     .fc .fc-daygrid-day {
-        height: auto !important;
+        transition: all 0.3s ease !important;
+        min-height: 160px !important; /* Tingkatkan lagi tinggi minimum */
+        height: 160px !important; /* Tingkatkan lagi tinggi */
     }
 
     .fc .fc-daygrid-day-frame {
-        min-height: 100px !important;
+        min-height: 160px !important; /* Tingkatkan lagi tinggi minimum */
         height: 100% !important;
-        padding: 8px !important;
     }
 
     .fc-view-harness {
-        height: calc(100% - 50px) !important; /* Mengurangi tinggi header */
+        height: auto !important;
+        min-height: 900px !important; /* Tingkatkan lagi tinggi minimum */
     }
 
     .fc-daygrid-body {
-        width: 100% !important;
-    }
-
-    .fc-scrollgrid-sync-table {
-        width: 100% !important;
-        height: 100% !important;
+        min-height: 900px !important; /* Tingkatkan lagi tinggi minimum */
     }
 
     /* Row spacing */
@@ -287,7 +163,7 @@
 
     /* Row Container */
     .row {
-        min-height: 900px;
+        min-height: 1100px; /* Tingkatkan lagi tinggi minimum */
     }
 
     /* Action Buttons Container */
@@ -302,19 +178,40 @@
         backdrop-filter: blur(10px);
         border: 1px solid rgba(0, 0, 0, 0.08);
         box-shadow: none;
-        height: calc(100% - 260px);
-        margin-top: var(--spacing-base); /* Konsisten 25px */
+        height: auto; /* Ubah dari fixed height */
+        margin-top: var(--spacing-base);
     }
     
     .upcoming-deadlines .card-header {
-        padding: var(--spacing-base); /* Konsisten 25px */
+        padding: var(--spacing-base);
         border-bottom: 1px solid rgba(0,0,0,0.05);
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 10;
+    }
+    
+    .upcoming-deadlines .card-body {
+        padding: 0;
+        height: 280px; /* Tinggi tetap untuk 4 item */
+        overflow-y: auto; /* Tambahkan scroll jika konten melebihi tinggi */
+    }
+    
+    .upcoming-deadlines .list-group {
+        height: 280px; /* Sama dengan card-body */
+        overflow: hidden; /* Sembunyikan overflow */
     }
     
     .upcoming-deadlines .list-group-item {
         padding: 15px;
         border-bottom: 1px solid rgba(0,0,0,0.05);
         transition: none !important;
+        height: 70px; /* Tinggi tetap untuk setiap item */
+        min-height: 70px; /* Pastikan tinggi minimum */
+        max-height: 70px; /* Pastikan tinggi maksimum */
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
     }
     
     .upcoming-deadlines .list-group-item:hover {
@@ -390,8 +287,8 @@
     }
 
     #calendar {
-        width: 100%;
-        min-height: 700px !important;
+        height: 100% !important;
+        min-height: 1000px !important; /* Tingkatkan lagi tinggi minimum */
         font-family: 'Nunito', sans-serif;
     }
 
@@ -1700,6 +1597,8 @@
         padding: 24px !important;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
         border: 1px solid #e9ecef !important;
+        min-height: 1000px !important; /* Tingkatkan lagi tinggi minimum */
+        height: 100% !important;
     }
 
     /* Header Cells (Hari) Styling */
@@ -1725,7 +1624,8 @@
     /* Day Cells Styling */
     .fc-daygrid-day {
         transition: all 0.3s ease !important;
-        min-height: 120px !important;
+        min-height: 160px !important; /* Tingkatkan lagi tinggi minimum */
+        height: 160px !important; /* Tingkatkan lagi tinggi */
     }
 
     .fc-daygrid-day-frame {
@@ -1867,6 +1767,128 @@
             padding: 4px 8px !important;
         }
     }
+
+    /* Overdue Tasks Card */
+    .stats-card.upcoming-tasks {
+        height: auto;
+        margin-bottom: 20px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    .stats-card.upcoming-tasks .card-header {
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 10;
+        padding: 15px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .stats-card.upcoming-tasks .card-body {
+        padding: 15px; /* Tambahkan padding untuk card body */
+    }
+
+    /* Custom scrollbar styling */
+    .card-body::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .card-body::-webkit-scrollbar-track {
+        background: #f8f9fc;
+    }
+
+    .card-body::-webkit-scrollbar-thumb {
+        background-color: #cbd5e0;
+        border-radius: 3px;
+    }
+
+    /* List item styling */
+    .list-group-item {
+        padding: 15px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        transition: all 0.2s ease !important;
+        min-height: 70px; /* Tinggi minimum untuk list item */
+    }
+
+    .list-group-item:last-child {
+        border-bottom: none;
+    }
+
+    /* Hover effect untuk list items */
+    .list-group-item:hover {
+        background-color: #f8f9fa !important;
+        transform: translateX(5px) !important;
+    }
+
+    /* Overdue Tasks Styling */
+    .overdue-tasks-container {
+        height: 350px; /* Fixed height container */
+        min-height: 350px; /* Minimum height */
+        max-height: 350px; /* Maximum height */
+        overflow-y: auto; /* Enable vertical scrolling */
+        scrollbar-width: thin;
+        scrollbar-color: #cbd5e0 #f8f9fc;
+    }
+
+    .overdue-tasks-container::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .overdue-tasks-container::-webkit-scrollbar-track {
+        background: #f8f9fc;
+    }
+
+    .overdue-tasks-container::-webkit-scrollbar-thumb {
+        background-color: #cbd5e0;
+        border-radius: 3px;
+    }
+
+    /* Ensure consistent height for list items */
+    .overdue-tasks-container .list-group-item {
+        height: 70px;
+        min-height: 70px;
+        max-height: 70px;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+    }
+
+    /* Empty state styling */
+    .overdue-tasks-container .list-group-item .text-center {
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    /* Empty state styling */
+    .empty-state {
+        height: 100%;
+        min-height: 250px;
+        padding: 30px 20px;
+        text-align: center;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .empty-state:hover {
+        background-color: #f0f0f0;
+    }
+
+    .empty-state i {
+        opacity: 0.7;
+    }
+
+    .empty-state h6 {
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .empty-state p {
+        max-width: 80%;
+        margin: 0 auto;
+    }
 </style>
 @endsection
 
@@ -1942,24 +1964,26 @@
                 
                 <!-- Task Statistics Card -->
                 <div class="stats-card upcoming-tasks mb-4">
-                    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
-                        <h5 class="mb-0">Task Statistics</h5>
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3 shadow-sm" style="border-bottom: none; position: relative; z-index: 2;">
+                        <h5 class="mb-0">
+                            <i class="fas fa-chart-pie text-primary me-2"></i> Task Statistics
+                        </h5>
                     </div>
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="card-body p-0" style="position: relative; z-index: 1; margin-top: -1px;">
+                        <div class="d-flex justify-content-between align-items-center mb-3 px-3 pt-3">
                             <h6 class="text-muted mb-0">Persentase Tugas</h6>
                             <h6 class="text-primary mb-0">
                                 {{ number_format(($totalTasks > 0 ? ($completedTasks / $totalTasks) * 100 : 0), 1) }}%
                             </h6>
                         </div>
-                        <div class="progress mb-3" style="height: 10px;">
+                        <div class="progress mb-3 mx-3" style="height: 10px;">
                             <div class="progress-bar bg-primary" role="progressbar" 
                                  style="width: {{ $totalTasks > 0 ? ($completedTasks / $totalTasks) * 100 : 0 }}%"
                                  aria-valuenow="{{ $totalTasks > 0 ? ($completedTasks / $totalTasks) * 100 : 0 }}"
                                  aria-valuemin="0" aria-valuemax="100">
                             </div>
                         </div>
-                        <div class="d-flex justify-content-between task-counts">
+                        <div class="d-flex justify-content-between task-counts px-3 pb-3">
                             <div class="stat-item text-center">
                                 <h4 class="mb-1">{{ $totalTasks }}</h4>
                                 <span class="text-muted">Total Tasks</span>
@@ -1976,50 +2000,24 @@
                     </div>
                 </div>
                 
+                <!-- Upcoming Deadlines Card -->
                 <div class="stats-card upcoming-tasks mb-4">
-                    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
-                        <h5 class="mb-0">Upcoming Deadlines</h5>
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3 shadow-sm" style="border-bottom: none; position: relative; z-index: 2;">
+                        <h5 class="mb-0">
+                            <i class="fas fa-hourglass-half text-info me-2"></i> Tenggat Mendatang
+                        </h5>
                     </div>
-                    <div class="card-body p-0">
-                        <div class="list-group list-group-flush">
-                            @foreach($upcomingDeadlines as $task)
-                            <div class="list-group-item border-0 py-3">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="d-flex align-items-center">
-                                        <div class="form-check me-3">
-                                            <input type="checkbox" 
-                                                class="form-check-input task-checkbox" 
-                                                id="task-{{ $task->id }}"
-                                                data-task-id="{{ $task->id }}"
-                                                {{ $task->status === 'completed' ? 'checked' : '' }}>
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-1 task-title">{{ $task->title }}</h6>
-                                            <small class="text-muted">
-                                                Due: {{ \Carbon\Carbon::parse($task->end_date)->format('M d, Y') }}
-                                            </small>
-                                        </div>
-                                    </div>
-                                    <span class="badge bg-{{ $task->priority === 'high' ? 'danger' : ($task->priority === 'medium' ? 'warning' : 'success') }}">
-                                        {{ ucfirst($task->priority) }}
-                                    </span>
-                                </div>
+                    <div class="card-body p-0" style="position: relative; z-index: 1; margin-top: -1px;">
+                        <div class="list-group list-group-flush overdue-tasks-container">
+                            @if($upcomingDeadlines->isEmpty())
+                            <div class="d-flex flex-column align-items-center justify-content-center" style="height: 300px; padding: 20px;">
+                                <i class="fas fa-calendar-check text-primary mb-3" style="font-size: 3rem;"></i>
+                                <h6 class="text-muted">Tidak ada tenggat mendatang</h6>
+                                <p class="text-muted small">Anda tidak memiliki tugas yang perlu dikerjakan dalam waktu dekat</p>
                             </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Overdue Tasks Card -->
-                <div class="stats-card upcoming-tasks">
-                    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
-                        <h5 class="mb-0">Overdue Tasks</h5>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="list-group list-group-flush">
-                            @foreach($overdueTasks as $task)
-                            <div class="list-group-item">
-                                <div class="d-flex justify-content-between align-items-center">
+                            @else
+                                @foreach($upcomingDeadlines as $task)
+                                <div class="list-group-item position-relative">
                                     <div class="d-flex align-items-center">
                                         <div class="form-check me-3">
                                             <input type="checkbox" 
@@ -2031,22 +2029,58 @@
                                         <div>
                                             <h6 class="mb-1 task-title">{{ $task->title }}</h6>
                                             <small class="text-danger">
-                                                Due: {{ \Carbon\Carbon::parse($task->end_date)->format('M d, Y') }}
+                                                Tenggat: {{ \Carbon\Carbon::parse($task->end_date)->format('d M Y') }}
                                             </small>
                                         </div>
                                     </div>
-                                    <span class="badge bg-{{ $task->priority === 'high' ? 'danger' : ($task->priority === 'medium' ? 'warning' : 'success') }}">
-                                        {{ ucfirst($task->priority) }}
+                                    <span class="badge bg-{{ $task->priority === 'high' ? 'danger' : ($task->priority === 'medium' ? 'warning' : 'success') }} position-absolute" style="right: 15px; top: 50%; transform: translateY(-50%);">
+                                        {{ $task->priority === 'high' ? 'Tinggi' : ($task->priority === 'medium' ? 'Sedang' : 'Rendah') }}
                                     </span>
                                 </div>
-                            </div>
-                            @endforeach
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Overdue Tasks Card -->
+                <div class="stats-card upcoming-tasks">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3 shadow-sm" style="border-bottom: none; position: relative; z-index: 2;">
+                        <h5 class="mb-0">
+                            <i class="fas fa-exclamation-circle text-danger me-2"></i> Tugas Terlewat
+                        </h5>
+                    </div>
+                    <div class="card-body p-0" style="position: relative; z-index: 1; margin-top: -1px;">
+                        <div class="list-group list-group-flush overdue-tasks-container">
                             @if($overdueTasks->isEmpty())
-                            <div class="list-group-item">
-                                <div class="text-center text-muted">
-                                    No overdue tasks
-                                </div>
+                            <div class="d-flex flex-column align-items-center justify-content-center" style="height: 300px; padding: 20px;">
+                                <i class="fas fa-trophy text-warning mb-3" style="font-size: 3rem;"></i>
+                                <h6 class="text-muted">Tidak ada tugas terlewat</h6>
+                                <p class="text-muted small">Semua tugas Anda sudah dikerjakan tepat waktu!</p>
                             </div>
+                            @else
+                                @foreach($overdueTasks as $task)
+                                <div class="list-group-item position-relative">
+                                    <div class="d-flex align-items-center">
+                                        <div class="form-check me-3">
+                                            <input type="checkbox" 
+                                                class="form-check-input task-checkbox" 
+                                                id="task-{{ $task->id }}"
+                                                data-task-id="{{ $task->id }}"
+                                                {{ $task->status === 'completed' ? 'checked' : '' }}>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1 task-title">{{ $task->title }}</h6>
+                                            <small class="text-danger">
+                                                Tenggat: {{ \Carbon\Carbon::parse($task->end_date)->format('d M Y') }}
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <span class="badge bg-{{ $task->priority === 'high' ? 'danger' : ($task->priority === 'medium' ? 'warning' : 'success') }} position-absolute" style="right: 15px; top: 50%; transform: translateY(-50%);">
+                                        {{ $task->priority === 'high' ? 'Tinggi' : ($task->priority === 'medium' ? 'Sedang' : 'Rendah') }}
+                                    </span>
+                                </div>
+                                @endforeach
                             @endif
                         </div>
                     </div>
