@@ -1,51 +1,51 @@
-<div class="col-md-8">
-    <div class="card shadow mb-4" style="min-height: calc(100vh - 200px);">
-        <div class="card-body task-calendar" style="height: 100%; display: flex; flex-direction: column;">
-            <!-- Header dengan toggle buttons -->
-            <div class="d-flex justify-content-end align-items-center mb-4">
+<div class="col-md-8 mb-4">
+    <div class="card shadow h-100">
+        <div class="card-body task-calendar">
+        <!-- Header dengan toggle buttons -->
+        <div class="d-flex justify-content-end align-items-center mb-4">
                 <div class="btn-group view-toggle" role="group">
-                    <button type="button" class="btn btn-primary active" id="calendarViewBtn">
+                <button type="button" class="btn btn-primary active" id="calendarViewBtn">
                         <i class="fas fa-calendar-alt me-2"></i> Calendar
-                    </button>
-                    <button type="button" class="btn btn-primary" id="statsViewBtn">
+                </button>
+                <button type="button" class="btn btn-primary" id="statsViewBtn">
                         <i class="fas fa-chart-bar me-2"></i> Statistics
-                    </button>
-                </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Container untuk Calendar dan Statistics -->
+            <div class="view-container">
+            <!-- Calendar View -->
+                <div id="calendarView" class="view-content">
+                    <div id="calendar"></div>
             </div>
 
-            <!-- Container untuk Calendar dan Statistics -->
-            <div class="view-container" style="flex: 1; display: flex; flex-direction: column;">
-                <!-- Calendar View -->
-                <div id="calendarView" class="view-content" style="flex: 1;">
-                    <div id="calendar" style="height: 100%;"></div>
-                </div>
-
-                <!-- Statistics View -->
-                <div id="statisticsView" class="view-content" style="display: none; flex: 1;">
-                    <div class="row g-4" style="height: 100%;">
-                        <div class="col-md-6">
-                            <div class="stats-card h-100">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-4">Task Distribution by Priority</h5>
-                                    <canvas id="priorityChart"></canvas>
-                                </div>
+            <!-- Statistics View -->
+                <div id="statisticsView" class="view-content" style="display: none;">
+                    <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="stats-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4">Task Distribution by Priority</h5>
+                                <canvas id="priorityChart"></canvas>
                             </div>
                         </div>
-                        
-                        <div class="col-md-6">
-                            <div class="stats-card h-100">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-4">Task Completion Rate</h5>
-                                    <canvas id="completionChart"></canvas>
-                                </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="stats-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4">Task Completion Rate</h5>
+                                <canvas id="completionChart"></canvas>
                             </div>
                         </div>
-                        
-                        <div class="col-md-12 mt-4">
-                            <div class="stats-card">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-4">Weekly Task Overview</h5>
-                                    <canvas id="weeklyChart"></canvas>
+                    </div>
+                    
+                    <div class="col-md-12 mt-4">
+                        <div class="stats-card">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4">Weekly Task Overview</h5>
+                                <canvas id="weeklyChart"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -63,10 +63,72 @@
         border-radius: 10px;
     }
     
-    .stats-card {
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: rgba(58, 59, 69, 0.15);
+    .task-calendar {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .view-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    #calendarView {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    #calendar {
+        flex: 1;
+        min-height: 0;
+    }
+
+    .fc {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .fc .fc-view-harness {
+        flex: 1 1 auto;
+        min-height: 0;
+    }
+
+    .fc .fc-daygrid {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .fc .fc-daygrid-body {
+        flex: 1 1 auto;
+        height: auto !important;
+    }
+
+    .fc .fc-scroller {
+        height: 100% !important;
+        overflow: hidden auto;
+    }
+
+    .fc .fc-scroller-liquid-absolute {
+        position: relative !important;
+        top: 0 !important;
+        right: 0 !important;
+        left: 0 !important;
+        bottom: 0 !important;
+    }
+
+    .fc-direction-ltr .fc-daygrid-event.fc-event-end {
+        margin-right: 4px;
+    }
+
+    .fc table {
+        height: 100%;
     }
 
     /* View Toggle Button Styling */
@@ -92,10 +154,6 @@
     }
 
     /* Calendar Styling */
-    .fc {
-        height: 100%;
-    }
-
     .fc .fc-toolbar.fc-header-toolbar {
         margin-bottom: 1rem;
     }
@@ -127,194 +185,73 @@
     }
 
     .fc .fc-daygrid-day {
-        height: 150px !important;
-        max-height: 150px !important;
-        min-height: 150px !important;
+        height: auto !important;
     }
 
     .fc .fc-daygrid-day-frame {
         height: 100% !important;
-        max-height: 150px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        overflow: hidden !important;
+        min-height: 150px !important;
+        display: flex;
+        flex-direction: column;
     }
 
     .fc .fc-daygrid-day-top {
-        flex: 0 0 auto !important;
-        padding: 4px 8px !important;
-        z-index: 2 !important;
+        flex: 0 0 auto;
+        padding: 4px 8px;
     }
 
     .fc .fc-daygrid-day-events {
-        flex: 1 1 auto !important;
-        position: relative !important;
-        padding: 2px 4px !important;
-        overflow-y: auto !important;
-        max-height: calc(150px - 30px) !important;
-        margin-right: 2px !important;
-    }
-
-    .fc .fc-daygrid-more-link {
-        position: absolute !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        background: rgba(255,255,255,0.9) !important;
-        padding: 2px 4px !important;
-        text-align: center !important;
-        font-size: 0.8em !important;
-        color: #4e73df !important;
-        cursor: pointer !important;
-        z-index: 3 !important;
-    }
-
-    .fc .fc-daygrid-body {
-        width: 100% !important;
+        flex: 1;
+        min-height: 0;
+        margin: 0 !important;
+        padding: 0 4px;
     }
 
     .fc .fc-daygrid-body-balanced .fc-daygrid-day-events {
         position: relative !important;
+        min-height: 0;
     }
 
-    .fc .fc-daygrid-body-natural .fc-daygrid-day-frame {
-        height: 150px !important;
-        max-height: 150px !important;
-        min-height: 150px !important;
+    .fc .fc-daygrid-day-bottom {
+        padding: 2px 4px;
     }
 
-    /* Week row height */
-    .fc-dayGridWeek-view .fc-daygrid-body-balanced .fc-scrollgrid-sync-table {
-        height: 150px !important;
+    .fc table {
+        height: 100%;
     }
 
-    .fc .fc-scroller-liquid-absolute {
-        position: relative !important;
+    .fc-theme-standard td {
+        border: 1px solid #e3e6f0;
     }
 
-    .fc-daygrid-day-frame:hover .fc-daygrid-day-events {
-        overflow-y: auto !important;
+    .fc .fc-scrollgrid-sync-table {
+        height: 100% !important;
     }
 
-    /* Custom scrollbar */
-    .fc-daygrid-day-events::-webkit-scrollbar {
-        width: 4px !important;
+    .fc-view-harness, 
+    .fc-view-harness-active {
+        height: 100% !important;
     }
 
-    .fc-daygrid-day-events::-webkit-scrollbar-track {
-        background: #f8f9fc !important;
+    .fc-daygrid-body,
+    .fc-scrollgrid-sync-table,
+    .fc-col-header,
+    .fc-scrollgrid {
+        width: 100% !important;
     }
 
-    .fc-daygrid-day-events::-webkit-scrollbar-thumb {
-        background: #4e73df !important;
-        border-radius: 4px !important;
+    .fc-scrollgrid-section-body table, 
+    .fc-scrollgrid-section-header table {
+        width: 100% !important;
+        height: 100% !important;
     }
 
-    .fc-daygrid-day-events::-webkit-scrollbar-thumb:hover {
-        background: #2e59d9 !important;
+    .fc .fc-scrollgrid-section-liquid {
+        height: 100%;
     }
 
-    .fc .fc-daygrid-day-number {
-        font-size: 0.85rem;
-        font-weight: 500;
-        color: #5a5c69;
-        padding: 4px;
-    }
-
-    .fc .fc-day-today {
-        background-color: rgba(78, 115, 223, 0.05) !important;
-    }
-
-    .fc .fc-event {
-        margin: 1px 0 !important;
-        padding: 2px 8px !important;
-        border-radius: 4px !important;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.1) !important;
-        border: none !important;
-        min-height: 22px !important;
-        line-height: 1.2 !important;
-    }
-
-    .fc .fc-event:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 2px 4px rgba(0,0,0,0.15) !important;
-        transition: all 0.2s ease;
-        filter: brightness(95%);
-    }
-
-    .fc .fc-event-title {
-        font-size: 0.8rem !important;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        padding: 1px 0;
-    }
-
-    .fc-daygrid-event {
-        white-space: nowrap;
-        position: relative;
-        display: block;
-        font-size: 0.8em;
-        line-height: 1.2;
-    }
-
-    .fc-daygrid-block-event .fc-event-time {
-        font-weight: normal !important;
-        font-size: 0.8rem !important;
-    }
-
-    .fc-daygrid-event-dot {
-        display: none !important;
-    }
-
-    /* Priority Colors for Events */
-    .priority-high {
-        background-color: #ff4444 !important;
-        color: white !important;
-        border-left: 4px solid #cc0000 !important;
-        font-weight: 600 !important;
-    }
-
-    .priority-medium {
-        background-color: #ffa726 !important;
-        color: white !important;
-        border-left: 4px solid #fb8c00 !important;
-        font-weight: 600 !important;
-    }
-
-    .priority-low {
-        background-color: #66bb6a !important;
-        color: white !important;
-        border-left: 4px solid #43a047 !important;
-        font-weight: 600 !important;
-    }
-
-    /* Statistics Cards */
-    .stats-card .card-title {
-        color: #4e73df;
-        font-size: 1.1rem;
-        font-weight: 600;
-    }
-
-    .stats-card .card-body {
-        padding: 1.5rem;
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-        .fc .fc-toolbar {
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .fc .fc-toolbar-title {
-            font-size: 1.1rem;
-        }
-
-        .view-toggle .btn {
-            padding: 0.4rem 1rem;
-            font-size: 0.9rem;
-        }
+    .fc-scrollgrid-sync-table {
+        min-height: 0 !important;
     }
 
     /* Calendar Table Styling */
@@ -404,5 +341,160 @@
         width: 40px;
         height: 2px;
         background-color: #4e73df;
+    }
+
+    /* Calendar Cell Styling */
+    .fc .fc-daygrid-day {
+        height: auto !important;
+    }
+
+    .fc .fc-daygrid-day-frame {
+        height: 100% !important;
+        min-height: 150px !important;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .fc .fc-daygrid-day-top {
+        flex: 0 0 auto;
+        padding: 4px 8px;
+    }
+
+    .fc .fc-daygrid-day-events {
+        flex: 1;
+        min-height: 0;
+        margin: 0 !important;
+        padding: 0 4px;
+    }
+
+    /* Event Styling */
+    .fc .fc-event {
+        margin: 1px 0 !important;
+        padding: 2px 8px !important;
+        border-radius: 4px !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1) !important;
+        border: none !important;
+        min-height: 22px !important;
+        line-height: 1.2 !important;
+    }
+
+    .fc .fc-event:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.15) !important;
+        transition: all 0.2s ease;
+        filter: brightness(95%);
+    }
+
+    .fc .fc-event-title {
+        font-size: 0.8rem !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 1px 0;
+    }
+
+    /* Priority Colors */
+    .priority-high {
+        background-color: #ff4444 !important;
+        color: white !important;
+        border-left: 4px solid #cc0000 !important;
+        font-weight: 600 !important;
+    }
+
+    .priority-medium {
+        background-color: #ffa726 !important;
+        color: white !important;
+        border-left: 4px solid #fb8c00 !important;
+        font-weight: 600 !important;
+    }
+
+    .priority-low {
+        background-color: #66bb6a !important;
+        color: white !important;
+        border-left: 4px solid #43a047 !important;
+        font-weight: 600 !important;
+    }
+
+    /* Calendar Structure */
+    .fc-scrollgrid-sync-table {
+        height: 100% !important;
+    }
+
+    .fc-view-harness, 
+    .fc-view-harness-active {
+        height: 100% !important;
+    }
+
+    .fc-daygrid-body,
+    .fc-scrollgrid-sync-table,
+    .fc-col-header,
+    .fc-scrollgrid {
+        width: 100% !important;
+    }
+
+    .fc-scrollgrid-section-body table, 
+    .fc-scrollgrid-section-header table {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .fc .fc-scrollgrid-section-liquid {
+        height: 100%;
+    }
+
+    /* Other Calendar Elements */
+    .fc-theme-standard td {
+        border: 1px solid #e3e6f0;
+    }
+
+    .fc .fc-day-today {
+        background-color: rgba(78, 115, 223, 0.05) !important;
+    }
+
+    .fc-daygrid-event-dot {
+        display: none !important;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .fc .fc-toolbar {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .fc .fc-toolbar-title {
+            font-size: 1.1rem;
+        }
+
+        .view-toggle .btn {
+            padding: 0.4rem 1rem;
+            font-size: 0.9rem;
+        }
+    }
+
+    .fc-scrollgrid-section-body table, 
+    .fc-scrollgrid-section-header table {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .fc-scrollgrid-section table {
+        height: 100%;
+    }
+
+    .fc .fc-scrollgrid-section-liquid > td {
+        height: 150px !important;
+    }
+
+    .fc .fc-daygrid-body {
+        min-height: 150px !important;
+    }
+
+    .fc .fc-daygrid-body table {
+        min-height: 150px !important;
+    }
+
+    .fc tr {
+        min-height: 150px !important;
     }
 </style>

@@ -363,7 +363,7 @@
 <div class="dashboard-container">
     <div class="container-fluid">
         <!-- Calendar and Tasks Section -->
-        <div class="row" style="min-height: calc(100vh - 100px);">
+        <div class="row" style="height: 100%;">
             <x-dashboard.calender />
             <div class="col-md-4 d-flex flex-column" style="height: 100%;">
                 <x-dashboard.button />
@@ -417,18 +417,18 @@
                 <!-- Title Section -->
                 <div class="task-title-section">
                     <div id="taskTitle" class="task-title"></div>
-                </div>
+                    </div>
                 
                 <!-- Image Section (if available) -->
                 <div class="task-image-container" id="taskImageContainer">
                     <img id="taskImage" class="task-image" src="https://placehold.co/600x400/4e73df/ffffff?text=Task+Image+Example" alt="Task Image">
-                </div>
+                    </div>
                 
                 <!-- Description Section -->
                 <div class="detail-section">
                     <div class="detail-label">Deskripsi</div>
                     <div id="taskDescription" class="detail-value"></div>
-                </div>
+                    </div>
                 
                 <div class="section-divider"></div>
                 
