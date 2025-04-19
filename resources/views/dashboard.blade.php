@@ -360,6 +360,7 @@
 @endsection
 
 @section('content')
+<div id="alert-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>
 <div class="dashboard-container">
     <div class="container-fluid">
         <!-- Calendar and Tasks Section -->
@@ -517,9 +518,17 @@
 @endsection
 
 @section('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+// Check if jQuery is loaded
+if (typeof jQuery === 'undefined') {
+    console.error('jQuery is not loaded!');
+} else {
+    console.log('jQuery is loaded, version:', jQuery.fn.jquery);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const calendarView = document.getElementById('calendarView');
     const statisticsView = document.getElementById('statisticsView');
@@ -612,22 +621,46 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Weekly Chart
         new Chart(document.getElementById('weeklyChart'), {
-            type: 'bar',
+            type: 'line',
             data: {
-                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                datasets: [{
-                    label: 'Tasks',
-                    data: {{ json_encode($weeklyTaskCounts) }},
-                    backgroundColor: '#0099ff'
-                }]
+                labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
+                datasets: [
+                    {
+                        label: 'Total Tugas',
+                        data: {{ json_encode(array_column($weeklyStats, 'total')) }},
+                        borderColor: '#0099ff',
+                        backgroundColor: 'rgba(0, 153, 255, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Tugas Selesai',
+                        data: {{ json_encode(array_column($weeklyStats, 'completed')) }},
+                        borderColor: '#1cc88a',
+                        backgroundColor: 'rgba(28, 200, 138, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    }
+                ]
             },
             options: {
                 responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Statistik Tugas Mingguan'
+                    }
+                },
                 scales: {
                     y: {
                         beginAtZero: true,
                         ticks: {
-                            stepSize: 1
+                            stepSize: 5
                         }
                     }
                 }
@@ -672,50 +705,74 @@ document.addEventListener('DOMContentLoaded', function() {
         initializeCharts();
     });
 
-    // Task completion toggle
-    document.querySelectorAll('.task-checkbox').forEach(checkbox => {
-        checkbox.addEventListener('change', function(e) {
-            e.stopPropagation(); // Stop event from bubbling up to parent
-            const taskId = this.dataset.taskId;
-            const token = document.querySelector('meta[name="csrf-token"]').content;
-
-            this.disabled = true;
-
-            fetch(`/tasks/${taskId}/toggle-status`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': token,
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+    // Task checkbox handling
+    $(document).ready(function() {
+        $('.task-checkbox').on('change', function(e) {
+            e.preventDefault();
+            
+            const checkbox = $(this);
+            const form = checkbox.closest('form.task-status-form');
+            const taskItem = checkbox.closest('.task-item');
+            
+            // Disable checkbox while processing
+            checkbox.prop('disabled', true);
+            
+            // Submit form via AJAX
+            $.ajax({
+                url: form.attr('action'),
+                type: 'POST',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    if (response.success) {
+                        // Show success notification
+                        showNotification(response.message, 'success');
+                        
+                        // Refresh the page after a short delay
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1000);
+                    } else {
+                        // Revert checkbox state
+                        checkbox.prop('checked', !checkbox.prop('checked'));
+                        showNotification(response.message || 'Gagal mengubah status tugas', 'danger');
+                    }
+                },
+                error: function(xhr) {
+                    // Revert checkbox state
+                    checkbox.prop('checked', !checkbox.prop('checked'));
+                    showNotification('Terjadi kesalahan saat mengubah status tugas', 'danger');
+                    console.error('Error:', xhr.responseText);
+                },
+                complete: function() {
+                    // Re-enable checkbox
+                    checkbox.prop('disabled', false);
                 }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    showNotification(
-                        data.status === 'completed' 
-                            ? 'Task marked as completed!' 
-                            : 'Task marked as pending!',
-                        'success'
-                    );
-                    
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 1000);
-                } else {
-                    this.checked = !this.checked;
-                    showNotification(data.message || 'Failed to update task status!', 'error');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                this.checked = !this.checked;
-                showNotification('Error updating task status!', 'error');
-            })
-            .finally(() => {
-                this.disabled = false;
             });
         });
+        
+        // Notification function
+        function showNotification(message, type = 'success') {
+            // Remove existing notifications
+            $('.notification').remove();
+            
+            // Create and show new notification
+            const notification = $(`
+                <div class="alert alert-${type} alert-dismissible fade show notification" role="alert">
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            `);
+            
+            // Add to body
+            $('body').append(notification);
+            
+            // Auto hide after 3 seconds
+            setTimeout(() => {
+                notification.alert('close');
+            }, 3000);
+        }
     });
 
     // Show task details in modal
@@ -833,24 +890,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-
-    // Notification function
-    function showNotification(message, type = 'success') {
-        const notification = document.createElement('div');
-        notification.className = `alert alert-${type} alert-dismissible fade show notification`;
-        notification.innerHTML = `
-            ${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        `;
-        document.body.appendChild(notification);
-
-        setTimeout(() => {
-            notification.style.animation = 'slideOut 0.5s ease-out forwards';
-            setTimeout(() => {
-                notification.remove();
-            }, 500);
-        }, 3000);
-    }
 
     // Image zoom functionality
     let scale = 1;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
@@ -229,29 +230,35 @@ class TaskController extends Controller
     public function toggleStatus($id)
     {
         try {
-            $task = Task::find($id);
+            $task = Task::findOrFail($id);
             
-            if (!$task) {
+            // Verify user owns this task
+            if ($task->user_id !== auth()->id()) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Task not found'
-                ], 404);
+                    'message' => 'Unauthorized action'
+                ], 403);
             }
-    
-            $task->status = ($task->status === 'completed') ? 'pending' : 'completed';
+            
+            // Toggle the status
+            $task->status = $task->status === 'completed' ? 'pending' : 'completed';
             $task->save();
-    
+            
             return response()->json([
                 'success' => true,
-                'status' => $task->status,
-                'message' => 'Task status updated successfully'
+                'message' => $task->status === 'completed' ? 'Tugas telah ditandai selesai' : 'Tugas ditandai belum selesai',
+                'status' => $task->status
             ]);
-    
+            
         } catch (\Exception $e) {
-            \Log::error('Error updating task status: ' . $e->getMessage());
+            Log::error('Error toggling task status:', [
+                'task_id' => $id,
+                'error' => $e->getMessage()
+            ]);
+            
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to update task status'
+                'message' => 'Terjadi kesalahan saat mengubah status tugas'
             ], 500);
         }
     }

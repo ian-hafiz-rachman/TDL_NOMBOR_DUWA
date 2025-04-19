@@ -50,11 +50,13 @@
                             </td>
                             <td>
                                 <div class="form-check">
-                                    <input class="form-check-input task-status" 
-                                           type="checkbox" 
-                                           value="{{ $task->id }}"
-                                           {{ $task->status === 'completed' ? 'checked' : '' }}
-                                           data-task-id="{{ $task->id }}">
+                                    <form class="task-status-form" action="{{ route('tasks.toggle-status', $task->id) }}" method="POST">
+                                        @csrf
+                                        <input class="form-check-input task-checkbox" 
+                                               type="checkbox" 
+                                               id="task-{{ $task->id }}"
+                                               {{ $task->status === 'completed' ? 'checked' : '' }}>
+                                    </form>
                                     <label class="form-check-label {{ $task->status === 'completed' ? 'text-decoration-line-through text-muted' : '' }}">
                                         {{ $task->status === 'completed' ? 'Completed' : 'Pending' }}
                                     </label>
@@ -95,6 +97,20 @@
     </div>
     @endif
 </div>
+
+<div id="alert-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>
+
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show notification" role="alert">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show notification" role="alert">
+        {{ session('error') }}
+    </div>
+@endif
 @endsection
 
 @section('styles')
@@ -118,29 +134,80 @@
 
 @section('scripts')
 <script>
-document.querySelectorAll('.task-status').forEach(checkbox => {
-    checkbox.addEventListener('change', function() {
-        const taskId = this.dataset.taskId;
-        
-        fetch(`/tasks/${taskId}/status`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                window.location.reload();
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            this.checked = !this.checked;
-            alert('Error updating task status!');
+document.addEventListener('DOMContentLoaded', function() {
+    // Task checkbox handling
+    document.querySelectorAll('.task-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function(e) {
+            e.preventDefault();
+            
+            const form = this.closest('form.task-status-form');
+            
+            // Disable checkbox while processing
+            this.disabled = true;
+            
+            // Submit form via fetch
+            fetch(form.action, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Show success notification
+                    showNotification(data.message, 'success');
+                    
+                    // Refresh the page after a short delay
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    // Revert checkbox state
+                    this.checked = !this.checked;
+                    showNotification(data.message || 'Failed to update task status', 'danger');
+                }
+            })
+            .catch(error => {
+                // Revert checkbox state
+                this.checked = !this.checked;
+                showNotification('Error updating task status', 'danger');
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                // Re-enable checkbox
+                this.disabled = false;
+            });
         });
     });
+    
+    // Notification function
+    function showNotification(message, type = 'success') {
+        const alertContainer = document.getElementById('alert-container');
+        
+        // Remove existing notifications
+        while (alertContainer.firstChild) {
+            alertContainer.removeChild(alertContainer.firstChild);
+        }
+        
+        // Create new notification
+        const notification = document.createElement('div');
+        notification.className = `alert alert-${type} alert-dismissible fade show`;
+        notification.role = 'alert';
+        notification.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+        
+        // Add to container
+        alertContainer.appendChild(notification);
+        
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
 });
 </script>
 @endsection 

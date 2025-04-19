@@ -90,11 +90,13 @@
                     data-task-status="{{ $task->status }}">
                     <div class="d-flex align-items-center">
                         <div class="form-check me-3">
-                            <input type="checkbox" 
-                                class="form-check-input task-checkbox" 
-                                id="task-{{ $task->id }}"
-                                data-task-id="{{ $task->id }}"
-                                {{ $task->status === 'completed' ? 'checked' : '' }}>
+                            <form class="task-status-form" action="{{ route('tasks.toggle-status', $task->id) }}" method="POST">
+                                @csrf
+                                <input type="checkbox" 
+                                    class="form-check-input task-checkbox" 
+                                    id="task-{{ $task->id }}"
+                                    {{ $task->status === 'completed' ? 'checked' : '' }}>
+                            </form>
                         </div>
                         <div class="task-content">
                             <h6 class="mb-1 task-title {{ $task->status === 'completed' ? 'text-decoration-line-through' : '' }}">
@@ -103,6 +105,9 @@
                             <small class="text-danger">
                                 Tenggat: {{ \Carbon\Carbon::parse($task->end_date)->format('d M Y') }}
                             </small>
+                            <span class="task-status d-none {{ $task->status === 'completed' ? 'text-success' : 'text-warning' }}">
+                                {{ $task->status === 'completed' ? 'Selesai' : 'Belum Selesai' }}
+                            </span>
                         </div>
                         <div class="badge-container">
                             <span class="badge bg-{{ $task->priority === 'high' ? 'danger' : ($task->priority === 'medium' ? 'warning' : 'success') }}">

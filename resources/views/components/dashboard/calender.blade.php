@@ -44,7 +44,7 @@
                     <div class="col-md-12 mt-4">
                         <div class="stats-card">
                             <div class="card-body">
-                                <h5 class="card-title mb-4">Weekly Task Overview</h5>
+                                <h5 class="card-title mb-4">Statistik Tugas Mingguan</h5>
                                 <canvas id="weeklyChart"></canvas>
                                 </div>
                             </div>

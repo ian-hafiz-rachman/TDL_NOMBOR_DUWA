@@ -51,13 +51,28 @@ class DashboardController extends Controller
             ->where('status', 'pending')
             ->count();
 
-        // Weekly task counts
-        $weeklyTaskCounts = [];
+        // Weekly task counts for the current week
+        $weeklyStats = [];
+        $startOfWeek = now()->startOfWeek();
+        
         for ($i = 0; $i < 7; $i++) {
-            $date = now()->startOfWeek()->addDays($i);
-            $weeklyTaskCounts[] = Task::where('user_id', $user->id)
+            $date = $startOfWeek->copy()->addDays($i);
+            
+            // Get total tasks for the day
+            $totalTasksDay = Task::where('user_id', $user->id)
                 ->whereDate('created_at', $date)
                 ->count();
+            
+            // Get completed tasks for the day
+            $completedTasksDay = Task::where('user_id', $user->id)
+                ->where('status', 'completed')
+                ->whereDate('created_at', $date)
+                ->count();
+            
+            $weeklyStats[] = [
+                'total' => $totalTasksDay,
+                'completed' => $completedTasksDay
+            ];
         }
 
         // Menghitung persentase dan membulatkannya
@@ -72,7 +87,7 @@ class DashboardController extends Controller
             'lowPriorityCount',
             'completedTasks',
             'pendingTasks',
-            'weeklyTaskCounts',
+            'weeklyStats',
             'percentage'
         ));
     }
