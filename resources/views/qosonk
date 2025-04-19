@@ -1,0 +1,6111 @@
+    :root {
+        --spacing-base: 25px;
+        --primary-color: #0099ff;
+        --hover-color: #0077cc;
+        --success-color: #1cc88a;
+        --warning-color: #f6c23e;
+        --danger-color: #e74a3b;
+    }
+
+    /* Dashboard Container */
+    .dashboard-container {
+        padding: 30px;
+        background-color: #f8f9fa;
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cstyle%3E.todo-list %7B fill: none; stroke: %230099ff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; stroke-opacity: 0.1;%7D%3C/style%3E%3Cg class='todo-list'%3E%3Cpath d='M50 50h100v120H50z' transform='rotate(-2 100 100)' /%3E%3Cpath d='M55 70h90 M55 90h90 M55 110h90 M55 130h90' transform='rotate(-2 100 100)' /%3E%3Cpath d='M60 75l-5-5 M60 95l-5-5 M60 115l-5-5 M60 135l-5-5' transform='rotate(-2 100 100)' /%3E%3Cpath d='M200 80h80v100h-80z' transform='rotate(3 240 130)' /%3E%3Cpath d='M205 100h70 M205 120h70 M205 140h70 M205 160h70' transform='rotate(3 240 130)' /%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    /* Stats Cards Styling */
+    .stats-card {
+        transition: none !important;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: none;
+    }
+    
+    .stats-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    
+    .stats-card .card-body {
+        padding: 1.8rem;
+    }
+    
+    .stats-card h6 {
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    
+    .stats-card h4 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    /* Action buttons spacing */
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+        margin-bottom: var(--spacing-base); /* Konsisten 25px */
+    }
+    
+    .action-buttons .btn {
+        flex: 1;
+        padding: 8px 16px;
+        font-weight: 500;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .action-buttons .btn-primary {
+        background-color: var(--primary-color);
+        border: none;
+        box-shadow: none;
+    }
+
+    .action-buttons .btn-outline-primary {
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+        background-color: white;
+    }
+
+    .action-buttons .btn-outline-primary:hover {
+        background-color: var(--primary-color);
+        color: white;
+    }
+
+    /* Calendar Container */
+    .task-calendar {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: none;
+        padding: 15px; /* Mengurangi padding */
+        border-radius: 15px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* View Container */
+    .view-container {
+        position: relative;
+        height: 1000px !important; /* Tingkatkan lagi tinggi */
+        min-height: 1000px !important;
+        overflow: visible;
+    }
+
+    /* Calendar View */
+    #calendarView {
+        height: 100% !important;
+        min-height: 1000px !important; /* Tingkatkan lagi tinggi minimum */
+    }
+
+    /* Calendar Container Styling */
+    .fc {
+        background: white !important;
+        border-radius: 16px !important;
+        padding: 24px !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+        border: none !important;
+        height: 100% !important;
+    }
+
+    /* Header Toolbar Styling */
+    .fc .fc-toolbar {
+        margin-bottom: 2rem !important;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .fc .fc-toolbar-title {
+        font-size: 1.5rem !important;
+        font-weight: 600 !important;
+        color: #2d3748 !important;
+    }
+
+    /* Navigation Buttons */
+    .fc-button {
+        padding: 8px 16px !important;
+        font-weight: 500 !important;
+        border-radius: 8px !important;
+        border: 1px solid #e2e8f0 !important;
+        background: white !important;
+        color: #4a5568 !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .fc-button:hover {
+        background: #f7fafc !important;
+        border-color: #cbd5e0 !important;
+        color: #2d3748 !important;
+    }
+
+    .fc-button-active {
+        background: #3182ce !important;
+        border-color: #3182ce !important;
+        color: white !important;
+    }
+
+    /* Calendar Grid */
+    .fc-theme-standard td, 
+    .fc-theme-standard th {
+        border: 1px solid #edf2f7 !important;
+    }
+
+    /* Day Header Cells */
+    .fc-col-header-cell {
+        padding: 12px 0 !important;
+        background: #f8fafc !important;
+    }
+
+    .fc-col-header-cell-cushion {
+        padding: 8px !important;
+        color: #4a5568 !important;
+        font-weight: 600 !important;
+        font-size: 0.9rem !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+    }
+
+    /* Day Cells */
+    .fc-daygrid-day {
+        height: 130px !important;
+        max-height: 130px !important;
+        min-height: 130px !important;
+    }
+
+    .fc-daygrid-day-frame {
+        padding: 8px !important;
+        height: 100% !important;
+        background: white !important;
+        transition: background-color 0.2s ease !important;
+    }
+
+    .fc-daygrid-day-frame:hover {
+        background: #f8fafc !important;
+    }
+
+    /* Day Numbers */
+    .fc-daygrid-day-number {
+        font-size: 0.9rem !important;
+        font-weight: 500 !important;
+        color: #4a5568 !important;
+        padding: 4px 8px !important;
+        margin: 2px !important;
+    }
+
+    /* Today Styling */
+    .fc-day-today .fc-daygrid-day-frame {
+        background: #ebf8ff !important;
+    }
+
+    .fc-day-today .fc-daygrid-day-number {
+        background: #3182ce !important;
+        color: white !important;
+        border-radius: 50% !important;
+        width: 24px !important;
+        height: 24px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* Event Styling */
+    .fc-event {
+        border: none !important;
+        padding: 4px 8px !important;
+        margin: 2px 0 !important;
+        border-radius: 6px !important;
+        font-size: 0.85rem !important;
+        font-weight: 500 !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Priority Colors with Gradients */
+    .priority-high {
+        background: linear-gradient(45deg, #f56565, #fc8181) !important;
+        color: white !important;
+    }
+
+    .priority-medium {
+        background: linear-gradient(45deg, #ecc94b, #f6e05e) !important;
+        color: #744210 !important;
+    }
+
+    .priority-low {
+        background: linear-gradient(45deg, #48bb78, #68d391) !important;
+        color: white !important;
+    }
+
+    /* More Link Styling */
+    .fc-daygrid-more-link {
+        background: #edf2f7 !important;
+        color: #4a5568 !important;
+        font-size: 0.8rem !important;
+        font-weight: 500 !important;
+        padding: 2px 6px !important;
+        border-radius: 4px !important;
+        margin: 2px 0 !important;
+        text-align: center !important;
+    }
+
+    .fc-daygrid-more-link:hover {
+        background: #e2e8f0 !important;
+        color: #2d3748 !important;
+        text-decoration: none !important;
+    }
+
+    /* Popover Styling */
+    .fc-popover {
+        border: none !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+        overflow: hidden !important;
+    }
+
+    .fc-popover-header {
+        background: #f8fafc !important;
+        padding: 12px 16px !important;
+        font-size: 0.9rem !important;
+        font-weight: 600 !important;
+        color: #2d3748 !important;
+        border-bottom: 1px solid #edf2f7 !important;
+    }
+
+    .fc-popover-body {
+        padding: 12px !important;
+        max-height: 300px !important;
+        overflow-y: auto !important;
+    }
+
+    /* Other Month Days */
+    .fc-day-other .fc-daygrid-day-frame {
+        background: #fafafa !important;
+    }
+
+    .fc-day-other .fc-daygrid-day-number {
+        opacity: 0.5 !important;
+    }
+
+    /* Weekend Days */
+    .fc-day-sat, .fc-day-sun {
+        background: #f8fafc !important;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .fc {
+            padding: 16px !important;
+        }
+        
+        .fc-toolbar-title {
+            font-size: 1.2rem !important;
+        }
+        
+        .fc-daygrid-day {
+            height: 100px !important;
+        }
+        
+        .fc-event {
+            font-size: 0.75rem !important;
+            padding: 2px 4px !important;
+        }
+    }
+
+    /* View Container */
+    .view-container {
+        position: relative;
+        height: 1000px !important; /* Tingkatkan lagi tinggi */
+        min-height: 1000px !important;
+        overflow: visible;
+    }
+
+    /* Calendar Grid */
+    .fc {
+        background: white !important;
+        border-radius: 16px !important;
+        padding: 24px !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+        border: 1px solid #e9ecef !important;
+        min-height: 1000px !important; /* Tingkatkan lagi tinggi minimum */
+        height: 100% !important;
+    }
+
+    .fc .fc-toolbar.fc-header-toolbar {
+        margin-bottom: 0.5rem !important; /* Mengurangi margin header */
+    }
+
+    /* Update Calendar Day Cell Styling */
+    .fc .fc-daygrid-day {
+        height: 130px !important; /* Ukuran tetap untuk setiap cell */
+        max-height: 130px !important;
+        min-height: 130px !important;
+    }
+
+    .fc .fc-daygrid-day-frame {
+        height: 100% !important;
+        min-height: 100% !important;
+        max-height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 8px !important;
+    }
+
+    .fc .fc-daygrid-day-top {
+        flex: 0 0 auto !important;
+        padding: 4px !important;
+    }
+
+    .fc .fc-daygrid-day-events {
+        flex: 1 !important;
+        min-height: 0 !important;
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2px !important;
+        padding: 0 4px !important;
+        overflow-y: auto !important; /* Ubah ke auto untuk scrolling */
+        max-height: calc(100% - 25px) !important; /* Beri ruang untuk tanggal */
+    }
+
+    /* Style untuk event/task - Garis saat idle, tampilkan teks saat hover */
+    .fc-daygrid-event-harness {
+        margin: 1px 0 !important;
+    }
+
+    .fc-event {
+        padding: 2px 6px !important;
+        margin: 0 !important;
+        font-size: 0 !important; /* Sembunyikan teks awalnya */
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        height: 8px !important; /* Tinggi garis saat idle */
+        border-radius: 20px !important;
+        transition: all 0.2s ease-in-out !important;
+    }
+
+    .fc-event .fc-event-title,
+    .fc-event .fc-event-time {
+        opacity: 0 !important; /* Sembunyikan teks */
+        transition: all 0.2s ease-in-out !important;
+    }
+
+    .fc-event:hover {
+        height: auto !important;
+        font-size: 0.8rem !important;
+        padding: 4px 6px !important;
+        z-index: 100 !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .fc-event:hover .fc-event-title,
+    .fc-event:hover .fc-event-time {
+        opacity: 1 !important;
+    }
+
+    /* Style untuk tombol "more" */
+    .fc-daygrid-more-link {
+        display: none !important;
+    }
+
+    /* Pastikan scrollbar tidak terlalu mengganggu */
+    .fc .fc-daygrid-day-events::-webkit-scrollbar {
+        width: 4px !important;
+    }
+
+    .fc .fc-daygrid-day-events::-webkit-scrollbar-track {
+        background: transparent !important;
+    }
+
+    .fc .fc-daygrid-day-events::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.1) !important;
+        border-radius: 10px !important;
+    }
+
+    /* Style untuk tombol "more" */
+    .fc-daygrid-more-link {
+        background: #f8fafc !important;
+        color: #4a5568 !important;
+        font-size: 0.8rem !important;
+        font-weight: 500 !important;
+        padding: 2px 6px !important;
+        border-radius: 4px !important;
+        margin-top: auto !important;
+        text-align: center !important;
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+    }
+
+    /* Memastikan container kalender memiliki tinggi tetap */
+    .fc-view-harness {
+        height: auto !important;
+    }
+
+    .fc-scrollgrid-sync-table {
+        height: auto !important;
+    }
+
+    /* Memastikan baris kalender memiliki tinggi tetap */
+    .fc-scrollgrid-sync-table tr {
+        height: 150px !important;
+    }
+
+    /* Memperbaiki tampilan untuk hari di luar bulan */
+    .fc-day-other .fc-daygrid-day-frame {
+        background: #f8fafc !important;
+        opacity: 0.7 !important;
+    }
+
+    /* Styling untuk hari ini */
+    .fc-day-today .fc-daygrid-day-frame {
+        background: #ebf8ff !important;
+    }
+
+    /* Memastikan grid tetap konsisten */
+    .fc-scrollgrid {
+        border-collapse: collapse !important;
+    }
+
+    .fc td, .fc th {
+        border: 1px solid #e2e8f0 !important;
+    }
+
+    /* Alert Styling */
+    .alert {
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        z-index: 1000;
+        min-width: 300px;
+        border-radius: 10px;
+        box-shadow: none;
+        animation: slideIn 0.5s ease-out;
+        padding: 12px 20px; /* Adjust padding since we removed the close button */
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .alert-success {
+        background-color: var(--success-color);
+        border-color: var(--success-color);
+        color: white;
+    }
+
+    .alert-danger {
+        background-color: var(--danger-color);
+        border-color: var(--danger-color);
+        color: white;
+    }
+
+    .alert .btn-close {
+        color: white;
+        opacity: 0.8;
+    }
+
+    /* Reset container styles */
+    .dashboard-container {
+        padding: 20px;
+        background: #f8f9fc;
+    }
+    
+    /* Task calendar styles */
+    .task-calendar {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: none;
+        margin-bottom: 20px;
+    }
+
+    #calendar {
+        height: 100% !important;
+        min-height: 1000px !important; /* Tingkatkan lagi tinggi minimum */
+        font-family: 'Nunito', sans-serif;
+    }
+
+    /* Stats card styles */
+    .stats-card {
+        transition: none !important;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    /* Upcoming deadlines card */
+    .card-body.p-0 {
+        max-height: 600px;
+        overflow-y: auto;
+    }
+
+    /* Keep your existing styles below */
+    .stats-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    .stats-card .card-body {
+        padding: 1.5rem;
+    }
+    /* Calendar Styling */
+    .fc-header-toolbar {
+        margin-bottom: 1rem !important;
+        padding: 0 !important;
+    }
+    .fc-toolbar-title {
+        font-size: 1.5em !important;
+        font-weight: 600 !important;
+        color: #2c3e50;
+    }
+    .fc-button {
+        padding: 8px 15px !important;
+        font-weight: 500 !important;
+        border-radius: 8px !important;
+        text-transform: capitalize !important;
+    }
+    .fc-button-primary {
+        background-color: var(--primary-color) !important;
+        border-color: var(--primary-color) !important;
+    }
+    .fc-button-primary:hover {
+        background-color: var(--hover-color) !important;
+        border-color: var(--hover-color) !important;
+    }
+    .fc-daygrid-day {
+        transition: none !important;
+    }
+    .fc-daygrid-day:hover {
+        background-color: white !important;
+    }
+    .fc-daygrid-day-number {
+        font-size: 0.9em !important;
+        padding: 4px 8px !important;
+        color: #5a5c69;
+    }
+    .fc-day-today .fc-daygrid-day-number {
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+    }
+    .fc-event {
+        border-radius: 6px !important;
+        padding: 3px 8px !important;
+        font-size: 0.85em !important;
+        border: none !important;
+        margin: 2px 0 !important;
+    }
+    /* Priority Colors */
+    .priority-high {
+        background-color: var(--danger-color) !important;
+        border-color: var(--danger-color) !important;
+    }
+    .priority-medium {
+        background-color: var(--warning-color) !important;
+        border-color: var(--warning-color) !important;
+        color: #000 !important;
+    }
+    .priority-low {
+        background-color: var(--success-color) !important;
+        border-color: var(--success-color) !important;
+    }
+    /* Today's Tasks Section */
+    .today-tasks {
+        background: white;
+        border-radius: 15px;
+        box-shadow: none;
+        height: 600px;
+        overflow-y: auto;
+    }
+    .today-tasks .card-header {
+        background: transparent;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 1.5rem;
+    }
+    .today-tasks .list-group-item {
+        border: none;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 1rem 1.5rem;
+    }
+    .today-tasks .list-group-item:last-child {
+        border-bottom: none;
+    }
+    /* Navigation Button Group Styling */
+    .fc-button-group {
+        gap: 5px !important;
+        background: #f8f9fc;
+        padding: 5px;
+        border-radius: 12px;
+    }
+    .fc-button-group .fc-button {
+        border-radius: 8px !important;
+        padding: 8px 16px !important;
+        font-weight: 500 !important;
+        border: none !important;
+        background: transparent !important;
+        color: #6c757d !important;
+    }
+    .fc-button-group .fc-button.fc-button-active {
+        background-color: var(--primary-color) !important;
+        color: white !important;
+    }
+    .fc-button-group .fc-button:hover:not(.fc-button-active) {
+        background-color: #eaecf4 !important;
+    }
+    /* Header Toolbar Spacing */
+    .fc-header-toolbar {
+        padding: 15px 0 !important;
+        margin-bottom: 1.5rem !important;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    /* Calendar Grid */
+    .fc-daygrid-day {
+        height: 150px !important;
+    }
+    .fc-daygrid-day-frame {
+        min-height: 100% !important;
+        padding: 8px !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .fc-daygrid-day-top {
+        flex-direction: row !important;
+        margin-bottom: 4px;
+    }
+    .fc-daygrid-day-number {
+        float: left !important;
+        margin: 5px !important;
+        font-size: 14px !important;
+        font-weight: 500;
+        color: #5a5c69;
+    }
+    .fc-day-today .fc-daygrid-day-number {
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Calendar Header */
+    .fc-col-header-cell {
+        padding: 10px 0 !important;
+        background: #f8f9fc !important;
+        border-color: #e3e6f0 !important;
+    }
+    .fc-col-header-cell-cushion {
+        padding: 8px !important;
+        color: #4e73df !important;
+        font-weight: 600 !important;
+        text-decoration: none !important;
+    }
+    
+    /* Event Styling */
+    .fc-daygrid-event {
+        margin: 2px 4px !important;
+        padding: 2px 4px !important;
+        border-radius: 4px !important;
+    }
+    
+    /* Navigation Buttons */
+    .fc-button-group {
+        gap: 5px !important;
+    }
+    .fc-button {
+        padding: 8px 16px !important;
+        font-weight: 500 !important;
+        border: none !important;
+    }
+    .fc-button-primary {
+        background-color: var(--primary-color) !important;
+        color: white !important;
+    }
+    .fc-button-primary:not(.fc-button-active):hover {
+        background-color: var(--hover-color) !important;
+    }
+    .fc-button-active {
+        background-color: var(--hover-color) !important;
+    }
+    
+    /* Event styling */
+    .fc-event {
+        border: none !important;
+        padding: 4px 8px !important;
+        font-size: 0.85em !important;
+        white-space: normal !important;
+    }
+    
+    .priority-high {
+        background-color: rgba(231, 74, 59, 0.9) !important;
+        color: white !important;
+    }
+    
+    .priority-medium {
+        background-color: rgba(246, 194, 62, 0.9) !important;
+        color: black !important;
+    }
+    
+    .priority-low {
+        background-color: rgba(28, 200, 138, 0.9) !important;
+        color: white !important;
+    }
+    
+    .fc-event i {
+        opacity: 0.8;
+    }
+
+    /* New styles for task statistics */
+    .task-stats {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: none;
+        border-radius: 15px;
+        margin-bottom: var(--spacing-base);
+        padding: 1.5rem;
+    }
+
+    .task-stats .card-body {
+        padding: 0; /* Remove default card-body padding since we added padding to parent */
+    }
+
+    .task-stats h6 {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #2d3748;
+    }
+
+    .task-stats .progress {
+        background-color: #f0f2f5;
+        border-radius: 10px;
+        margin: 1rem 0;
+    }
+
+    .task-stats .progress-bar {
+        background-color: var(--primary-color);
+        border-radius: 10px;
+    }
+
+    .task-stats .task-counts {
+        margin-top: 1.5rem;
+    }
+
+    .task-stats .stat-item {
+        text-align: center;
+    }
+
+    .task-stats .stat-item h4 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+        color: #2d3748;
+    }
+
+    .task-stats .stat-item .text-success {
+        color: var(--success-color) !important;
+    }
+
+    .task-stats .stat-item .text-warning {
+        color: var(--warning-color) !important;
+    }
+
+    .task-stats .stat-item span {
+        font-size: 0.85rem;
+        color: #6c757d;
+    }
+
+    /* Update upcoming deadlines card styling */
+    .upcoming-deadlines {
+        background: white;
+        border-radius: 15px;
+        box-shadow: none;
+        height: calc(100% - 260px);
+        margin-top: var(--spacing-base); /* Konsisten 25px */
+    }
+    
+    .upcoming-deadlines .card-body {
+        height: calc(100% - 60px);
+        overflow-y: auto;
+    }
+
+    .upcoming-deadlines .list-group {
+        height: 100%;
+    }
+
+    /* Update list item styling */
+    .upcoming-deadlines .list-group-item {
+        padding: 15px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        transition: none !important;
+    }
+    
+    .upcoming-deadlines .list-group-item:hover {
+        background-color: white !important;
+    }
+    
+    /* Checkbox styling */
+    .form-check-input {
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-top: 0.2rem;
+        cursor: pointer !important;
+        border-color: #e0e3e7;
+    }
+    
+    .form-check-input:checked {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+    
+    /* Task title styling */
+    .upcoming-deadlines h6 {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 0.3rem;
+    }
+    
+    /* Task completed styling */
+    .task-completed {
+        text-decoration: line-through;
+        color: #858796;
+    }
+    
+    /* Badge styling */
+    .badge {
+        padding: 0.4rem 0.8rem;
+        font-weight: 500;
+        font-size: 0.75rem;
+    }
+    
+    /* Edit button styling */
+    .btn-outline-primary {
+        padding: 0.25rem 0.5rem;
+        border-color: #e0e3e7;
+        color: #4e73df;
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: #4e73df;
+        border-color: #4e73df;
+        color: white;
+    }
+    
+    /* Date text styling */
+    .text-muted {
+        font-size: 0.8rem;
+        color: #6c757d;
+    }
+
+    /* Update progress bar styling */
+    .progress {
+        background-color: #eaecf4;
+        border-radius: 10px;
+        height: 10px !important;
+    }
+
+    .progress-bar {
+        border-radius: 10px;
+        transition: none !important;
+    }
+
+    /* Update stats card styling */
+    .task-stats {
+        background: white;
+        border-radius: 15px;
+        box-shadow: none;
+    }
+
+    .task-stats .card-body {
+        padding: 1.5rem;
+    }
+
+    .stat-item {
+        flex: 1;
+        padding: 0 10px;
+    }
+
+    .stat-item h4 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+    }
+
+    .stat-item span {
+        font-size: 0.8rem;
+        color: #858796;
+    }
+
+    /* Add hover effect to stats */
+    .stat-item:hover h4 {
+        transform: none !important;
+        transition: none !important;
+    }
+
+    /* Modal styling */
+    .modal-content {
+        border: none;
+        border-radius: 15px;
+        box-shadow: none;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 1.5rem;
+    }
+
+    .modal-body {
+        padding: 1.5rem;
+    }
+
+    .modal-footer {
+        border-top: 1px solid rgba(0,0,0,0.05);
+        padding: 1.5rem;
+    }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 1px solid #e0e3e7;
+        padding: 0.6rem 1rem;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #4e73df;
+        box-shadow: none;
+    }
+
+    .form-label {
+        font-weight: 500;
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Update Modal styling */
+    .modal-lg {
+        max-width: 800px;
+    }
+
+    .modal-content {
+        border: none;
+        border-radius: 15px;
+        box-shadow: none;
+        max-height: 90vh; /* Maksimum tinggi modal 90% dari tinggi viewport */
+    }
+
+    .modal-header {
+        background-color: #f8f9fc;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 1rem 1.5rem; /* Mengurangi padding */
+    }
+
+    .modal-header .modal-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .modal-body {
+        padding: 1.5rem;
+        overflow-y: auto; /* Tambah scroll untuk modal body */
+        max-height: calc(90vh - 110px); /* Tinggi maksimum body modal */
+    }
+
+    .modal-footer {
+        background-color: #f8f9fc;
+        border-top: 1px solid rgba(0,0,0,0.05);
+        padding: 0.75rem 1.5rem; /* Mengurangi padding */
+    }
+
+    /* Form styling */
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 1px solid #e0e3e7;
+        padding: 0.7rem 1rem; /* Sedikit mengurangi padding */
+        font-size: 1rem;
+    }
+
+    .form-control-lg {
+        font-size: 1.1rem;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #4e73df;
+        box-shadow: none;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    /* Button styling */
+    .btn-primary {
+        padding: 0.5rem 1.25rem;
+        font-weight: 500;
+    }
+
+    .btn-secondary {
+        background-color: #eaecf4;
+        border: none;
+        color: #6e707e;
+        padding: 0.5rem 1.25rem;
+    }
+
+    .btn-secondary:hover {
+        background-color: #dde0e9;
+    }
+
+    /* Custom scrollbar styling */
+    .custom-scroll {
+        scrollbar-width: thin;
+        scrollbar-color: #cbd5e0 #f8f9fc;
+    }
+
+    .custom-scroll::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .custom-scroll::-webkit-scrollbar-track {
+        background: #f8f9fc;
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb {
+        background-color: #cbd5e0;
+        border-radius: 3px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .dashboard-container {
+            padding: 15px;
+        }
+    }
+
+    /* Tambahkan style untuk modal */
+    .modal-content {
+        border-radius: 15px;
+        border: none;
+        box-shadow: none;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        padding: 1.5rem;
+    }
+
+    .modal-body {
+        padding: 1.5rem;
+    }
+
+    .modal-footer {
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        padding: 1.5rem;
+    }
+
+    .task-detail-content label {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .task-detail-content p {
+        color: #2c3e50;
+        font-size: 1rem;
+    }
+
+    .badge {
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        border-radius: 6px;
+    }
+
+    .statistics-container {
+        padding: 20px;
+        background: white;
+        border-radius: 15px;
+        min-height: 600px;
+    }
+
+    .stats-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: none;
+        transition: none !important;
+    }
+
+    .stats-card:hover {
+        transform: none !important;
+    }
+
+    .card-title {
+        color: #2c3e50;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .btn-group .btn {
+        padding: 8px 16px;
+    }
+
+    .btn-group .btn.active {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .view-container {
+        position: relative;
+        height: 600px; /* Tinggi tetap */
+        overflow: hidden; /* Mencegah scroll */
+    }
+
+    .view-content {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        transition: none !important;
+    }
+
+    #statisticsView {
+        padding: 20px 0;
+    }
+
+    /* Tambahan style untuk kalender */
+    .fc-view-harness {
+        height: calc(100% - 50px) !important;
+    }
+
+    .fc .fc-daygrid-body {
+        height: 100% !important;
+    }
+
+    .fc .fc-daygrid-body-balanced .fc-daygrid-day-events {
+        position: relative !important;
+    }
+
+    .current-month {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #2c3e50;
+        min-width: 150px;
+        text-align: center;
+    }
+
+    .fc-theme-standard td, .fc-theme-standard th {
+        border: 1px solid #e3e6f0;
+    }
+
+    .fc-daygrid-day {
+        min-height: 100px !important;
+        height: auto !important;
+    }
+
+    .fc-daygrid-day-frame {
+        height: 100% !important;
+        min-height: unset !important;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .fc-daygrid-day-top {
+        flex: 0 0 auto;
+        padding: 4px;
+    }
+
+    .fc-daygrid-day-events {
+        flex: 1;
+        min-height: 0;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    .fc-daygrid-more-link {
+        margin: 2px 0 !important;
+        padding: 2px 4px !important;
+        font-size: 0.85em !important;
+    }
+
+    .fc-day-today {
+        background: rgba(0, 153, 255, 0.05) !important;
+    }
+
+    .fc td, .fc th {
+        border: 1px solid #e3e6f0 !important;
+    }
+
+    /* Style untuk notifikasi */
+    .notification {
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        z-index: 1000;
+        min-width: 300px;
+        border-radius: 10px;
+        box-shadow: none;
+        animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideOut {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+
+    .task-completed {
+        text-decoration: line-through;
+        color: #6c757d;
+    }
+
+    .form-check-input {
+        cursor: pointer !important;
+    }
+
+    .form-check-input:checked {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    /* Upcoming Tasks Styling */
+    .upcoming-tasks {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: none;
+    }
+
+    .upcoming-tasks .card-header {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        padding: 1rem 1.5rem;
+    }
+
+    .upcoming-tasks .card-header h5 {
+        color: #2c3e50;
+        font-weight: 600;
+    }
+
+    .upcoming-tasks .list-group-item {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: none !important;
+    }
+
+    .upcoming-tasks .list-group-item:hover {
+        background-color: white !important;
+    }
+
+    .upcoming-tasks .list-group-item:last-child {
+        border-bottom: none;
+    }
+
+    .upcoming-tasks h6 {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #2c3e50;
+        margin: 0;
+    }
+
+    .upcoming-tasks .text-muted {
+        font-size: 0.85rem;
+    }
+
+    .upcoming-tasks .badge {
+        padding: 0.5em 0.8em;
+        font-weight: 500;
+        font-size: 0.75rem;
+    }
+
+    /* Checkbox Styling */
+    .form-check-input {
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-top: 0.2rem;
+        cursor: pointer !important;
+        border: 2px solid #dee2e6;
+    }
+
+    .form-check-input:checked {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .form-check-input:focus {
+        border-color: var(--primary-color);
+        box-shadow: none;
+    }
+
+    /* Task completed style */
+    .task-completed {
+        text-decoration: line-through;
+        color: #6c757d;
+    }
+
+    /* Badge colors */
+    .badge.bg-danger {
+        background-color: #e74a3b !important;
+    }
+
+    .badge.bg-warning {
+        background-color: #f6c23e !important;
+        color: #2c3e50;
+    }
+
+    .badge.bg-success {
+        background-color: #1cc88a !important;
+    }
+
+    /* Tambahan style untuk overdue tasks */
+    .overdue-tasks {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: none;
+    }
+
+    .overdue-tasks .text-danger {
+        font-weight: 500;
+    }
+
+    .overdue-tasks .list-group-item:hover {
+        background-color: white !important;
+    }
+
+    /* Reset hover effects tapi pertahankan shadow */
+    .upcoming-tasks .list-group-item:hover,
+    .fc-event:hover,
+    .badge:hover,
+    .btn:hover,
+    .form-check-input:hover {
+        transform: none !important;
+        background-color: inherit !important;
+        cursor: default !important;
+    }
+
+    /* Pertahankan shadow pada cards */
+    .stats-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+        transition: none !important;
+    }
+
+    /* Kecuali untuk checkbox tetap bisa diklik */
+    .form-check-input {
+        cursor: pointer !important;
+    }
+
+    /* Reset hover pada calendar events */
+    .fc-event {
+        cursor: default !important;
+    }
+
+    /* Reset hover pada buttons */
+    .btn {
+        transition: none !important;
+    }
+
+    /* Reset hover pada list items tapi pertahankan background */
+    .list-group-item {
+        transition: none !important;
+        background-color: white !important;
+    }
+
+    /* Reset hover pada badges */
+    .badge {
+        transition: none !important;
+    }
+
+    /* Pastikan shadow tetap ada dalam kondisi apapun */
+    .stats-card,
+    .stats-card:hover {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Reset hover effects */
+    .upcoming-tasks .list-group-item:hover,
+    .fc-event:hover,
+    .badge:hover,
+    .btn:hover,
+    .form-check-input:hover {
+        transform: none !important;
+        background-color: inherit !important;
+        cursor: default !important;
+    }
+
+    /* Kecuali untuk checkbox tetap bisa diklik */
+    .form-check-input {
+        cursor: pointer !important;
+    }
+
+    /* Reset hover pada calendar events */
+    .fc-event {
+        cursor: default !important;
+    }
+
+    /* Reset hover pada buttons */
+    .btn {
+        transition: none !important;
+    }
+
+    /* Reset hover pada list items */
+    .list-group-item {
+        transition: none !important;
+        background-color: white !important;
+    }
+
+    /* Reset hover pada badges */
+    .badge {
+        transition: none !important;
+    }
+
+    /* Pastikan shadow tetap ada untuk semua cards */
+    .upcoming-tasks,
+    .upcoming-tasks:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Styling untuk cards */
+    .stats-card,
+    .stats-card:hover {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Reset hover effects untuk non-button elements */
+    .upcoming-tasks .list-group-item:hover,
+    .fc-event:hover,
+    .badge:hover {
+        transform: none !important;
+        background-color: inherit !important;
+        cursor: default !important;
+    }
+
+    /* Hover effects untuk buttons */
+    .btn {
+        transition: all 0.3s ease !important;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* Specific button hover effects */
+    .btn-primary:hover {
+        background-color: #0056b3 !important;
+    }
+
+    .btn-success:hover {
+        background-color: #1e7e34 !important;
+    }
+
+    .btn-danger:hover {
+        background-color: #bd2130 !important;
+    }
+
+    .btn-warning:hover {
+        background-color: #d39e00 !important;
+    }
+
+    .btn-info:hover {
+        background-color: #117a8b !important;
+    }
+
+    /* Toggle view buttons hover */
+    #calendarViewBtn:hover,
+    #statsViewBtn:hover {
+        background-color: #f8f9fa !important;
+        color: #0056b3 !important;
+    }
+
+    /* Add task button hover */
+    .add-task-btn:hover {
+        background-color: #0056b3 !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2) !important;
+    }
+
+    /* Checkbox styling */
+    .form-check-input {
+        cursor: pointer !important;
+    }
+
+    /* Reset hover pada list items */
+    .list-group-item {
+        transition: none !important;
+        background-color: white !important;
+    }
+
+    /* Reset hover pada badges */
+    .badge {
+        transition: none !important;
+    }
+
+    /* Pastikan shadow tetap ada */
+    .upcoming-tasks,
+    .upcoming-tasks:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Close button hover effect */
+    .btn-close:hover {
+        opacity: 1 !important;
+        transform: rotate(90deg) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    /* Toggle view buttons styling */
+    #calendarViewBtn,
+    #statsViewBtn {
+        padding: 10px 20px;
+        border-radius: 6px;
+        transition: all 0.3s ease !important;
+        font-weight: 500;
+        border: 1px solid #e9ecef !important;
+        margin: 0 5px;
+        font-size: 15px;
+        min-width: 140px;  /* Menambahkan lebar minimum */
+    }
+
+    /* Default state */
+    #calendarViewBtn,
+    #statsViewBtn {
+        background-color: #ffffff;
+        color: #6c757d;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Active state untuk Calendar View */
+    #calendarViewBtn.active {
+        background-color: #0d6efd !important;
+        color: #ffffff !important;
+        font-weight: 600;
+        border-color: #0d6efd !important;
+        box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3) !important;
+    }
+
+    /* Active state untuk Statistics View */
+    #statsViewBtn.active {
+        background-color: #0d6efd !important;
+        color: #ffffff !important;
+        font-weight: 600;
+        border-color: #0d6efd !important;
+        box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3) !important;
+    }
+
+    /* Hover state */
+    #calendarViewBtn:hover,
+    #statsViewBtn:hover {
+        background-color: #0b5ed7 !important;
+        color: #ffffff !important;
+        transform: translateY(-2px);
+        border-color: #0b5ed7 !important;
+        box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4) !important;
+    }
+
+    /* Container untuk toggle buttons */
+    .view-toggle-container {
+        background-color: #f8f9fa;
+        padding: 6px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: inline-flex;
+        gap: 10px;
+    }
+
+    /* Today button styling untuk konsistensi */
+    .fc-today-button {
+        padding: 8px 16px !important;
+        font-size: 14px !important;
+        border-radius: 6px !important;
+    }
+
+    /* Icon styling */
+    #calendarViewBtn i,
+    #statsViewBtn i {
+        margin-right: 8px;
+        font-size: 16px;
+    }
+
+    /* Styling untuk tombol navigasi kalender */
+    .fc-prev-button,
+    .fc-next-button,
+    .fc-today-button {
+        padding: 8px 16px !important;
+        font-size: 14px !important;
+        border-radius: 6px !important;
+        background-color: #ffffff !important;
+        color: #6c757d !important;
+        border: 1px solid #e9ecef !important;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .fc-prev-button:hover,
+    .fc-next-button:hover,
+    .fc-today-button:hover {
+        background-color: #0b5ed7 !important;
+        color: #ffffff !important;
+        transform: translateY(-2px);
+        border-color: #0b5ed7 !important;
+        box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4) !important;
+    }
+
+    .fc-prev-button:active,
+    .fc-next-button:active,
+    .fc-today-button:active {
+        transform: translateY(0);
+    }
+
+    /* Pastikan icon pada tombol prev/next terlihat */
+    .fc-icon {
+        color: currentColor !important;
+    }
+
+    /* Calendar navigation styling */
+    .fc .fc-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 20px !important;
+    }
+
+    .fc .fc-toolbar-title {
+        font-size: 20px !important;
+        font-weight: 600 !important;
+        margin: 0 15px !important;
+    }
+
+    .fc .fc-prev-button,
+    .fc .fc-next-button {
+        background-color: #fff !important;
+        border: 1px solid #e9ecef !important;
+        color: #6c757d !important;
+        width: 36px !important;
+        height: 36px !important;
+        padding: 0 !important;
+        border-radius: 6px !important;
+    }
+
+    .fc .fc-today-button {
+        background-color: #0d6efd !important;
+        border: none !important;
+        padding: 8px 16px !important;
+        border-radius: 6px !important;
+        font-weight: 500 !important;
+    }
+
+    /* Hover effects */
+    .fc .fc-prev-button:hover,
+    .fc .fc-next-button:hover {
+        background-color: #0b5ed7 !important;
+        color: #fff !important;
+        border-color: #0b5ed7 !important;
+    }
+
+    .fc .fc-today-button:hover {
+        background-color: #0b5ed7 !important;
+        transform: translateY(-2px);
+    }
+
+    /* Hover effects untuk task items */
+    .list-group-item {
+        transition: all 0.2s ease !important;
+        border-radius: 8px !important;
+        margin-bottom: 4px !important;
+        border: 1px solid transparent !important;
+    }
+
+    .list-group-item:hover {
+        transform: translateX(5px) !important;
+        background-color: #f8f9fa !important;
+        border-color: #e9ecef !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+    }
+
+    /* Badge priority styling - tanpa hover effect */
+    .badge {
+        transition: none !important;
+        pointer-events: none !important;
+    }
+
+    /* Hover effect untuk judul tugas */
+    .task-title {
+        transition: color 0.2s ease !important;
+    }
+
+    .list-group-item:hover .task-title {
+        color: #0d6efd !important;
+    }
+
+    /* Style untuk tanggal */
+    .list-group-item small {
+        transition: color 0.2s ease !important;
+        color: #dc3545 !important;
+        font-weight: normal !important;
+        font-size: 0.875rem !important; /* Menyamakan ukuran font */
+    }
+
+    .list-group-item:hover small {
+        color: #dc3545 !important;
+        font-weight: 600 !important;
+    }
+
+    /* Hover effect untuk checkbox */
+    .form-check-input {
+        transition: all 0.2s ease !important;
+        cursor: pointer !important;
+    }
+
+    .form-check-input:hover {
+        border-color: #0d6efd !important;
+        transform: scale(1.1) !important;
+    }
+
+    /* Mempertahankan warna background saat checked dan hover */
+    .form-check-input:checked {
+        background-color: #0d6efd !important;
+        border-color: #0d6efd !important;
+    }
+
+    .form-check-input:checked:hover {
+        background-color: #0b5ed7 !important;
+        border-color: #0b5ed7 !important;
+    }
+
+    /* Container styling */
+    .upcoming-tasks,
+    .overdue-tasks {
+        border-radius: 12px !important;
+        overflow: hidden !important;
+    }
+
+    /* List group container */
+    .list-group {
+        padding: 8px !important;
+    }
+
+    /* Memastikan ukuran font konsisten di semua bagian */
+    .upcoming-tasks small,
+    .overdue-tasks small {
+        font-size: 0.875rem !important; /* 14px */
+        line-height: 1.5 !important;
+    }
+
+    /* Calendar Container Styling */
+    .fc {
+        background: white !important;
+        border-radius: 16px !important;
+        padding: 24px !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+        border: 1px solid #e9ecef !important;
+        min-height: 1000px !important; /* Tingkatkan lagi tinggi minimum */
+        height: 100% !important;
+    }
+
+    /* Header Cells (Hari) Styling */
+    .fc-col-header {
+        margin-bottom: 10px !important;
+    }
+
+    .fc-col-header-cell {
+        padding: 15px 0 !important;
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .fc-col-header-cell-cushion {
+        color: #2c3e50 !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+        text-decoration: none !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+    }
+
+    /* Day Cells Styling */
+    .fc-daygrid-day {
+        transition: all 0.3s ease !important;
+        min-height: 160px !important; /* Tingkatkan lagi tinggi minimum */
+        height: 160px !important; /* Tingkatkan lagi tinggi */
+    }
+
+    .fc-daygrid-day-frame {
+        padding: 12px !important;
+        border-radius: 12px !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .fc-daygrid-day-frame:hover {
+        background-color: #f8f9fa !important;
+        transform: scale(1.02) !important;
+    }
+
+    .fc-daygrid-day-number {
+        font-size: 1.1rem !important;
+        color: #2c3e50 !important;
+        text-decoration: none !important;
+        font-weight: 500 !important;
+        padding: 8px !important;
+    }
+
+    /* Today Styling */
+    .fc-day-today .fc-daygrid-day-frame {
+        background-color: #e3efff !important;
+        border-radius: 12px !important;
+    }
+
+    .fc-day-today .fc-daygrid-day-number {
+        color: #0d6efd !important;
+        font-weight: 700 !important;
+        background: #ffffff !important;
+        border-radius: 50% !important;
+        width: 32px !important;
+        height: 32px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 4px !important;
+    }
+
+    /* Event Styling */
+    .fc-event {
+        border: none !important;
+        padding: 6px 12px !important;
+        margin: 3px 0 !important;
+        border-radius: 8px !important;
+        font-size: 0.9rem !important;
+        font-weight: 500 !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    .fc-event:hover {
+        transform: translateY(-2px) scale(1.02) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+    }
+
+    /* Other Month Days */
+    .fc-day-other .fc-daygrid-day-frame {
+        opacity: 0.4 !important;
+        background-color: #fafbfc !important;
+    }
+
+    /* Weekend Styling */
+    .fc-day-sat .fc-daygrid-day-frame, 
+    .fc-day-sun .fc-daygrid-day-frame {
+        background-color: #f8f9fa !important;
+    }
+
+    /* Event Colors by Priority */
+    .fc-event.high-priority {
+        background: linear-gradient(45deg, #ff6b6b, #ff8787) !important;
+        color: white !important;
+    }
+
+    .fc-event.medium-priority {
+        background: linear-gradient(45deg, #ffd43b, #ffa94d) !important;
+        color: #212529 !important;
+    }
+
+    .fc-event.low-priority {
+        background: linear-gradient(45deg, #69db7c, #38d9a9) !important;
+        color: white !important;
+    }
+
+    /* More Link Styling */
+    .fc-more-link {
+        background: #f8f9fa !important;
+        color: #495057 !important;
+        font-weight: 600 !important;
+        padding: 2px 8px !important;
+        border-radius: 4px !important;
+        margin-top: 4px !important;
+    }
+
+    /* Border Styling */
+    .fc td {
+        border-color: #f1f3f5 !important;
+    }
+
+    /* Popover Styling */
+    .fc-popover {
+        border: none !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        max-height: 400px !important;
+        overflow-y: auto !important;
+    }
+
+    .fc-popover-header {
+        background: #f8f9fa !important;
+        padding: 12px 16px !important;
+        font-weight: 600 !important;
+        border-bottom: 1px solid #e9ecef !important;
+    }
+
+    .fc-popover-body {
+        padding: 12px !important;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .fc {
+            padding: 16px !important;
+        }
+        
+        .fc-daygrid-day {
+            min-height: 100px !important;
+        }
+        
+        .fc-daygrid-day-number {
+            font-size: 0.9rem !important;
+        }
+        
+        .fc-event {
+            font-size: 0.8rem !important;
+            padding: 4px 8px !important;
+        }
+    }
+
+    /* Overdue Tasks Card */
+    .stats-card.upcoming-tasks {
+        height: auto;
+        margin-bottom: 20px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    .stats-card.upcoming-tasks .card-header {
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 10;
+        padding: 15px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .stats-card.upcoming-tasks .card-body {
+        padding: 15px; /* Tambahkan padding untuk card body */
+    }
+
+    /* Custom scrollbar styling */
+    .card-body::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .card-body::-webkit-scrollbar-track {
+        background: #f8f9fc;
+    }
+
+    .card-body::-webkit-scrollbar-thumb {
+        background-color: #cbd5e0;
+        border-radius: 3px;
+    }
+
+    /* List item styling */
+    .list-group-item {
+        padding: 15px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        transition: all 0.2s ease !important;
+        min-height: 70px; /* Tinggi minimum untuk list item */
+    }
+
+    .list-group-item:last-child {
+        border-bottom: none;
+    }
+
+    /* Hover effect untuk list items */
+    .list-group-item:hover {
+        background-color: #f8f9fa !important;
+        transform: translateX(5px) !important;
+    }
+
+    /* Overdue Tasks Styling */
+    .overdue-tasks-container {
+        height: 420px; /* Increased height to fit 6 items (70px per item) */
+        min-height: 420px; /* Minimum height */
+        max-height: 420px; /* Maximum height */
+        overflow-y: auto; /* Enable vertical scrolling */
+        scrollbar-width: thin;
+        scrollbar-color: #cbd5e0 #f8f9fc;
+    }
+
+    .overdue-tasks-container::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .overdue-tasks-container::-webkit-scrollbar-track {
+        background: #f8f9fc;
+    }
+
+    .overdue-tasks-container::-webkit-scrollbar-thumb {
+        background-color: #cbd5e0;
+        border-radius: 3px;
+    }
+
+    /* Ensure consistent height for list items */
+    .overdue-tasks-container .list-group-item {
+        height: 70px;
+        min-height: 70px;
+        max-height: 70px;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+    }
+
+    /* Empty state styling */
+    .overdue-tasks-container .list-group-item .text-center {
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    /* Empty state styling */
+    .empty-state {
+        height: 100%;
+        min-height: 250px;
+        padding: 30px 20px;
+        text-align: center;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .empty-state:hover {
+        background-color: #f0f0f0;
+    }
+
+    .empty-state i {
+        opacity: 0.7;
+    }
+
+    .empty-state h6 {
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .empty-state p {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+
+    /* Ensure the row takes full height */
+    .row {
+        min-height: 100vh;
+    }
+
+    /* Make the right column fill available space */
+    .col-md-4 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Make the Overdue Tasks card expand to fill space */
+    .stats-card.upcoming-tasks:last-child {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Make the card body expand */
+    .stats-card.upcoming-tasks:last-child .card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Make the task container expand */
+    .overdue-tasks-container {
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    /* Calendar Grid Styling - Tetap sama seperti sebelumnya */
+    .fc .fc-daygrid-day {
+        height: 150px !important;
+        min-height: 150px !important;
+        max-height: 150px !important;
+        width: calc(100% / 7) !important;
+        box-sizing: border-box !important;
+    }
+
+    .fc .fc-daygrid-day-frame {
+        height: 100% !important;
+        min-height: 100% !important;
+        max-height: 100% !important;
+        padding: 8px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        background: white !important;
+        border-radius: 8px !important;
+        margin: 2px !important;
+        overflow: hidden !important;
+    }
+
+    /* Mengatur layout dalam sel */
+    .fc .fc-daygrid-day-top {
+        flex: 0 0 auto !important;
+        padding: 4px !important;
+        margin-bottom: 4px !important;
+    }
+
+    .fc .fc-daygrid-day-events {
+        flex: 1 !important;
+        min-height: 0 !important;
+        max-height: calc(100% - 30px) !important;
+        overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 4px !important;
+        position: relative !important;
+    }
+
+    /* Styling untuk event/task - DIUBAH untuk tampilan garis */
+    .fc-daygrid-event-harness {
+        margin: 2px 0 !important;
+        position: relative !important;
+    }
+
+    /* BARU: Styling untuk event saat idle (tampilan garis) */
+    .fc-event {
+        padding: 6px 8px !important;
+        margin: 0 !important;
+        border-radius: 20px !important;
+        height: 8px !important; /* Ukuran garis */
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        transition: all 0.2s ease-in-out !important;
+    }
+
+    /* BARU: Menyembunyikan teks pada kondisi default */
+    .fc-event .fc-event-title,
+    .fc-event .fc-event-time {
+        opacity: 0 !important;
+        font-size: 0 !important;
+        transition: all 0.2s ease-in-out !important;
+    }
+
+    /* BARU: Menampilkan teks saat hover */
+    .fc-event:hover {
+        height: auto !important;
+        padding: 6px 8px !important;
+        z-index: 100 !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .fc-event:hover .fc-event-title,
+    .fc-event:hover .fc-event-time {
+        opacity: 1 !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* Style untuk tombol "more" */
+    .fc-daygrid-more-link {
+        background: #f8fafc !important;
+        color: #4a5568 !important;
+        font-size: 0.8rem !important;
+        font-weight: 500 !important;
+        padding: 2px 6px !important;
+        border-radius: 4px !important;
+        margin-top: auto !important;
+        text-align: center !important;
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+    }
+
+    /* Memastikan container kalender memiliki tinggi tetap */
+    .fc-view-harness {
+        height: auto !important;
+    }
+
+    .fc-scrollgrid-sync-table {
+        height: auto !important;
+    }
+
+    /* Memastikan baris kalender memiliki tinggi tetap */
+    .fc-scrollgrid-sync-table tr {
+        height: 150px !important;
+    }
+
+    /* Memperbaiki tampilan untuk hari di luar bulan */
+    .fc-day-other .fc-daygrid-day-frame {
+        background: #f8fafc !important;
+        opacity: 0.7 !important;
+    }
+
+    /* Styling untuk hari ini */
+    .fc-day-today .fc-daygrid-day-frame {
+        background: #ebf8ff !important;
+    }
+
+    /* Memastikan grid tetap konsisten */
+    .fc-scrollgrid {
+        border-collapse: collapse !important;
+    }
+
+    .fc td, .fc th {
+        border: 1px solid #e2e8f0 !important;
+    }
+
+    /* Alert Styling */
+    .alert {
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        z-index: 1000;
+        min-width: 300px;
+        border-radius: 10px;
+        box-shadow: none;
+        animation: slideIn 0.5s ease-out;
+        padding: 12px 20px; /* Adjust padding since we removed the close button */
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .alert-success {
+        background-color: var(--success-color);
+        border-color: var(--success-color);
+        color: white;
+    }
+
+    .alert-danger {
+        background-color: var(--danger-color);
+        border-color: var(--danger-color);
+        color: white;
+    }
+
+    .alert .btn-close {
+        color: white;
+        opacity: 0.8;
+    }
+
+    /* Reset container styles */
+    .dashboard-container {
+        padding: 20px;
+        background: #f8f9fc;
+    }
+    
+    /* Task calendar styles */
+    .task-calendar {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: none;
+        margin-bottom: 20px;
+    }
+
+    #calendar {
+        height: 100% !important;
+        min-height: 1000px !important; /* Tingkatkan lagi tinggi minimum */
+        font-family: 'Nunito', sans-serif;
+    }
+
+    /* Stats card styles */
+    .stats-card {
+        transition: none !important;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    /* Upcoming deadlines card */
+    .card-body.p-0 {
+        max-height: 600px;
+        overflow-y: auto;
+    }
+
+    /* Keep your existing styles below */
+    .stats-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    .stats-card .card-body {
+        padding: 1.5rem;
+    }
+    /* Calendar Styling */
+    .fc-header-toolbar {
+        margin-bottom: 1rem !important;
+        padding: 0 !important;
+    }
+    .fc-toolbar-title {
+        font-size: 1.5em !important;
+        font-weight: 600 !important;
+        color: #2c3e50;
+    }
+    .fc-button {
+        padding: 8px 15px !important;
+        font-weight: 500 !important;
+        border-radius: 8px !important;
+        text-transform: capitalize !important;
+    }
+    .fc-button-primary {
+        background-color: var(--primary-color) !important;
+        border-color: var(--primary-color) !important;
+    }
+    .fc-button-primary:hover {
+        background-color: var(--hover-color) !important;
+        border-color: var(--hover-color) !important;
+    }
+    .fc-daygrid-day {
+        transition: none !important;
+    }
+    .fc-daygrid-day:hover {
+        background-color: white !important;
+    }
+    .fc-daygrid-day-number {
+        font-size: 0.9em !important;
+        padding: 4px 8px !important;
+        color: #5a5c69;
+    }
+    .fc-day-today .fc-daygrid-day-number {
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+    }
+    .fc-event {
+        border-radius: 6px !important;
+        padding: 3px 8px !important;
+        font-size: 0.85em !important;
+        border: none !important;
+        margin: 2px 0 !important;
+    }
+    /* Priority Colors */
+    .priority-high {
+        background-color: var(--danger-color) !important;
+        border-color: var(--danger-color) !important;
+    }
+    .priority-medium {
+        background-color: var(--warning-color) !important;
+        border-color: var(--warning-color) !important;
+        color: #000 !important;
+    }
+    .priority-low {
+        background-color: var(--success-color) !important;
+        border-color: var(--success-color) !important;
+    }
+    /* Today's Tasks Section */
+    .today-tasks {
+        background: white;
+        border-radius: 15px;
+        box-shadow: none;
+        height: 600px;
+        overflow-y: auto;
+    }
+    .today-tasks .card-header {
+        background: transparent;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 1.5rem;
+    }
+    .today-tasks .list-group-item {
+        border: none;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 1rem 1.5rem;
+    }
+    .today-tasks .list-group-item:last-child {
+        border-bottom: none;
+    }
+    /* Navigation Button Group Styling */
+    .fc-button-group {
+        gap: 5px !important;
+        background: #f8f9fc;
+        padding: 5px;
+        border-radius: 12px;
+    }
+    .fc-button-group .fc-button {
+        border-radius: 8px !important;
+        padding: 8px 16px !important;
+        font-weight: 500 !important;
+        border: none !important;
+        background: transparent !important;
+        color: #6c757d !important;
+    }
+    .fc-button-group .fc-button.fc-button-active {
+        background-color: var(--primary-color) !important;
+        color: white !important;
+    }
+    .fc-button-group .fc-button:hover:not(.fc-button-active) {
+        background-color: #eaecf4 !important;
+    }
+    /* Header Toolbar Spacing */
+    .fc-header-toolbar {
+        padding: 15px 0 !important;
+        margin-bottom: 1.5rem !important;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    /* Calendar Grid */
+    .fc-daygrid-day {
+        height: 150px !important;
+    }
+    .fc-daygrid-day-frame {
+        min-height: 100% !important;
+        padding: 8px !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .fc-daygrid-day-top {
+        flex-direction: row !important;
+        margin-bottom: 4px;
+    }
+    .fc-daygrid-day-number {
+        float: left !important;
+        margin: 5px !important;
+        font-size: 14px !important;
+        font-weight: 500;
+        color: #5a5c69;
+    }
+    .fc-day-today .fc-daygrid-day-number {
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Calendar Header */
+    .fc-col-header-cell {
+        padding: 10px 0 !important;
+        background: #f8f9fc !important;
+        border-color: #e3e6f0 !important;
+    }
+    .fc-col-header-cell-cushion {
+        padding: 8px !important;
+        color: #4e73df !important;
+        font-weight: 600 !important;
+        text-decoration: none !important;
+    }
+    
+    /* Event Styling */
+    .fc-daygrid-event {
+        margin: 2px 4px !important;
+        padding: 2px 4px !important;
+        border-radius: 4px !important;
+    }
+    
+    /* Navigation Buttons */
+    .fc-button-group {
+        gap: 5px !important;
+    }
+    .fc-button {
+        padding: 8px 16px !important;
+        font-weight: 500 !important;
+        border: none !important;
+    }
+    .fc-button-primary {
+        background-color: var(--primary-color) !important;
+        color: white !important;
+    }
+    .fc-button-primary:not(.fc-button-active):hover {
+        background-color: var(--hover-color) !important;
+    }
+    .fc-button-active {
+        background-color: var(--hover-color) !important;
+    }
+    
+    /* Event styling */
+    .fc-event {
+        border: none !important;
+        padding: 4px 8px !important;
+        font-size: 0.85em !important;
+        white-space: normal !important;
+    }
+    
+    .priority-high {
+        background-color: rgba(231, 74, 59, 0.9) !important;
+        color: white !important;
+    }
+    
+    .priority-medium {
+        background-color: rgba(246, 194, 62, 0.9) !important;
+        color: black !important;
+    }
+    
+    .priority-low {
+        background-color: rgba(28, 200, 138, 0.9) !important;
+        color: white !important;
+    }
+    
+    .fc-event i {
+        opacity: 0.8;
+    }
+
+    /* New styles for task statistics */
+    .task-stats {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: none;
+        border-radius: 15px;
+        margin-bottom: var(--spacing-base);
+        padding: 1.5rem;
+    }
+
+    .task-stats .card-body {
+        padding: 0; /* Remove default card-body padding since we added padding to parent */
+    }
+
+    .task-stats h6 {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #2d3748;
+    }
+
+    .task-stats .progress {
+        background-color: #f0f2f5;
+        border-radius: 10px;
+        margin: 1rem 0;
+    }
+
+    .task-stats .progress-bar {
+        background-color: var(--primary-color);
+        border-radius: 10px;
+    }
+
+    .task-stats .task-counts {
+        margin-top: 1.5rem;
+    }
+
+    .task-stats .stat-item {
+        text-align: center;
+    }
+
+    .task-stats .stat-item h4 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+        color: #2d3748;
+    }
+
+    .task-stats .stat-item .text-success {
+        color: var(--success-color) !important;
+    }
+
+    .task-stats .stat-item .text-warning {
+        color: var(--warning-color) !important;
+    }
+
+    .task-stats .stat-item span {
+        font-size: 0.85rem;
+        color: #6c757d;
+    }
+
+    /* Update upcoming deadlines card styling */
+    .upcoming-deadlines {
+        background: white;
+        border-radius: 15px;
+        box-shadow: none;
+        height: calc(100% - 260px);
+        margin-top: var(--spacing-base); /* Konsisten 25px */
+    }
+    
+    .upcoming-deadlines .card-body {
+        height: calc(100% - 60px);
+        overflow-y: auto;
+    }
+    
+    .upcoming-deadlines .list-group {
+        height: 100%;
+    }
+    
+    /* Update list item styling */
+    .upcoming-deadlines .list-group-item {
+        padding: 15px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        transition: none !important;
+    }
+    
+    .upcoming-deadlines .list-group-item:hover {
+        background-color: white !important;
+    }
+    
+    /* Checkbox styling */
+    .form-check-input {
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-top: 0.2rem;
+        cursor: pointer !important;
+        border-color: #e0e3e7;
+    }
+    
+    .form-check-input:checked {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+    
+    /* Task title styling */
+    .upcoming-deadlines h6 {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 0.3rem;
+    }
+    
+    /* Task completed styling */
+    .task-completed {
+        text-decoration: line-through;
+        color: #858796;
+    }
+    
+    /* Badge styling */
+    .badge {
+        padding: 0.4rem 0.8rem;
+        font-weight: 500;
+        font-size: 0.75rem;
+    }
+    
+    /* Edit button styling */
+    .btn-outline-primary {
+        padding: 0.25rem 0.5rem;
+        border-color: #e0e3e7;
+        color: #4e73df;
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: #4e73df;
+        border-color: #4e73df;
+        color: white;
+    }
+    
+    /* Date text styling */
+    .text-muted {
+        font-size: 0.8rem;
+        color: #6c757d;
+    }
+
+    /* Update progress bar styling */
+    .progress {
+        background-color: #eaecf4;
+        border-radius: 10px;
+        height: 10px !important;
+    }
+
+    .progress-bar {
+        border-radius: 10px;
+        transition: none !important;
+    }
+
+    /* Update stats card styling */
+    .task-stats {
+        background: white;
+        border-radius: 15px;
+        box-shadow: none;
+    }
+
+    .task-stats .card-body {
+        padding: 1.5rem;
+    }
+
+    .stat-item {
+        flex: 1;
+        padding: 0 10px;
+    }
+
+    .stat-item h4 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+    }
+
+    .stat-item span {
+        font-size: 0.8rem;
+        color: #858796;
+    }
+
+    /* Add hover effect to stats */
+    .stat-item:hover h4 {
+        transform: none !important;
+        transition: none !important;
+    }
+
+    /* Modal styling */
+    .modal-content {
+        border: none;
+        border-radius: 15px;
+        box-shadow: none;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 1.5rem;
+    }
+
+    .modal-body {
+        padding: 1.5rem;
+    }
+
+    .modal-footer {
+        border-top: 1px solid rgba(0,0,0,0.05);
+        padding: 1.5rem;
+    }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 1px solid #e0e3e7;
+        padding: 0.6rem 1rem;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #4e73df;
+        box-shadow: none;
+    }
+
+    .form-label {
+        font-weight: 500;
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Update Modal styling */
+    .modal-lg {
+        max-width: 800px;
+    }
+
+    .modal-content {
+        border: none;
+        border-radius: 15px;
+        box-shadow: none;
+        max-height: 90vh; /* Maksimum tinggi modal 90% dari tinggi viewport */
+    }
+
+    .modal-header {
+        background-color: #f8f9fc;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 1rem 1.5rem; /* Mengurangi padding */
+    }
+
+    .modal-header .modal-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .modal-body {
+        padding: 1.5rem;
+        overflow-y: auto; /* Tambah scroll untuk modal body */
+        max-height: calc(90vh - 110px); /* Tinggi maksimum body modal */
+    }
+
+    .modal-footer {
+        background-color: #f8f9fc;
+        border-top: 1px solid rgba(0,0,0,0.05);
+        padding: 0.75rem 1.5rem; /* Mengurangi padding */
+    }
+
+    /* Form styling */
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 1px solid #e0e3e7;
+        padding: 0.7rem 1rem; /* Sedikit mengurangi padding */
+        font-size: 1rem;
+    }
+
+    .form-control-lg {
+        font-size: 1.1rem;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #4e73df;
+        box-shadow: none;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    /* Button styling */
+    .btn-primary {
+        padding: 0.5rem 1.25rem;
+        font-weight: 500;
+    }
+
+    .btn-secondary {
+        background-color: #eaecf4;
+        border: none;
+        color: #6e707e;
+        padding: 0.5rem 1.25rem;
+    }
+
+    .btn-secondary:hover {
+        background-color: #dde0e9;
+    }
+
+    /* Custom scrollbar styling */
+    .custom-scroll {
+        scrollbar-width: thin;
+        scrollbar-color: #cbd5e0 #f8f9fc;
+    }
+
+    .custom-scroll::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .custom-scroll::-webkit-scrollbar-track {
+        background: #f8f9fc;
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb {
+        background-color: #cbd5e0;
+        border-radius: 3px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .dashboard-container {
+            padding: 15px;
+        }
+    }
+
+    /* Tambahkan style untuk modal */
+    .modal-content {
+        border-radius: 15px;
+        border: none;
+        box-shadow: none;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        padding: 1.5rem;
+    }
+
+    .modal-body {
+        padding: 1.5rem;
+    }
+
+    .modal-footer {
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        padding: 1.5rem;
+    }
+
+    .task-detail-content label {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .task-detail-content p {
+        color: #2c3e50;
+        font-size: 1rem;
+    }
+
+    .badge {
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        border-radius: 6px;
+    }
+
+    .statistics-container {
+        padding: 20px;
+        background: white;
+        border-radius: 15px;
+        min-height: 600px;
+    }
+
+    .stats-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: none;
+        transition: none !important;
+    }
+
+    .stats-card:hover {
+        transform: none !important;
+    }
+
+    .card-title {
+        color: #2c3e50;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .btn-group .btn {
+        padding: 8px 16px;
+    }
+
+    .btn-group .btn.active {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .view-container {
+        position: relative;
+        height: 600px; /* Tinggi tetap */
+        overflow: hidden; /* Mencegah scroll */
+    }
+
+    .view-content {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        transition: none !important;
+    }
+
+    #statisticsView {
+        padding: 20px 0;
+    }
+
+    /* Tambahan style untuk kalender */
+    .fc-view-harness {
+        height: calc(100% - 50px) !important;
+    }
+
+    .fc .fc-daygrid-body {
+        height: 100% !important;
+    }
+
+    .fc .fc-daygrid-body-balanced .fc-daygrid-day-events {
+        position: relative !important;
+    }
+
+    .current-month {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #2c3e50;
+        min-width: 150px;
+        text-align: center;
+    }
+
+    .fc-theme-standard td, .fc-theme-standard th {
+        border: 1px solid #e3e6f0;
+    }
+
+    .fc-daygrid-day {
+        min-height: 100px !important;
+        height: auto !important;
+    }
+
+    .fc-daygrid-day-frame {
+        height: 100% !important;
+        min-height: unset !important;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .fc-daygrid-day-top {
+        flex: 0 0 auto;
+        padding: 4px;
+    }
+
+    .fc-daygrid-day-events {
+        flex: 1;
+        min-height: 0;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    .fc-daygrid-more-link {
+        margin: 2px 0 !important;
+        padding: 2px 4px !important;
+        font-size: 0.85em !important;
+    }
+
+    .fc-day-today {
+        background: rgba(0, 153, 255, 0.05) !important;
+    }
+
+    .fc td, .fc th {
+        border: 1px solid #e3e6f0 !important;
+    }
+
+    /* Style untuk notifikasi */
+    .notification {
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        z-index: 1000;
+        min-width: 300px;
+        border-radius: 10px;
+        box-shadow: none;
+        animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideOut {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+
+    .task-completed {
+        text-decoration: line-through;
+        color: #6c757d;
+    }
+
+    .form-check-input {
+        cursor: pointer !important;
+    }
+
+    .form-check-input:checked {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    /* Upcoming Tasks Styling */
+    .upcoming-tasks {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: none;
+    }
+
+    .upcoming-tasks .card-header {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        padding: 1rem 1.5rem;
+    }
+
+    .upcoming-tasks .card-header h5 {
+        color: #2c3e50;
+        font-weight: 600;
+    }
+
+    .upcoming-tasks .list-group-item {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: none !important;
+    }
+
+    .upcoming-tasks .list-group-item:hover {
+        background-color: white !important;
+    }
+
+    .upcoming-tasks .list-group-item:last-child {
+        border-bottom: none;
+    }
+
+    .upcoming-tasks h6 {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #2c3e50;
+        margin: 0;
+    }
+
+    .upcoming-tasks .text-muted {
+        font-size: 0.85rem;
+    }
+
+    .upcoming-tasks .badge {
+        padding: 0.5em 0.8em;
+        font-weight: 500;
+        font-size: 0.75rem;
+    }
+
+    /* Checkbox Styling */
+    .form-check-input {
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-top: 0.2rem;
+        cursor: pointer !important;
+        border: 2px solid #dee2e6;
+    }
+
+    .form-check-input:checked {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .form-check-input:focus {
+        border-color: var(--primary-color);
+        box-shadow: none;
+    }
+
+    /* Task completed style */
+    .task-completed {
+        text-decoration: line-through;
+        color: #6c757d;
+    }
+
+    /* Badge colors */
+    .badge.bg-danger {
+        background-color: #e74a3b !important;
+    }
+
+    .badge.bg-warning {
+        background-color: #f6c23e !important;
+        color: #2c3e50;
+    }
+
+    .badge.bg-success {
+        background-color: #1cc88a !important;
+    }
+
+    /* Tambahan style untuk overdue tasks */
+    .overdue-tasks {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: none;
+    }
+
+    .overdue-tasks .text-danger {
+        font-weight: 500;
+    }
+
+    .overdue-tasks .list-group-item:hover {
+        background-color: white !important;
+    }
+
+    /* Reset hover effects tapi pertahankan shadow */
+    .upcoming-tasks .list-group-item:hover,
+    .fc-event:hover,
+    .badge:hover,
+    .btn:hover,
+    .form-check-input:hover {
+        transform: none !important;
+        background-color: inherit !important;
+        cursor: default !important;
+    }
+
+    /* Pertahankan shadow pada cards */
+    .stats-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+        transition: none !important;
+    }
+
+    /* Kecuali untuk checkbox tetap bisa diklik */
+    .form-check-input {
+        cursor: pointer !important;
+    }
+
+    /* Reset hover pada calendar events */
+    .fc-event {
+        cursor: default !important;
+    }
+
+    /* Reset hover pada buttons */
+    .btn {
+        transition: none !important;
+    }
+
+    /* Reset hover pada list items tapi pertahankan background */
+    .list-group-item {
+        transition: none !important;
+        background-color: white !important;
+    }
+
+    /* Reset hover pada badges */
+    .badge {
+        transition: none !important;
+    }
+
+    /* Pastikan shadow tetap ada dalam kondisi apapun */
+    .stats-card,
+    .stats-card:hover {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Reset hover effects */
+    .upcoming-tasks .list-group-item:hover,
+    .fc-event:hover,
+    .badge:hover,
+    .btn:hover,
+    .form-check-input:hover {
+        transform: none !important;
+        background-color: inherit !important;
+        cursor: default !important;
+    }
+
+    /* Kecuali untuk checkbox tetap bisa diklik */
+    .form-check-input {
+        cursor: pointer !important;
+    }
+
+    /* Reset hover pada calendar events */
+    .fc-event {
+        cursor: default !important;
+    }
+
+    /* Reset hover pada buttons */
+    .btn {
+        transition: none !important;
+    }
+
+    /* Reset hover pada list items */
+    .list-group-item {
+        transition: none !important;
+        background-color: white !important;
+    }
+
+    /* Reset hover pada badges */
+    .badge {
+        transition: none !important;
+    }
+
+    /* Pastikan shadow tetap ada untuk semua cards */
+    .upcoming-tasks,
+    .upcoming-tasks:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Styling untuk cards */
+    .stats-card,
+    .stats-card:hover {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Reset hover effects untuk non-button elements */
+    .upcoming-tasks .list-group-item:hover,
+    .fc-event:hover,
+    .badge:hover {
+        transform: none !important;
+        background-color: inherit !important;
+        cursor: default !important;
+    }
+
+    /* Hover effects untuk buttons */
+    .btn {
+        transition: all 0.3s ease !important;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* Specific button hover effects */
+    .btn-primary:hover {
+        background-color: #0056b3 !important;
+    }
+
+    .btn-success:hover {
+        background-color: #1e7e34 !important;
+    }
+
+    .btn-danger:hover {
+        background-color: #bd2130 !important;
+    }
+
+    .btn-warning:hover {
+        background-color: #d39e00 !important;
+    }
+
+    .btn-info:hover {
+        background-color: #117a8b !important;
+    }
+
+    /* Toggle view buttons hover */
+    #calendarViewBtn:hover,
+    #statsViewBtn:hover {
+        background-color: #f8f9fa !important;
+        color: #0056b3 !important;
+    }
+
+    /* Add task button hover */
+    .add-task-btn:hover {
+        background-color: #0056b3 !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2) !important;
+    }
+
+    /* Checkbox styling */
+    .form-check-input {
+        cursor: pointer !important;
+    }
+
+    /* Reset hover pada list items */
+    .list-group-item {
+        transition: none !important;
+        background-color: white !important;
+    }
+
+    /* Reset hover pada badges */
+    .badge {
+        transition: none !important;
+    }
+
+    /* Pastikan shadow tetap ada */
+    .upcoming-tasks,
+    .upcoming-tasks:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Close button hover effect */
+    .btn-close:hover {
+        opacity: 1 !important;
+        transform: rotate(90deg) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    /* Toggle view buttons styling */
+    #calendarViewBtn,
+    #statsViewBtn {
+        padding: 10px 20px;
+        border-radius: 6px;
+        transition: all 0.3s ease !important;
+        font-weight: 500;
+        border: 1px solid #e9ecef !important;
+        margin: 0 5px;
+        font-size: 15px;
+        min-width: 140px;  /* Menambahkan lebar minimum */
+    }
+
+    /* Default state */
+    #calendarViewBtn,
+    #statsViewBtn {
+        background-color: #ffffff;
+        color: #6c757d;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Active state untuk Calendar View */
+    #calendarViewBtn.active {
+        background-color: #0d6efd !important;
+        color: #ffffff !important;
+        font-weight: 600;
+        border-color: #0d6efd !important;
+        box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3) !important;
+    }
+
+    /* Active state untuk Statistics View */
+    #statsViewBtn.active {
+        background-color: #0d6efd !important;
+        color: #ffffff !important;
+        font-weight: 600;
+        border-color: #0d6efd !important;
+        box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3) !important;
+    }
+
+    /* Hover state */
+    #calendarViewBtn:hover,
+    #statsViewBtn:hover {
+        background-color: #0b5ed7 !important;
+        color: #ffffff !important;
+        transform: translateY(-2px);
+        border-color: #0b5ed7 !important;
+        box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4) !important;
+    }
+
+    /* Container untuk toggle buttons */
+    .view-toggle-container {
+        background-color: #f8f9fa;
+        padding: 6px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: inline-flex;
+        gap: 10px;
+    }
+
+    /* Today button styling untuk konsistensi */
+    .fc-today-button {
+        padding: 8px 16px !important;
+        font-size: 14px !important;
+        border-radius: 6px !important;
+    }
+
+    /* Icon styling */
+    #calendarViewBtn i,
+    #statsViewBtn i {
+        margin-right: 8px;
+        font-size: 16px;
+    }
+
+    /* Styling untuk tombol navigasi kalender */
+    .fc-prev-button,
+    .fc-next-button,
+    .fc-today-button {
+        padding: 8px 16px !important;
+        font-size: 14px !important;
+        border-radius: 6px !important;
+        background-color: #ffffff !important;
+        color: #6c757d !important;
+        border: 1px solid #e9ecef !important;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .fc-prev-button:hover,
+    .fc-next-button:hover,
+    .fc-today-button:hover {
+        background-color: #0b5ed7 !important;
+        color: #ffffff !important;
+        transform: translateY(-2px);
+        border-color: #0b5ed7 !important;
+        box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4) !important;
+    }
+
+    .fc-prev-button:active,
+    .fc-next-button:active,
+    .fc-today-button:active {
+        transform: translateY(0);
+    }
+
+    /* Pastikan icon pada tombol prev/next terlihat */
+    .fc-icon {
+        color: currentColor !important;
+    }
+
+    /* Calendar navigation styling */
+    .fc .fc-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 20px !important;
+    }
+
+    .fc .fc-toolbar-title {
+        font-size: 20px !important;
+        font-weight: 600 !important;
+        margin: 0 15px !important;
+    }
+
+    .fc .fc-prev-button,
+    .fc .fc-next-button {
+        background-color: #fff !important;
+        border: 1px solid #e9ecef !important;
+        color: #6c757d !important;
+        width: 36px !important;
+        height: 36px !important;
+        padding: 0 !important;
+        border-radius: 6px !important;
+    }
+
+    .fc .fc-today-button {
+        background-color: #0d6efd !important;
+        border: none !important;
+        padding: 8px 16px !important;
+        border-radius: 6px !important;
+        font-weight: 500 !important;
+    }
+
+    /* Hover effects */
+    .fc .fc-prev-button:hover,
+    .fc .fc-next-button:hover {
+        background-color: #0b5ed7 !important;
+        color: #fff !important;
+        border-color: #0b5ed7 !important;
+    }
+
+    .fc .fc-today-button:hover {
+        background-color: #0b5ed7 !important;
+        transform: translateY(-2px);
+    }
+
+    /* Hover effects untuk task items */
+    .list-group-item {
+        transition: all 0.2s ease !important;
+        border-radius: 8px !important;
+        margin-bottom: 4px !important;
+        border: 1px solid transparent !important;
+    }
+
+    .list-group-item:hover {
+        transform: translateX(5px) !important;
+        background-color: #f8f9fa !important;
+        border-color: #e9ecef !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+    }
+
+    /* Badge priority styling - tanpa hover effect */
+    .badge {
+        transition: none !important;
+        pointer-events: none !important;
+    }
+
+    /* Hover effect untuk judul tugas */
+    .task-title {
+        transition: color 0.2s ease !important;
+    }
+
+    .list-group-item:hover .task-title {
+        color: #0d6efd !important;
+    }
+
+    /* Style untuk tanggal */
+    .list-group-item small {
+        transition: color 0.2s ease !important;
+        color: #dc3545 !important;
+        font-weight: normal !important;
+        font-size: 0.875rem !important; /* Menyamakan ukuran font */
+    }
+
+    .list-group-item:hover small {
+        color: #dc3545 !important;
+        font-weight: 600 !important;
+    }
+
+    /* Hover effect untuk checkbox */
+    .form-check-input {
+        transition: all 0.2s ease !important;
+        cursor: pointer !important;
+    }
+
+    .form-check-input:hover {
+        border-color: #0d6efd !important;
+        transform: scale(1.1) !important;
+    }
+
+    /* Mempertahankan warna background saat checked dan hover */
+    .form-check-input:checked {
+        background-color: #0d6efd !important;
+        border-color: #0d6efd !important;
+    }
+
+    .form-check-input:checked:hover {
+        background-color: #0b5ed7 !important;
+        border-color: #0b5ed7 !important;
+    }
+
+    /* Container styling */
+    .upcoming-tasks,
+    .overdue-tasks {
+        border-radius: 12px !important;
+        overflow: hidden !important;
+    }
+
+    /* List group container */
+    .list-group {
+        padding: 8px !important;
+    }
+
+    /* Memastikan ukuran font konsisten di semua bagian */
+    .upcoming-tasks small,
+    .overdue-tasks small {
+        font-size: 0.875rem !important; /* 14px */
+        line-height: 1.5 !important;
+    }
+
+    /* Calendar Container Styling */
+    .fc {
+        background: white !important;
+        border-radius: 16px !important;
+        padding: 24px !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+        border: 1px solid #e9ecef !important;
+        min-height: 1000px !important; /* Tingkatkan lagi tinggi minimum */
+        height: 100% !important;
+    }
+
+    /* Header Cells (Hari) Styling */
+    .fc-col-header {
+        margin-bottom: 10px !important;
+    }
+
+    .fc-col-header-cell {
+        padding: 15px 0 !important;
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .fc-col-header-cell-cushion {
+        color: #2c3e50 !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+        text-decoration: none !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+    }
+
+    /* Day Cells Styling */
+    .fc-daygrid-day {
+        transition: all 0.3s ease !important;
+        min-height: 160px !important; /* Tingkatkan lagi tinggi minimum */
+        height: 160px !important; /* Tingkatkan lagi tinggi */
+    }
+
+    .fc-daygrid-day-frame {
+        padding: 12px !important;
+        border-radius: 12px !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .fc-daygrid-day-frame:hover {
+        background-color: #f8f9fa !important;
+        transform: scale(1.02) !important;
+    }
+
+    .fc-daygrid-day-number {
+        font-size: 1.1rem !important;
+        color: #2c3e50 !important;
+        text-decoration: none !important;
+        font-weight: 500 !important;
+        padding: 8px !important;
+    }
+
+    /* Today Styling */
+    .fc-day-today .fc-daygrid-day-frame {
+        background-color: #e3efff !important;
+        border-radius: 12px !important;
+    }
+
+    .fc-day-today .fc-daygrid-day-number {
+        color: #0d6efd !important;
+        font-weight: 700 !important;
+        background: #ffffff !important;
+        border-radius: 50% !important;
+        width: 32px !important;
+        height: 32px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 4px !important;
+    }
+
+    /* Event Styling */
+    .fc-event {
+        border: none !important;
+        padding: 6px 12px !important;
+        margin: 3px 0 !important;
+        border-radius: 8px !important;
+        font-size: 0.9rem !important;
+        font-weight: 500 !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    .fc-event:hover {
+        transform: translateY(-2px) scale(1.02) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+    }
+
+    /* Other Month Days */
+    .fc-day-other .fc-daygrid-day-frame {
+        opacity: 0.4 !important;
+        background-color: #fafbfc !important;
+    }
+
+    /* Weekend Styling */
+    .fc-day-sat .fc-daygrid-day-frame, 
+    .fc-day-sun .fc-daygrid-day-frame {
+        background-color: #f8f9fa !important;
+    }
+
+    /* Event Colors by Priority */
+    .fc-event.high-priority {
+        background: linear-gradient(45deg, #ff6b6b, #ff8787) !important;
+        color: white !important;
+    }
+
+    .fc-event.medium-priority {
+        background: linear-gradient(45deg, #ffd43b, #ffa94d) !important;
+        color: #212529 !important;
+    }
+
+    .fc-event.low-priority {
+        background: linear-gradient(45deg, #69db7c, #38d9a9) !important;
+        color: white !important;
+    }
+
+    /* More Link Styling */
+    .fc-more-link {
+        background: #f8f9fa !important;
+        color: #495057 !important;
+        font-weight: 600 !important;
+        padding: 2px 8px !important;
+        border-radius: 4px !important;
+        margin-top: 4px !important;
+    }
+
+    /* Border Styling */
+    .fc td {
+        border-color: #f1f3f5 !important;
+    }
+
+    /* Popover Styling */
+    .fc-popover {
+        border: none !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        max-height: 400px !important;
+        overflow-y: auto !important;
+    }
+
+    .fc-popover-header {
+        background: #f8f9fa !important;
+        padding: 12px 16px !important;
+        font-weight: 600 !important;
+        border-bottom: 1px solid #e9ecef !important;
+    }
+
+    .fc-popover-body {
+        padding: 12px !important;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .fc {
+            padding: 16px !important;
+        }
+        
+        .fc-daygrid-day {
+            min-height: 100px !important;
+        }
+        
+        .fc-daygrid-day-number {
+            font-size: 0.9rem !important;
+        }
+        
+        .fc-event {
+            font-size: 0.8rem !important;
+            padding: 4px 8px !important;
+        }
+    }
+
+    /* Overdue Tasks Card */
+    .stats-card.upcoming-tasks {
+        height: auto;
+        margin-bottom: 20px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    .stats-card.upcoming-tasks .card-header {
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 10;
+        padding: 15px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .stats-card.upcoming-tasks .card-body {
+        padding: 15px; /* Tambahkan padding untuk card body */
+    }
+
+    /* Custom scrollbar styling */
+    .card-body::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .card-body::-webkit-scrollbar-track {
+        background: #f8f9fc;
+    }
+
+    .card-body::-webkit-scrollbar-thumb {
+        background-color: #cbd5e0;
+        border-radius: 3px;
+    }
+
+    /* List item styling */
+    .list-group-item {
+        padding: 15px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        transition: all 0.2s ease !important;
+        min-height: 70px; /* Tinggi minimum untuk list item */
+    }
+
+    .list-group-item:last-child {
+        border-bottom: none;
+    }
+
+    /* Hover effect untuk list items */
+    .list-group-item:hover {
+        background-color: #f8f9fa !important;
+        transform: translateX(5px) !important;
+    }
+
+    /* Overdue Tasks Styling */
+    .overdue-tasks-container {
+        height: 420px; /* Increased height to fit 6 items (70px per item) */
+        min-height: 420px; /* Minimum height */
+        max-height: 420px; /* Maximum height */
+        overflow-y: auto; /* Enable vertical scrolling */
+        scrollbar-width: thin;
+        scrollbar-color: #cbd5e0 #f8f9fc;
+    }
+
+    .overdue-tasks-container::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .overdue-tasks-container::-webkit-scrollbar-track {
+        background: #f8f9fc;
+    }
+
+    .overdue-tasks-container::-webkit-scrollbar-thumb {
+        background-color: #cbd5e0;
+        border-radius: 3px;
+    }
+
+    /* Ensure consistent height for list items */
+    .overdue-tasks-container .list-group-item {
+        height: 70px;
+        min-height: 70px;
+        max-height: 70px;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+    }
+
+    /* Empty state styling */
+    .overdue-tasks-container .list-group-item .text-center {
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    /* Empty state styling */
+    .empty-state {
+        height: 100%;
+        min-height: 250px;
+        padding: 30px 20px;
+        text-align: center;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .empty-state:hover {
+        background-color: #f0f0f0;
+    }
+
+    .empty-state i {
+        opacity: 0.7;
+    }
+
+    .empty-state h6 {
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .empty-state p {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+
+    /* Ensure the row takes full height */
+    .row {
+        min-height: 100vh;
+    }
+
+    /* Make the right column fill available space */
+    .col-md-4 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Make the Overdue Tasks card expand to fill space */
+    .stats-card.upcoming-tasks:last-child {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Make the card body expand */
+    .stats-card.upcoming-tasks:last-child .card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Make the task container expand */
+    .overdue-tasks-container {
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    /* Calendar Grid Styling - Tetap sama seperti sebelumnya */
+    .fc .fc-daygrid-day {
+        height: 150px !important;
+        min-height: 150px !important;
+        max-height: 150px !important;
+        width: calc(100% / 7) !important;
+        box-sizing: border-box !important;
+    }
+
+    .fc .fc-daygrid-day-frame {
+        height: 100% !important;
+        min-height: 100% !important;
+        max-height: 100% !important;
+        padding: 8px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        background: white !important;
+        border-radius: 8px !important;
+        margin: 2px !important;
+        overflow: hidden !important;
+    }
+
+    /* Mengatur layout dalam sel */
+    .fc .fc-daygrid-day-top {
+        flex: 0 0 auto !important;
+        padding: 4px !important;
+        margin-bottom: 4px !important;
+    }
+
+    .fc .fc-daygrid-day-events {
+        flex: 1 !important;
+        min-height: 0 !important;
+        max-height: calc(100% - 30px) !important;
+        overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 4px !important;
+        position: relative !important;
+    }
+
+    /* Styling untuk event/task - DIUBAH untuk tampilan garis */
+    .fc-daygrid-event-harness {
+        margin: 2px 0 !important;
+        position: relative !important;
+    }
+
+    /* BARU: Styling untuk event saat idle (tampilan garis) */
+    .fc-event {
+        padding: 6px 8px !important;
+        margin: 0 !important;
+        border-radius: 20px !important;
+        height: 8px !important; /* Ukuran garis */
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        transition: all 0.2s ease-in-out !important;
+    }
+
+    /* BARU: Menyembunyikan teks pada kondisi default */
+    .fc-event .fc-event-title,
+    .fc-event .fc-event-time {
+        opacity: 0 !important;
+        font-size: 0 !important;
+        transition: all 0.2s ease-in-out !important;
+    }
+
+    /* BARU: Menampilkan teks saat hover */
+    .fc-event:hover {
+        height: auto !important;
+        padding: 6px 8px !important;
+        z-index: 100 !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .fc-event:hover .fc-event-title,
+    .fc-event:hover .fc-event-time {
+        opacity: 1 !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* Style untuk tombol "more" */
+    .fc-daygrid-more-link {
+        background: #f8fafc !important;
+        color: #4a5568 !important;
+        font-size: 0.8rem !important;
+        font-weight: 500 !important;
+        padding: 2px 6px !important;
+        border-radius: 4px !important;
+        margin-top: auto !important;
+        text-align: center !important;
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+    }
+
+    /* Memastikan container kalender memiliki tinggi tetap */
+    .fc-view-harness {
+        height: auto !important;
+    }
+
+    .fc-scrollgrid-sync-table {
+        height: auto !important;
+    }
+
+    /* Memastikan baris kalender memiliki tinggi tetap */
+    .fc-scrollgrid-sync-table tr {
+        height: 150px !important;
+    }
+
+    /* Memperbaiki tampilan untuk hari di luar bulan */
+    .fc-day-other .fc-daygrid-day-frame {
+        background: #f8fafc !important;
+        opacity: 0.7 !important;
+    }
+
+    /* Styling untuk hari ini */
+    .fc-day-today .fc-daygrid-day-frame {
+        background: #ebf8ff !important;
+    }
+
+    /* Memastikan grid tetap konsisten */
+    .fc-scrollgrid {
+        border-collapse: collapse !important;
+    }
+
+    .fc td, .fc th {
+        border: 1px solid #e2e8f0 !important;
+    }
+
+    /* Alert Styling */
+    .alert {
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        z-index: 1000;
+        min-width: 300px;
+        border-radius: 10px;
+        box-shadow: none;
+        animation: slideIn 0.5s ease-out;
+        padding: 12px 20px; /* Adjust padding since we removed the close button */
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .alert-success {
+        background-color: var(--success-color);
+        border-color: var(--success-color);
+        color: white;
+    }
+
+    .alert-danger {
+        background-color: var(--danger-color);
+        border-color: var(--danger-color);
+        color: white;
+    }
+
+    .alert .btn-close {
+        color: white;
+        opacity: 0.8;
+    }
+
+    /* Reset container styles */
+    .dashboard-container {
+        padding: 20px;
+        background: #f8f9fc;
+    }
+    
+    /* Task calendar styles */
+    .task-calendar {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: none;
+        margin-bottom: 20px;
+    }
+
+    #calendar {
+        height: 100% !important;
+        min-height: 1000px !important; /* Tingkatkan lagi tinggi minimum */
+        font-family: 'Nunito', sans-serif;
+    }
+
+    /* Stats card styles */
+    .stats-card {
+        transition: none !important;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    /* Upcoming deadlines card */
+    .card-body.p-0 {
+        max-height: 600px;
+        overflow-y: auto;
+    }
+
+    /* Keep your existing styles below */
+    .stats-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    .stats-card .card-body {
+        padding: 1.5rem;
+    }
+    /* Calendar Styling */
+    .fc-header-toolbar {
+        margin-bottom: 1rem !important;
+        padding: 0 !important;
+    }
+    .fc-toolbar-title {
+        font-size: 1.5em !important;
+        font-weight: 600 !important;
+        color: #2c3e50;
+    }
+    .fc-button {
+        padding: 8px 15px !important;
+        font-weight: 500 !important;
+        border-radius: 8px !important;
+        text-transform: capitalize !important;
+    }
+    .fc-button-primary {
+        background-color: var(--primary-color) !important;
+        border-color: var(--primary-color) !important;
+    }
+    .fc-button-primary:hover {
+        background-color: var(--hover-color) !important;
+        border-color: var(--hover-color) !important;
+    }
+    .fc-daygrid-day {
+        transition: none !important;
+    }
+    .fc-daygrid-day:hover {
+        background-color: white !important;
+    }
+    .fc-daygrid-day-number {
+        font-size: 0.9em !important;
+        padding: 4px 8px !important;
+        color: #5a5c69;
+    }
+    .fc-day-today .fc-daygrid-day-number {
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+    }
+    .fc-event {
+        border-radius: 6px !important;
+        padding: 3px 8px !important;
+        font-size: 0.85em !important;
+        border: none !important;
+        margin: 2px 0 !important;
+    }
+    /* Priority Colors */
+    .priority-high {
+        background-color: var(--danger-color) !important;
+        border-color: var(--danger-color) !important;
+    }
+    .priority-medium {
+        background-color: var(--warning-color) !important;
+        border-color: var(--warning-color) !important;
+        color: #000 !important;
+    }
+    .priority-low {
+        background-color: var(--success-color) !important;
+        border-color: var(--success-color) !important;
+    }
+    /* Today's Tasks Section */
+    .today-tasks {
+        background: white;
+        border-radius: 15px;
+        box-shadow: none;
+        height: 600px;
+        overflow-y: auto;
+    }
+    .today-tasks .card-header {
+        background: transparent;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 1.5rem;
+    }
+    .today-tasks .list-group-item {
+        border: none;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 1rem 1.5rem;
+    }
+    .today-tasks .list-group-item:last-child {
+        border-bottom: none;
+    }
+    /* Navigation Button Group Styling */
+    .fc-button-group {
+        gap: 5px !important;
+        background: #f8f9fc;
+        padding: 5px;
+        border-radius: 12px;
+    }
+    .fc-button-group .fc-button {
+        border-radius: 8px !important;
+        padding: 8px 16px !important;
+        font-weight: 500 !important;
+        border: none !important;
+        background: transparent !important;
+        color: #6c757d !important;
+    }
+    .fc-button-group .fc-button.fc-button-active {
+        background-color: var(--primary-color) !important;
+        color: white !important;
+    }
+    .fc-button-group .fc-button:hover:not(.fc-button-active) {
+        background-color: #eaecf4 !important;
+    }
+    /* Header Toolbar Spacing */
+    .fc-header-toolbar {
+        padding: 15px 0 !important;
+        margin-bottom: 1.5rem !important;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    /* Calendar Grid */
+    .fc-daygrid-day {
+        height: 150px !important;
+    }
+    .fc-daygrid-day-frame {
+        min-height: 100% !important;
+        padding: 8px !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .fc-daygrid-day-top {
+        flex-direction: row !important;
+        margin-bottom: 4px;
+    }
+    .fc-daygrid-day-number {
+        float: left !important;
+        margin: 5px !important;
+        font-size: 14px !important;
+        font-weight: 500;
+        color: #5a5c69;
+    }
+    .fc-day-today .fc-daygrid-day-number {
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Calendar Header */
+    .fc-col-header-cell {
+        padding: 10px 0 !important;
+        background: #f8f9fc !important;
+        border-color: #e3e6f0 !important;
+    }
+    .fc-col-header-cell-cushion {
+        padding: 8px !important;
+        color: #4e73df !important;
+        font-weight: 600 !important;
+        text-decoration: none !important;
+    }
+    
+    /* Event Styling */
+    .fc-daygrid-event {
+        margin: 2px 4px !important;
+        padding: 2px 4px !important;
+        border-radius: 4px !important;
+    }
+    
+    /* Navigation Buttons */
+    .fc-button-group {
+        gap: 5px !important;
+    }
+    .fc-button {
+        padding: 8px 16px !important;
+        font-weight: 500 !important;
+        border: none !important;
+    }
+    .fc-button-primary {
+        background-color: var(--primary-color) !important;
+        color: white !important;
+    }
+    .fc-button-primary:not(.fc-button-active):hover {
+        background-color: var(--hover-color) !important;
+    }
+    .fc-button-active {
+        background-color: var(--hover-color) !important;
+    }
+    
+    /* Event styling */
+    .fc-event {
+        border: none !important;
+        padding: 4px 8px !important;
+        font-size: 0.85em !important;
+        white-space: normal !important;
+    }
+    
+    .priority-high {
+        background-color: rgba(231, 74, 59, 0.9) !important;
+        color: white !important;
+    }
+    
+    .priority-medium {
+        background-color: rgba(246, 194, 62, 0.9) !important;
+        color: black !important;
+    }
+    
+    .priority-low {
+        background-color: rgba(28, 200, 138, 0.9) !important;
+        color: white !important;
+    }
+    
+    .fc-event i {
+        opacity: 0.8;
+    }
+
+    /* New styles for task statistics */
+    .task-stats {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: none;
+        border-radius: 15px;
+        margin-bottom: var(--spacing-base);
+        padding: 1.5rem;
+    }
+
+    .task-stats .card-body {
+        padding: 0; /* Remove default card-body padding since we added padding to parent */
+    }
+
+    .task-stats h6 {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #2d3748;
+    }
+
+    .task-stats .progress {
+        background-color: #f0f2f5;
+        border-radius: 10px;
+        margin: 1rem 0;
+    }
+
+    .task-stats .progress-bar {
+        background-color: var(--primary-color);
+        border-radius: 10px;
+    }
+
+    .task-stats .task-counts {
+        margin-top: 1.5rem;
+    }
+
+    .task-stats .stat-item {
+        text-align: center;
+    }
+
+    .task-stats .stat-item h4 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+        color: #2d3748;
+    }
+
+    .task-stats .stat-item .text-success {
+        color: var(--success-color) !important;
+    }
+
+    .task-stats .stat-item .text-warning {
+        color: var(--warning-color) !important;
+    }
+
+    .task-stats .stat-item span {
+        font-size: 0.85rem;
+        color: #6c757d;
+    }
+
+    /* Update upcoming deadlines card styling */
+    .upcoming-deadlines {
+        background: white;
+        border-radius: 15px;
+        box-shadow: none;
+        height: calc(100% - 260px);
+        margin-top: var(--spacing-base); /* Konsisten 25px */
+    }
+    
+    .upcoming-deadlines .card-body {
+        height: calc(100% - 60px);
+        overflow-y: auto;
+    }
+    
+    .upcoming-deadlines .list-group {
+        height: 100%;
+    }
+    
+    /* Update list item styling */
+    .upcoming-deadlines .list-group-item {
+        padding: 15px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        transition: none !important;
+    }
+    
+    .upcoming-deadlines .list-group-item:hover {
+        background-color: white !important;
+    }
+    
+    /* Checkbox styling */
+    .form-check-input {
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-top: 0.2rem;
+        cursor: pointer !important;
+        border-color: #e0e3e7;
+    }
+    
+    .form-check-input:checked {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+    
+    /* Task title styling */
+    .upcoming-deadlines h6 {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 0.3rem;
+    }
+    
+    /* Task completed styling */
+    .task-completed {
+        text-decoration: line-through;
+        color: #858796;
+    }
+    
+    /* Badge styling */
+    .badge {
+        padding: 0.4rem 0.8rem;
+        font-weight: 500;
+        font-size: 0.75rem;
+    }
+    
+    /* Edit button styling */
+    .btn-outline-primary {
+        padding: 0.25rem 0.5rem;
+        border-color: #e0e3e7;
+        color: #4e73df;
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: #4e73df;
+        border-color: #4e73df;
+        color: white;
+    }
+    
+    /* Date text styling */
+    .text-muted {
+        font-size: 0.8rem;
+        color: #6c757d;
+    }
+
+    /* Update progress bar styling */
+    .progress {
+        background-color: #eaecf4;
+        border-radius: 10px;
+        height: 10px !important;
+    }
+
+    .progress-bar {
+        border-radius: 10px;
+        transition: none !important;
+    }
+
+    /* Update stats card styling */
+    .task-stats {
+        background: white;
+        border-radius: 15px;
+        box-shadow: none;
+    }
+
+    .task-stats .card-body {
+        padding: 1.5rem;
+    }
+
+    .stat-item {
+        flex: 1;
+        padding: 0 10px;
+    }
+
+    .stat-item h4 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+    }
+
+    .stat-item span {
+        font-size: 0.8rem;
+        color: #858796;
+    }
+
+    /* Add hover effect to stats */
+    .stat-item:hover h4 {
+        transform: none !important;
+        transition: none !important;
+    }
+
+    /* Modal styling */
+    .modal-content {
+        border: none;
+        border-radius: 15px;
+        box-shadow: none;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 1.5rem;
+    }
+
+    .modal-body {
+        padding: 1.5rem;
+    }
+
+    .modal-footer {
+        border-top: 1px solid rgba(0,0,0,0.05);
+        padding: 1.5rem;
+    }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 1px solid #e0e3e7;
+        padding: 0.6rem 1rem;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #4e73df;
+        box-shadow: none;
+    }
+
+    .form-label {
+        font-weight: 500;
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Update Modal styling */
+    .modal-lg {
+        max-width: 800px;
+    }
+
+    .modal-content {
+        border: none;
+        border-radius: 15px;
+        box-shadow: none;
+        max-height: 90vh; /* Maksimum tinggi modal 90% dari tinggi viewport */
+    }
+
+    .modal-header {
+        background-color: #f8f9fc;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 1rem 1.5rem; /* Mengurangi padding */
+    }
+
+    .modal-header .modal-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .modal-body {
+        padding: 1.5rem;
+        overflow-y: auto; /* Tambah scroll untuk modal body */
+        max-height: calc(90vh - 110px); /* Tinggi maksimum body modal */
+    }
+
+    .modal-footer {
+        background-color: #f8f9fc;
+        border-top: 1px solid rgba(0,0,0,0.05);
+        padding: 0.75rem 1.5rem; /* Mengurangi padding */
+    }
+
+    /* Form styling */
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 1px solid #e0e3e7;
+        padding: 0.7rem 1rem; /* Sedikit mengurangi padding */
+        font-size: 1rem;
+    }
+
+    .form-control-lg {
+        font-size: 1.1rem;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #4e73df;
+        box-shadow: none;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    /* Button styling */
+    .btn-primary {
+        padding: 0.5rem 1.25rem;
+        font-weight: 500;
+    }
+
+    .btn-secondary {
+        background-color: #eaecf4;
+        border: none;
+        color: #6e707e;
+        padding: 0.5rem 1.25rem;
+    }
+
+    .btn-secondary:hover {
+        background-color: #dde0e9;
+    }
+
+    /* Custom scrollbar styling */
+    .custom-scroll {
+        scrollbar-width: thin;
+        scrollbar-color: #cbd5e0 #f8f9fc;
+    }
+
+    .custom-scroll::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .custom-scroll::-webkit-scrollbar-track {
+        background: #f8f9fc;
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb {
+        background-color: #cbd5e0;
+        border-radius: 3px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .dashboard-container {
+            padding: 15px;
+        }
+    }
+
+    /* Tambahkan style untuk modal */
+    .modal-content {
+        border-radius: 15px;
+        border: none;
+        box-shadow: none;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        padding: 1.5rem;
+    }
+
+    .modal-body {
+        padding: 1.5rem;
+    }
+
+    .modal-footer {
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        padding: 1.5rem;
+    }
+
+    .task-detail-content label {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .task-detail-content p {
+        color: #2c3e50;
+        font-size: 1rem;
+    }
+
+    .badge {
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        border-radius: 6px;
+    }
+
+    .statistics-container {
+        padding: 20px;
+        background: white;
+        border-radius: 15px;
+        min-height: 600px;
+    }
+
+    .stats-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: none;
+        transition: none !important;
+    }
+
+    .stats-card:hover {
+        transform: none !important;
+    }
+
+    .card-title {
+        color: #2c3e50;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .btn-group .btn {
+        padding: 8px 16px;
+    }
+
+    .btn-group .btn.active {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .view-container {
+        position: relative;
+        height: 600px; /* Tinggi tetap */
+        overflow: hidden; /* Mencegah scroll */
+    }
+
+    .view-content {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        transition: none !important;
+    }
+
+    #statisticsView {
+        padding: 20px 0;
+    }
+
+    /* Tambahan style untuk kalender */
+    .fc-view-harness {
+        height: calc(100% - 50px) !important;
+    }
+
+    .fc .fc-daygrid-body {
+        height: 100% !important;
+    }
+
+    .fc .fc-daygrid-body-balanced .fc-daygrid-day-events {
+        position: relative !important;
+    }
+
+    .current-month {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #2c3e50;
+        min-width: 150px;
+        text-align: center;
+    }
+
+    .fc-theme-standard td, .fc-theme-standard th {
+        border: 1px solid #e3e6f0;
+    }
+
+    .fc-daygrid-day {
+        min-height: 100px !important;
+        height: auto !important;
+    }
+
+    .fc-daygrid-day-frame {
+        height: 100% !important;
+        min-height: unset !important;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .fc-daygrid-day-top {
+        flex: 0 0 auto;
+        padding: 4px;
+    }
+
+    .fc-daygrid-day-events {
+        flex: 1;
+        min-height: 0;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    .fc-daygrid-more-link {
+        margin: 2px 0 !important;
+        padding: 2px 4px !important;
+        font-size: 0.85em !important;
+    }
+
+    .fc-day-today {
+        background: rgba(0, 153, 255, 0.05) !important;
+    }
+
+    .fc td, .fc th {
+        border: 1px solid #e3e6f0 !important;
+    }
+
+    /* Style untuk notifikasi */
+    .notification {
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        z-index: 1000;
+        min-width: 300px;
+        border-radius: 10px;
+        box-shadow: none;
+        animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideOut {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+
+    .task-completed {
+        text-decoration: line-through;
+        color: #6c757d;
+    }
+
+    .form-check-input {
+        cursor: pointer !important;
+    }
+
+    .form-check-input:checked {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    /* Upcoming Tasks Styling */
+    .upcoming-tasks {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: none;
+    }
+
+    .upcoming-tasks .card-header {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        padding: 1rem 1.5rem;
+    }
+
+    .upcoming-tasks .card-header h5 {
+        color: #2c3e50;
+        font-weight: 600;
+    }
+
+    .upcoming-tasks .list-group-item {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: none !important;
+    }
+
+    .upcoming-tasks .list-group-item:hover {
+        background-color: white !important;
+    }
+
+    .upcoming-tasks .list-group-item:last-child {
+        border-bottom: none;
+    }
+
+    .upcoming-tasks h6 {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #2c3e50;
+        margin: 0;
+    }
+
+    .upcoming-tasks .text-muted {
+        font-size: 0.85rem;
+    }
+
+    .upcoming-tasks .badge {
+        padding: 0.5em 0.8em;
+        font-weight: 500;
+        font-size: 0.75rem;
+    }
+
+    /* Checkbox Styling */
+    .form-check-input {
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-top: 0.2rem;
+        cursor: pointer !important;
+        border: 2px solid #dee2e6;
+    }
+
+    .form-check-input:checked {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .form-check-input:focus {
+        border-color: var(--primary-color);
+        box-shadow: none;
+    }
+
+    /* Task completed style */
+    .task-completed {
+        text-decoration: line-through;
+        color: #6c757d;
+    }
+
+    /* Badge colors */
+    .badge.bg-danger {
+        background-color: #e74a3b !important;
+    }
+
+    .badge.bg-warning {
+        background-color: #f6c23e !important;
+        color: #2c3e50;
+    }
+
+    .badge.bg-success {
+        background-color: #1cc88a !important;
+    }
+
+    /* Tambahan style untuk overdue tasks */
+    .overdue-tasks {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: none;
+    }
+
+    .overdue-tasks .text-danger {
+        font-weight: 500;
+    }
+
+    .overdue-tasks .list-group-item:hover {
+        background-color: white !important;
+    }
+
+    /* Reset hover effects tapi pertahankan shadow */
+    .upcoming-tasks .list-group-item:hover,
+    .fc-event:hover,
+    .badge:hover,
+    .btn:hover,
+    .form-check-input:hover {
+        transform: none !important;
+        background-color: inherit !important;
+        cursor: default !important;
+    }
+
+    /* Pertahankan shadow pada cards */
+    .stats-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+        transition: none !important;
+    }
+
+    /* Kecuali untuk checkbox tetap bisa diklik */
+    .form-check-input {
+        cursor: pointer !important;
+    }
+
+    /* Reset hover pada calendar events */
+    .fc-event {
+        cursor: default !important;
+    }
+
+    /* Reset hover pada buttons */
+    .btn {
+        transition: none !important;
+    }
+
+    /* Reset hover pada list items tapi pertahankan background */
+    .list-group-item {
+        transition: none !important;
+        background-color: white !important;
+    }
+
+    /* Reset hover pada badges */
+    .badge {
+        transition: none !important;
+    }
+
+    /* Pastikan shadow tetap ada dalam kondisi apapun */
+    .stats-card,
+    .stats-card:hover {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Reset hover effects */
+    .upcoming-tasks .list-group-item:hover,
+    .fc-event:hover,
+    .badge:hover,
+    .btn:hover,
+    .form-check-input:hover {
+        transform: none !important;
+        background-color: inherit !important;
+        cursor: default !important;
+    }
+
+    /* Kecuali untuk checkbox tetap bisa diklik */
+    .form-check-input {
+        cursor: pointer !important;
+    }
+
+    /* Reset hover pada calendar events */
+    .fc-event {
+        cursor: default !important;
+    }
+
+    /* Reset hover pada buttons */
+    .btn {
+        transition: none !important;
+    }
+
+    /* Reset hover pada list items */
+    .list-group-item {
+        transition: none !important;
+        background-color: white !important;
+    }
+
+    /* Reset hover pada badges */
+    .badge {
+        transition: none !important;
+    }
+
+    /* Pastikan shadow tetap ada untuk semua cards */
+    .upcoming-tasks,
+    .upcoming-tasks:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Styling untuk cards */
+    .stats-card,
+    .stats-card:hover {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Reset hover effects untuk non-button elements */
+    .upcoming-tasks .list-group-item:hover,
+    .fc-event:hover,
+    .badge:hover {
+        transform: none !important;
+        background-color: inherit !important;
+        cursor: default !important;
+    }
+
+    /* Hover effects untuk buttons */
+    .btn {
+        transition: all 0.3s ease !important;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* Specific button hover effects */
+    .btn-primary:hover {
+        background-color: #0056b3 !important;
+    }
+
+    .btn-success:hover {
+        background-color: #1e7e34 !important;
+    }
+
+    .btn-danger:hover {
+        background-color: #bd2130 !important;
+    }
+
+    .btn-warning:hover {
+        background-color: #d39e00 !important;
+    }
+
+    .btn-info:hover {
+        background-color: #117a8b !important;
+    }
+
+    /* Toggle view buttons hover */
+    #calendarViewBtn:hover,
+    #statsViewBtn:hover {
+        background-color: #f8f9fa !important;
+        color: #0056b3 !important;
+    }
+
+    /* Add task button hover */
+    .add-task-btn:hover {
+        background-color: #0056b3 !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2) !important;
+    }
+
+    /* Checkbox styling */
+    .form-check-input {
+        cursor: pointer !important;
+    }
+
+    /* Reset hover pada list items */
+    .list-group-item {
+        transition: none !important;
+        background-color: white !important;
+    }
+
+    /* Reset hover pada badges */
+    .badge {
+        transition: none !important;
+    }
+
+    /* Pastikan shadow tetap ada */
+    .upcoming-tasks,
+    .upcoming-tasks:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Close button hover effect */
+    .btn-close:hover {
+        opacity: 1 !important;
+        transform: rotate(90deg) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    /* Toggle view buttons styling */
+    #calendarViewBtn,
+    #statsViewBtn {
+        padding: 10px 20px;
+        border-radius: 6px;
+        transition: all 0.3s ease !important;
+        font-weight: 500;
+        border: 1px solid #e9ecef !important;
+        margin: 0 5px;
+        font-size: 15px;
+        min-width: 140px;  /* Menambahkan lebar minimum */
+    }
+
+    /* Default state */
+    #calendarViewBtn,
+    #statsViewBtn {
+        background-color: #ffffff;
+        color: #6c757d;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Active state untuk Calendar View */
+    #calendarViewBtn.active {
+        background-color: #0d6efd !important;
+        color: #ffffff !important;
+        font-weight: 600;
+        border-color: #0d6efd !important;
+        box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3) !important;
+    }
+
+    /* Active state untuk Statistics View */
+    #statsViewBtn.active {
+        background-color: #0d6efd !important;
+        color: #ffffff !important;
+        font-weight: 600;
+        border-color: #0d6efd !important;
+        box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3) !important;
+    }
+
+    /* Hover state */
+    #calendarViewBtn:hover,
+    #statsViewBtn:hover {
+        background-color: #0b5ed7 !important;
+        color: #ffffff !important;
+        transform: translateY(-2px);
+        border-color: #0b5ed7 !important;
+        box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4) !important;
+    }
+
+    /* Container untuk toggle buttons */
+    .view-toggle-container {
+        background-color: #f8f9fa;
+        padding: 6px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: inline-flex;
+        gap: 10px;
+    }
+
+    /* Today button styling untuk konsistensi */
+    .fc-today-button {
+        padding: 8px 16px !important;
+        font-size: 14px !important;
+        border-radius: 6px !important;
+    }
+
+    /* Icon styling */
+    #calendarViewBtn i,
+    #statsViewBtn i {
+        margin-right: 8px;
+        font-size: 16px;
+    }
+
+    /* Styling untuk tombol navigasi kalender */
+    .fc-prev-button,
+    .fc-next-button,
+    .fc-today-button {
+        padding: 8px 16px !important;
+        font-size: 14px !important;
+        border-radius: 6px !important;
+        background-color: #ffffff !important;
+        color: #6c757d !important;
+        border: 1px solid #e9ecef !important;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .fc-prev-button:hover,
+    .fc-next-button:hover,
+    .fc-today-button:hover {
+        background-color: #0b5ed7 !important;
+        color: #ffffff !important;
+        transform: translateY(-2px);
+        border-color: #0b5ed7 !important;
+        box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4) !important;
+    }
+
+    .fc-prev-button:active,
+    .fc-next-button:active,
+    .fc-today-button:active {
+        transform: translateY(0);
+    }
+
+    /* Pastikan icon pada tombol prev/next terlihat */
+    .fc-icon {
+        color: currentColor !important;
+    }
+
+    /* Calendar navigation styling */
+    .fc .fc-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 20px !important;
+    }
+
+    .fc .fc-toolbar-title {
+        font-size: 20px !important;
+        font-weight: 600 !important;
+        margin: 0 15px !important;
+    }
+
+    .fc .fc-prev-button,
+    .fc .fc-next-button {
+        background-color: #fff !important;
+        border: 1px solid #e9ecef !important;
+        color: #6c757d !important;
+        width: 36px !important;
+        height: 36px !important;
+        padding: 0 !important;
+        border-radius: 6px !important;
+    }
+
+    .fc .fc-today-button {
+        background-color: #0d6efd !important;
+        border: none !important;
+        padding: 8px 16px !important;
+        border-radius: 6px !important;
+        font-weight: 500 !important;
+    }
+
+    /* Hover effects */
+    .fc .fc-prev-button:hover,
+    .fc .fc-next-button:hover {
+        background-color: #0b5ed7 !important;
+        color: #fff !important;
+        border-color: #0b5ed7 !important;
+    }
+
+    .fc .fc-today-button:hover {
+        background-color: #0b5ed7 !important;
+        transform: translateY(-2px);
+    }
+
+    /* Hover effects untuk task items */
+    .list-group-item {
+        transition: all 0.2s ease !important;
+        border-radius: 8px !important;
+        margin-bottom: 4px !important;
+        border: 1px solid transparent !important;
+    }
+
+    .list-group-item:hover {
+        transform: translateX(5px) !important;
+        background-color: #f8f9fa !important;
+        border-color: #e9ecef !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+    }
+
+    /* Badge priority styling - tanpa hover effect */
+    .badge {
+        transition: none !important;
+        pointer-events: none !important;
+    }
+
+    /* Hover effect untuk judul tugas */
+    .task-title {
+        transition: color 0.2s ease !important;
+    }
+
+    .list-group-item:hover .task-title {
+        color: #0d6efd !important;
+    }
+
+    /* Style untuk tanggal */
+    .list-group-item small {
+        transition: color 0.2s ease !important;
+        color: #dc3545 !important;
+        font-weight: normal !important;
+        font-size: 0.875rem !important; /* Menyamakan ukuran font */
+    }
+
+    .list-group-item:hover small {
+        color: #dc3545 !important;
+        font-weight: 600 !important;
+    }
+
+    /* Hover effect untuk checkbox */
+    .form-check-input {
+        transition: all 0.2s ease !important;
+        cursor: pointer !important;
+    }
+
+    .form-check-input:hover {
+        border-color: #0d6efd !important;
+        transform: scale(1.1) !important;
+    }
+
+    /* Mempertahankan warna background saat checked dan hover */
+    .form-check-input:checked {
+        background-color: #0d6efd !important;
+        border-color: #0d6efd !important;
+    }
+
+    .form-check-input:checked:hover {
+        background-color: #0b5ed7 !important;
+        border-color: #0b5ed7 !important;
+    }
+
+    /* Container styling */
+    .upcoming-tasks,
+    .overdue-tasks {
+        border-radius: 12px !important;
+        overflow: hidden !important;
+    }
+
+    /* List group container */
+    .list-group {
+        padding: 8px !important;
+    }
+
+    /* Memastikan ukuran font konsisten di semua bagian */
+    .upcoming-tasks small,
+    .overdue-tasks small {
+        font-size: 0.875rem !important; /* 14px */
+        line-height: 1.5 !important;
+    }
+
+    /* Calendar Container Styling */
+    .fc {
+        background: white !important;
+        border-radius: 16px !important;
+        padding: 24px !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+        border: 1px solid #e9ecef !important;
+        min-height: 1000px !important; /* Tingkatkan lagi tinggi minimum */
+        height: 100% !important;
+    }
+
+    /* Header Cells (Hari) Styling */
+    .fc-col-header {
+        margin-bottom: 10px !important;
+    }
+
+    .fc-col-header-cell {
+        padding: 15px 0 !important;
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .fc-col-header-cell-cushion {
+        color: #2c3e50 !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+        text-decoration: none !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+    }
+
+    /* Day Cells Styling */
+    .fc-daygrid-day {
+        transition: all 0.3s ease !important;
+        min-height: 160px !important; /* Tingkatkan lagi tinggi minimum */
+        height: 160px !important; /* Tingkatkan lagi tinggi */
+    }
+
+    .fc-daygrid-day-frame {
+        padding: 12px !important;
+        border-radius: 12px !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .fc-daygrid-day-frame:hover {
+        background-color: #f8f9fa !important;
+        transform: scale(1.02) !important;
+    }
+
+    .fc-daygrid-day-number {
+        font-size: 1.1rem !important;
+        color: #2c3e50 !important;
+        text-decoration: none !important;
+        font-weight: 500 !important;
+        padding: 8px !important;
+    }
+
+    /* Today Styling */
+    .fc-day-today .fc-daygrid-day-frame {
+        background-color: #e3efff !important;
+        border-radius: 12px !important;
+    }
+
+    .fc-day-today .fc-daygrid-day-number {
+        color: #0d6efd !important;
+        font-weight: 700 !important;
+        background: #ffffff !important;
+        border-radius: 50% !important;
+        width: 32px !important;
+        height: 32px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 4px !important;
+    }
+
+    /* Event Styling */
+    .fc-event {
+        border: none !important;
+        padding: 6px 12px !important;
+        margin: 3px 0 !important;
+        border-radius: 8px !important;
+        font-size: 0.9rem !important;
+        font-weight: 500 !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    .fc-event:hover {
+        transform: translateY(-2px) scale(1.02) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+    }
+
+    /* Other Month Days */
+    .fc-day-other .fc-daygrid-day-frame {
+        opacity: 0.4 !important;
+        background-color: #fafbfc !important;
+    }
+
+    /* Weekend Styling */
+    .fc-day-sat .fc-daygrid-day-frame, 
+    .fc-day-sun .fc-daygrid-day-frame {
+        background-color: #f8f9fa !important;
+    }
+
+    /* Event Colors by Priority */
+    .fc-event.high-priority {
+        background: linear-gradient(45deg, #ff6b6b, #ff8787) !important;
+        color: white !important;
+    }
+
+    .fc-event.medium-priority {
+        background: linear-gradient(45deg, #ffd43b, #ffa94d) !important;
+        color: #212529 !important;
+    }
+
+    .fc-event.low-priority {
+        background: linear-gradient(45deg, #69db7c, #38d9a9) !important;
+        color: white !important;
+    }
+
+    /* More Link Styling */
+    .fc-more-link {
+        background: #f8f9fa !important;
+        color: #495057 !important;
+        font-weight: 600 !important;
+        padding: 2px 8px !important;
+        border-radius: 4px !important;
+        margin-top: 4px !important;
+    }
+
+    /* Border Styling */
+    .fc td {
+        border-color: #f1f3f5 !important;
+    }
+
+    /* Popover Styling */
+    .fc-popover {
+        border: none !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        max-height: 400px !important;
+        overflow-y: auto !important;
+    }
+
+    .fc-popover-header {
+        background: #f8f9fa !important;
+        padding: 12px 16px !important;
+        font-weight: 600 !important;
+        border-bottom: 1px solid #e9ecef !important;
+    }
+
+    .fc-popover-body {
+        padding: 12px !important;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .fc {
+            padding: 16px !important;
+        }
+        
+        .fc-daygrid-day {
+            min-height: 100px !important;
+        }
+        
+        .fc-daygrid-day-number {
+            font-size: 0.9rem !important;
+        }
+        
+        .fc-event {
+            font-size: 0.8rem !important;
+            padding: 4px 8px !important;
+        }
+    }
+
+    /* Overdue Tasks Card */
+    .stats-card.upcoming-tasks {
+        height: auto;
+        margin-bottom: 20px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    .stats-card.upcoming-tasks .card-header {
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 10;
+        padding: 15px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .stats-card.upcoming-tasks .card-body {
+        padding: 15px; /* Tambahkan padding untuk card body */
+    }
+
+    /* Custom scrollbar styling */
+    .card-body::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .card-body::-webkit-scrollbar-track {
+        background: #f8f9fc;
+    }
+
+    .card-body::-webkit-scrollbar-thumb {
+        background-color: #cbd5e0;
+        border-radius: 3px;
+    }
+
+    /* List item styling */
+    .list-group-item {
+        padding: 15px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        transition: all 0.2s ease !important;
+        min-height: 70px; /* Tinggi minimum untuk list item */
+    }
+
+    .list-group-item:last-child {
+        border-bottom: none;
+    }
+
+    /* Hover effect untuk list items */
+    .list-group-item:hover {
+        background-color: #f8f9fa !important;
+        transform: translateX(5px) !important;
+    }
+
+    /* Overdue Tasks Styling */
+    .overdue-tasks-container {
+        height: 420px; /* Increased height to fit 6 items (70px per item) */
+        min-height: 420px; /* Minimum height */
+        max-height: 420px; /* Maximum height */
+        overflow-y: auto; /* Enable vertical scrolling */
+        scrollbar-width: thin;
+        scrollbar-color: #cbd5e0 #f8f9fc;
+    }
+
+    .overdue-tasks-container::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .overdue-tasks-container::-webkit-scrollbar-track {
+        background: #f8f9fc;
+    }
+
+    .overdue-tasks-container::-webkit-scrollbar-thumb {
+        background-color: #cbd5e0;
+        border-radius: 3px;
+    }
+
+    /* Ensure consistent height for list items */
+    .overdue-tasks-container .list-group-item {
+        height: 70px;
+        min-height: 70px;
+        max-height: 70px;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+    }
+
+    /* Empty state styling */
+    .overdue-tasks-container .list-group-item .text-center {
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    /* Empty state styling */
+    .empty-state {
+        height: 100%;
+        min-height: 250px;
+        padding: 30px 20px;
+        text-align: center;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .empty-state:hover {
+        background-color: #f0f0f0;
+    }
+
+    .empty-state i {
+        opacity: 0.7;
+    }
+
+    .empty-state h6 {
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .empty-state p {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+
+    /* Ensure the row takes full height */
+    .row {
+        min-height: 100vh;
+    }
+
+    /* Make the right column fill available space */
+    .col-md-4 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Make the Overdue Tasks card expand to fill space */
+    .stats-card.upcoming-tasks:last-child {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Make the card body expand */
+    .stats-card.upcoming-tasks:last-child .card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Make the task container expand */
+    .overdue-tasks-container {
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    /* Calendar Grid Styling - Tetap sama seperti sebelumnya */
+    .fc .fc-daygrid-day {
+        height: 150px !important;
+        min-height: 150px !important;
+        max-height: 150px !important;
+        width: calc(100% / 7) !important;
+        box-sizing: border-box !important;
+    }
+
+    .fc .fc-daygrid-day-frame {
+        height: 100% !important;
+        min-height: 100% !important;
+        max-height: 100% !important;
+        padding: 8px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        background: white !important;
+        border-radius: 8px !important;
+        margin: 2px !important;
+        overflow: hidden !important;
+    }
+
+    /* Mengatur layout dalam sel */
+    .fc .fc-daygrid-day-top {
+        flex: 0 0 auto !important;
+        padding: 4px !important;
+        margin-bottom: 4px !important;
+    }
+
+    .fc .fc-daygrid-day-events {
+        flex: 1 !important;
+        min-height: 0 !important;
+        max-height: calc(100% - 30px) !important;
+        overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 4px !important;
+        position: relative !important;
+    }
+
+    /* Styling untuk event/task - DIUBAH untuk tampilan garis */
+    .fc-daygrid-event-harness {
+        margin: 2px 0 !important;
+        position: relative !important;
+    }
+
+    /* BARU: Styling untuk event saat idle (tampilan garis) */
+    .fc-event {
+        padding: 6px 8px !important;
+        margin: 0 !important;
+        border-radius: 20px !important;
+        height: 8px !important; /* Ukuran garis */
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        transition: all 0.2s ease-in-out !important;
+    }
+
+    /* BARU: Menyembunyikan teks pada kondisi default */
+    .fc-event .fc-event-title,
+    .fc-event .fc-event-time {
+        opacity: 0 !important;
+        font-size: 0 !important;
+        transition: all 0.2s ease-in-out !important;
+    }
+
+    /* BARU: Menampilkan teks saat hover */
+    .fc-event:hover {
+        height: auto !important;
+        padding: 6px 8px !important;
+        z-index: 100 !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .fc-event:hover .fc-event-title,
+    .fc-event:hover .fc-event-time {
+        opacity: 1 !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* Style untuk tombol "more" */
+    .fc-daygrid-more-link {
+        background: #f8fafc !important;
+        color: #4a5568 !important;
+        font-size: 0.8rem !important;
+        font-weight: 500 !important;
+        padding: 2px 6px !important;
+        border-radius: 4px !important;
+        margin-top: auto !important;
+        text-align: center !important;
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+    }
+
+    /* Memastikan container kalender memiliki tinggi tetap */
+    .fc-view-harness {
+        height: auto !important;
+    }
+
+    .fc-scrollgrid-sync-table {
+        height: auto !important;
+    }
+
+    /* Memastikan baris kalender memiliki tinggi tetap */
+    .fc-scrollgrid-sync-table tr {
+        height: 150px !important;
+    }
+
+    /* Memperbaiki tampilan untuk hari di luar bulan */
+    .fc-day-other .fc-daygrid-day-frame {
+        background: #f8fafc !important;
+        opacity: 0.7 !important;
+    }
+
+    /* Styling untuk hari ini */
+    .fc-day-today .fc-daygrid-day-frame {
+        background: #ebf8ff !important;
+    }
+
+    /* Memastikan grid tetap konsisten */
+    .fc-scrollgrid {
+        border-collapse: collapse !important;
+    }
+
+    .fc td, .fc th {
+        border: 1px solid #e2e8f0 !important;
+    }
+
+    /* Style untuk event/task - tampilan garis saat idle */
+    .fc-daygrid-event-harness {
+        margin: 2px 0 !important;
+        position: relative !important;
+    }
+
+    .fc-event {
+        padding: 4px 8px !important;
+        margin: 0 !important;
+        border-radius: 20px !important;
+        height: 8px !important; /* Ukuran garis saat idle */
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        transition: all 0.25s ease !important; /* Transisi yang lebih halus */
+        transform-origin: left center !important; /* Penting: membuat scaling dari kiri */
+    }
+
+    /* Menyembunyikan teks pada kondisi default */
+    .fc-event .fc-event-title,
+    .fc-event .fc-event-time {
+        opacity: 0 !important;
+        max-height: 0 !important; /* Gunakan max-height alih-alih font-size */
+        transition: all 0.25s ease !important;
+    }
+
+    /* Efek hover yang lebih halus, tanpa bouncing */
+    .fc-event:hover {
+        height: auto !important;
+        padding: 6px 8px !important;
+        z-index: 100 !important;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .fc-event:hover .fc-event-title,
+    .fc-event:hover .fc-event-time {
+        opacity: 1 !important;
+        max-height: 50px !important; /* Gunakan max-height alih-alih font-size */
+        font-size: 0.85rem !important;
+    }
+
+    /* Pastikan container event tidak berubah ukuran secara drastis */
+    .fc .fc-daygrid-day-events {
+        flex: 1 !important;
+        min-height: 0 !important;
+        max-height: calc(100% - 30px) !important;
+        overflow-y: auto !important; /* Allow scrolling */
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 4px !important;
+        position: relative !important;
+        padding-right: 2px !important; /* Ruang untuk scrollbar */
+    }
+
+    /* Styling scrollbar agar lebih halus */
+    .fc .fc-daygrid-day-events::-webkit-scrollbar {
+        width: 3px !important;
+    }
+
+    .fc .fc-daygrid-day-events::-webkit-scrollbar-track {
+        background: transparent !important;
+    }
+
+    .fc .fc-daygrid-day-events::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.1) !important;
+        border-radius: 10px !important;
+    }
+
+    /* Style untuk container event/task */
+    .fc-daygrid-event-harness {
+        margin: 3px 0 !important; /* Sedikit lebih besar margin vertikal */
+        position: relative !important;
+    }
+
+    /* Memperbesar ukuran garis saat kondisi idle */
+    .fc-event {
+        padding: 6px 10px !important; /* Padding horizontal dan vertikal lebih besar */
+        margin: 0 !important;
+        border-radius: 20px !important;
+        height: 12px !important; /* Tinggi garis lebih besar dari 8px menjadi 12px */
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        transition: all 0.25s ease !important;
+        transform-origin: left center !important;
+        cursor: pointer !important; /* Menambahkan cursor pointer untuk indikasi interaktif */
+    }
+
+    /* Menyembunyikan teks pada kondisi default */
+    .fc-event .fc-event-title,
+    .fc-event .fc-event-time {
+        opacity: 0 !important;
+        max-height: 0 !important;
+        transition: all 0.25s ease !important;
+    }
+
+    /* Efek hover yang lebih halus */
+    .fc-event:hover {
+        height: auto !important;
+        padding: 8px 12px !important; /* Padding sedikit lebih besar saat hover */
+        z-index: 100 !important;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .fc-event:hover .fc-event-title,
+    .fc-event:hover .fc-event-time {
+        opacity: 1 !important;
+        max-height: 50px !important;
+        font-size: 0.85rem !important;
+        padding: 2px 0 !important; /* Tambahan padding vertikal untuk teks */
+    }
+
+    /* Menyesuaikan container events agar memiliki spacing yang tepat */
+    .fc .fc-daygrid-day-events {
+        flex: 1 !important;
+        min-height: 0 !important;
+        max-height: calc(100% - 30px) !important;
+        overflow-y: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 5px !important; /* Meningkatkan gap antar event untuk area klik yang lebih baik */
+        position: relative !important;
+        padding: 2px 4px !important; /* Tambahan padding untuk container */
+    }
+
+    /* Memperbaiki tampilan pada layar sentuh dengan area yang lebih besar */
+    @media (pointer: coarse) {
+    .fc-event {
+            height: 16px !important; /* Lebih tinggi lagi pada perangkat sentuh */
+            padding: 8px 12px !important;
+        }
+        
+        .fc .fc-daygrid-day-events {
+            gap: 8px !important; /* Gap lebih besar untuk sentuhan jari */
+        }
+    }
+    
+    <div class="row" style="min-height: calc(100vh - 100px);">
+    <x-dashboard.calender class="component-container" />
+    <div class="col-md-4 d-flex flex-column" style="height: 100%;">
+        <x-dashboard.button class="component-container" />
+        <!-- Task Statistics Card -->
+        <x-dashboard.task_statistic_card
+            :totalTasks="$totalTasks"
+            :completedTasks="$completedTasks" 
+            :pendingTasks="$pendingTasks"
+            class="component-container"
+            />
+        <!-- Upcoming Deadlines Card -->
+        <x-dashboard.upcoming_deadline_card
+        :upcomingDeadlines="$upcomingDeadlines"
+        class="component-container"
+        />
+
+        <!-- Overdue Tasks Card  -->
+        <x-dashboard.overdue_task_card
+        :overdueTasks="$overdueTasks"
+        class="component-container"
+        />
+    </div>
+</div>

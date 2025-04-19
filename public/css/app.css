@@ -1,0 +1,20 @@
+/* Animasi hover untuk item tugas */
+.task-item {
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+    position: relative;
+}
+
+.task-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.task-item .task-actions {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.task-item:hover .task-actions {
+    opacity: 1;
+} 

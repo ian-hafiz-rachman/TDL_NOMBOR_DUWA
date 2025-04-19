@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
+use App\View\Components\Dashboard\TaskStats;
+use App\View\Components\Dashboard\UpcomingDeadline;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Blade::component('dashboard.task-stats', TaskStats::class);
+        Blade::component('dashboard.upcoming-deadline', UpcomingDeadline::class);
     }
 }
