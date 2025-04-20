@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Task;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Task;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -13,7 +13,7 @@ class TaskController extends Controller
     {
         $tasks = Task::where('user_id', auth()->id())
                      ->orderBy('end_date', 'asc')
-                     ->paginate(10);
+                     ->paginate(6);
                      
         return view('tasks.index', compact('tasks'));
     }
@@ -55,12 +55,12 @@ class TaskController extends Controller
                 'priority' => 'required|in:low,medium,high'
             ]);
 
-            // Set end_date sama dengan start_date
+            // Set end_date sama dengan start_date dan tambahkan waktu default 23:59:59
             $task = Task::create([
                 'title' => $validated['title'],
                 'description' => $validated['description'],
-                'start_date' => $validated['start_date'],
-                'end_date' => $validated['start_date'], // Menggunakan start_date sebagai end_date
+                'start_date' => $validated['start_date'] . ' 00:00:00',
+                'end_date' => $validated['start_date'] . ' 23:59:59', // Menambahkan waktu akhir hari
                 'priority' => $validated['priority'],
                 'status' => 'pending',
                 'user_id' => auth()->id()
@@ -91,12 +91,10 @@ class TaskController extends Controller
     {
         // Pastikan user hanya bisa edit task miliknya
         if ($task->user_id !== auth()->id()) {
-            return redirect()
-                ->route('dashboard')
-                ->with('error', 'You are not authorized to edit this task.');
+            return response()->json(['error' => 'Unauthorized'], 403);
         }
 
-        return view('tasks.edit', compact('task'));
+        return response()->json($task);
     }
 
     public function update(Request $request, Task $task)
@@ -104,9 +102,7 @@ class TaskController extends Controller
         try {
             // Pastikan user hanya bisa update task miliknya
             if ($task->user_id !== auth()->id()) {
-                return redirect()
-                    ->route('dashboard')
-                    ->with('error', 'You are not authorized to update this task.');
+                return response()->json(['error' => 'Unauthorized'], 403);
             }
 
             // Validasi input
@@ -118,12 +114,15 @@ class TaskController extends Controller
                 'status' => 'required|in:pending,completed'
             ]);
 
-            // Update task
+            // Update task dengan menambahkan waktu ke end_date
+            $validated['end_date'] = $validated['end_date'] . ' 23:59:59';
             $task->update($validated);
 
-            return redirect()
-                ->route('dashboard')
-                ->with('success', 'Task updated successfully!');
+            return response()->json([
+                'success' => true,
+                'message' => 'Task updated successfully',
+                'task' => $task
+            ]);
 
         } catch (\Exception $e) {
             \Log::error('Task update failed:', [
@@ -131,10 +130,10 @@ class TaskController extends Controller
                 'trace' => $e->getTraceAsString()
             ]);
 
-            return redirect()
-                ->back()
-                ->withInput()
-                ->with('error', 'Failed to update task. Please try again.');
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update task'
+            ], 500);
         }
     }
 
@@ -251,7 +250,7 @@ class TaskController extends Controller
             ]);
             
         } catch (\Exception $e) {
-            Log::error('Error toggling task status:', [
+            \Log::error('Error toggling task status:', [
                 'task_id' => $id,
                 'error' => $e->getMessage()
             ]);

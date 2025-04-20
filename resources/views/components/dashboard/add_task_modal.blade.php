@@ -21,7 +21,7 @@
                     <div class="row mb-4">
                         <div class="col-md-6">
                             <label for="start_date" class="form-label">Due Date</label>
-                            <input type="datetime-local" class="form-control" id="start_date" 
+                            <input type="date" class="form-control" id="start_date" 
                                    name="start_date" required>
                         </div>
                         <div class="col-md-6">

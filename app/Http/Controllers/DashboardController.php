@@ -15,7 +15,7 @@ class DashboardController extends Controller
         // Get all tasks with pagination
         $tasks = Task::where('user_id', $user->id)
                     ->orderBy('end_date', 'asc')
-                    ->paginate(10);
+                    ->paginate(6);
         
         // Upcoming deadlines - hanya tampilkan yang belum selesai (pending)
         $upcomingDeadlines = Task::where('user_id', $user->id)

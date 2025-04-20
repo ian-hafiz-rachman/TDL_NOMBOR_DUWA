@@ -10,19 +10,92 @@
     }
 
     /* Task List Table Styling */
+    #taskListSection .card {
+        background: #fff;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
     .table th {
         font-weight: 600;
         color: #4e73df;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        background-color: #f8f9fc;
+        border-bottom: 2px solid #4e73df !important;
+        padding: 1rem 1.5rem;
     }
+
     .table td {
         vertical-align: middle;
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid #e3e6f0;
     }
+
+    .table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .table tr {
+        background-color: #fff;
+    }
+
     .badge {
         font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
     }
+
+    .form-check-input {
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-top: 0.25rem;
+        cursor: pointer;
+        border: 2px solid #d1d3e2;
+    }
+
     .form-check-input:checked {
         background-color: #4e73df;
         border-color: #4e73df;
+    }
+
+    .form-check-label {
+        cursor: pointer;
+        padding-left: 0.5rem;
+    }
+
+    /* Action Buttons */
+    .btn-sm {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+        border-radius: 50px;
+        transition: all 0.2s;
+    }
+
+    .btn-outline-primary {
+        border-width: 2px;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #4e73df;
+        color: white;
+        transform: translateY(-1px);
+    }
+
+    .btn-outline-danger {
+        border-width: 2px;
+    }
+
+    .btn-outline-danger:hover {
+        background-color: #e74a3b;
+        color: white;
+        transform: translateY(-1px);
     }
 
     /* Task Detail Modal Styling */
@@ -542,50 +615,33 @@
         <!-- Task List Section -->
         <div class="row mt-4" id="taskListSection">
             <div class="col-12">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header bg-white py-3">
+                <div class="card border-0 shadow" style="border-radius: 15px; overflow: hidden;">
+                    <div class="card-header bg-white py-3" style="border-bottom: 1px solid rgba(0,0,0,.05);">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0 text-primary">
+                            <h5 class="mb-0 text-primary fw-bold">
                                 <i class="fas fa-tasks me-2"></i>
                                 Daftar Semua Tugas
                             </h5>
-                            <a href="{{ route('tasks.create') }}" class="btn btn-primary btn-sm">
-                                <i class="fas fa-plus"></i> Tambah Tugas Baru
-                            </a>
+                            <button type="button" class="btn btn-primary btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#addTaskModal">
+                                <i class="fas fa-plus me-1"></i> Tambah Tugas Baru
+                            </button>
                         </div>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
-                            <table class="table table-hover mb-0">
+                            <table class="table table-hover mb-0" style="border-collapse: separate; border-spacing: 0;">
                                 <thead>
                                     <tr class="bg-light">
-                                        <th scope="col" class="px-4 py-3">Judul</th>
-                                        <th scope="col" class="py-3">Tenggat</th>
-                                        <th scope="col" class="py-3">Prioritas</th>
-                                        <th scope="col" class="py-3">Status</th>
-                                        <th scope="col" class="text-end px-4 py-3">Aksi</th>
+                                        <th scope="col" class="py-3" style="border-bottom: 2px solid #4e73df;">Status</th>
+                                        <th scope="col" class="px-4 py-3" style="border-bottom: 2px solid #4e73df;">Judul</th>
+                                        <th scope="col" class="py-3" style="border-bottom: 2px solid #4e73df;">Tenggat</th>
+                                        <th scope="col" class="py-3" style="border-bottom: 2px solid #4e73df;">Prioritas</th>
+                                        <th scope="col" class="text-end px-4 py-3" style="border-bottom: 2px solid #4e73df;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse($tasks as $task)
                                     <tr class="align-middle">
-                                        <td class="px-4 py-3">
-                                            <div class="fw-medium text-dark">{{ $task->title }}</div>
-                                            @if($task->description)
-                                                <small class="text-muted d-block mt-1">{{ Str::limit($task->description, 50) }}</small>
-                                            @endif
-                                        </td>
-                                        <td class="py-3">
-                                            <div class="{{ $task->end_date < now() && $task->status !== 'completed' ? 'text-danger' : 'text-dark' }}">
-                                                {{ \Carbon\Carbon::parse($task->end_date)->format('d M Y, H:i') }}
-                                            </div>
-                                            <small class="text-muted d-block">{{ \Carbon\Carbon::parse($task->end_date)->diffForHumans() }}</small>
-                                        </td>
-                                        <td class="py-3">
-                                            <span class="badge bg-{{ $task->priority === 'high' ? 'danger' : ($task->priority === 'medium' ? 'warning' : 'success') }} rounded-pill">
-                                                {{ $task->priority === 'high' ? 'Tinggi' : ($task->priority === 'medium' ? 'Sedang' : 'Rendah') }}
-                                            </span>
-                                        </td>
                                         <td class="py-3">
                                             <div class="form-check">
                                                 <form class="task-status-form" action="{{ route('tasks.toggle-status', $task->id) }}" method="POST">
@@ -600,10 +656,29 @@
                                                 </label>
                                             </div>
                                         </td>
+                                        <td class="px-4 py-3">
+                                            <div class="fw-medium text-dark">{{ $task->title }}</div>
+                                            @if($task->description)
+                                                <small class="text-muted d-block mt-1">{{ Str::limit($task->description, 50) }}</small>
+                                            @endif
+                                        </td>
+                                        <td class="py-3">
+                                            <div class="{{ $task->end_date < now() && $task->status !== 'completed' ? 'text-danger' : 'text-dark' }}">
+                                                {{ \Carbon\Carbon::parse($task->end_date)->format('d M Y') }}
+                                            </div>
+                                            <small class="text-muted d-block">{{ \Carbon\Carbon::parse($task->end_date)->diffForHumans() }}</small>
+                                        </td>
+                                        <td class="py-3">
+                                            <span class="badge bg-{{ $task->priority === 'high' ? 'danger' : ($task->priority === 'medium' ? 'warning' : 'success') }} rounded-pill">
+                                                {{ $task->priority === 'high' ? 'Tinggi' : ($task->priority === 'medium' ? 'Sedang' : 'Rendah') }}
+                                            </span>
+                                        </td>
                                         <td class="text-end px-4 py-3">
-                                            <a href="{{ route('tasks.edit', $task) }}" class="btn btn-sm btn-outline-primary me-1">
+                                            <button type="button" 
+                                                onclick="openEditTaskModal({{ $task->id }})" 
+                                                class="btn btn-sm btn-outline-primary me-1">
                                                 <i class="fas fa-edit"></i>
-                                            </a>
+                                            </button>
                                             <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
@@ -770,6 +845,10 @@
         <p><strong>Prioritas:</strong> <span style="background-color: rgba(246, 194, 62, 0.15); color: #f6c23e; padding: 5px 10px; border-radius: 50px; font-size: 0.85rem;">Medium</span></p>
     </div>
 </div>
+
+<!-- Include Edit Task Modal -->
+@include('components.dashboard.edit_task_modal')
+
 @endsection
 
 @section('scripts')
@@ -1123,7 +1202,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Setup edit button link
             document.getElementById('editTaskBtn').onclick = function() {
-                window.location.href = `/tasks/${taskId}/edit`;
+                openEditTaskModal(taskId);
             };
             
             // Setup complete button (hide if already completed)
@@ -1339,6 +1418,117 @@ document.addEventListener('DOMContentLoaded', function() {
             scrollToTaskList();
         });
     });
+
+    // Handle pagination links to maintain scroll position
+    function attachPaginationHandlers() {
+        document.querySelectorAll('.pagination a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                
+                // Store the current position of the task list section
+                const taskListTop = taskListSection.offsetTop;
+                
+                // Make AJAX request to get new page content
+                fetch(href)
+                    .then(response => response.text())
+                    .then(html => {
+                        // Create a temporary element to parse the HTML
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        
+                        // Update only the task list section content
+                        const newTaskList = doc.getElementById('taskListSection');
+                        if (newTaskList) {
+                            taskListSection.innerHTML = newTaskList.innerHTML;
+                            
+                            // Update URL without refreshing page
+                            window.history.pushState({}, '', href);
+                            
+                            // Scroll back to the task list position
+                            window.scrollTo({
+                                top: taskListTop,
+                                behavior: 'instant'
+                            });
+                            
+                            // Reinitialize all event listeners for the new content
+                            initializeTaskListeners();
+                            attachPaginationHandlers(); // Reattach pagination handlers
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Fallback to normal page load if AJAX fails
+                        window.location.href = href;
+                    });
+            });
+        });
+    }
+
+    // Function to initialize event listeners for task list items
+    function initializeTaskListeners() {
+        // Re-attach checkbox handlers for ALL task checkboxes in the page
+        document.querySelectorAll('.task-checkbox').forEach(checkbox => {
+            checkbox.removeEventListener('change', handleCheckboxChange);
+            checkbox.addEventListener('change', handleCheckboxChange);
+        });
+
+        // Re-attach edit and delete button handlers
+        document.querySelectorAll('[onclick^="openEditTaskModal"]').forEach(button => {
+            const taskId = button.getAttribute('onclick').match(/\d+/)[0];
+            button.onclick = null; // Remove existing onclick handler
+            button.addEventListener('click', () => openEditTaskModal(taskId));
+        });
+    }
+
+    // Separate function to handle checkbox changes
+    function handleCheckboxChange(e) {
+        e.preventDefault();
+        
+        const checkbox = e.target;
+        const form = checkbox.closest('form.task-status-form');
+        
+        // Disable checkbox while processing
+        checkbox.disabled = true;
+        
+        // Submit form via AJAX
+        fetch(form.action, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showNotification(data.message, 'success');
+                // Reload the page after a short delay
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                // Revert checkbox state
+                checkbox.checked = !checkbox.checked;
+                showNotification(data.message || 'Gagal mengubah status tugas', 'danger');
+            }
+        })
+        .catch(error => {
+            // Revert checkbox state
+            checkbox.checked = !checkbox.checked;
+            showNotification('Terjadi kesalahan saat mengubah status tugas', 'danger');
+            console.error('Error:', error);
+        })
+        .finally(() => {
+            // Re-enable checkbox
+            checkbox.disabled = false;
+        });
+    }
+    
+    // Initialize listeners for initial page load
+    initializeTaskListeners();
+    attachPaginationHandlers();
 });
 </script>
 @endsection
