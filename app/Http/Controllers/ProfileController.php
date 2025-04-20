@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Cache;
 
 class ProfileController extends Controller
 {
@@ -58,14 +59,11 @@ class ProfileController extends Controller
     {
         try {
             $request->validate([
-                'avatar' => 'required'
+                'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120'
             ]);
 
             $user = auth()->user();
 
-            // Decode base64 image
-            $image = $request->file('avatar');
-            
             // Generate unique filename
             $fileName = 'avatars/' . uniqid() . '.jpg';
             
@@ -80,17 +78,23 @@ class ProfileController extends Controller
                 Storage::disk('public')->delete($user->avatar);
             }
 
-            // Save new avatar
-            Storage::disk('public')->put($fileName, file_get_contents($image));
+            // Get the image file from request
+            $image = $request->file('avatar');
 
+            // Store the new avatar
+            $path = $image->storeAs('avatars', basename($fileName), 'public');
+            
             // Update user avatar in database
-            $user->avatar = $fileName;
+            $user->avatar = $path;
             $user->save();
+
+            // Clear any cached avatar URLs
+            Cache::forget('user_avatar_' . $user->id);
 
             return response()->json([
                 'success' => true,
                 'message' => 'Avatar berhasil diperbarui',
-                'path' => Storage::url($fileName)
+                'path' => Storage::url($path)
             ]);
 
         } catch (\Exception $e) {

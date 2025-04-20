@@ -19,7 +19,7 @@
                     <!-- Profile Avatar -->
                     <div class="profile-avatar-large">
                         @if($user->avatar)
-                            <img src="{{ Storage::url($user->avatar) }}" alt="Profile" class="rounded-circle shadow">
+                            <img src="{{ asset('storage/' . $user->avatar) }}" alt="Profile" class="rounded-circle shadow">
                         @else
                             <div class="avatar-circle-large">
                                 <span class="initials-large">{{ substr($user->name, 0, 1) }}</span>

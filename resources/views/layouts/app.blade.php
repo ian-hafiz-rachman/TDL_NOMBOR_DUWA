@@ -175,7 +175,7 @@
                     <a href="{{ route('profile.index') }}" class="d-flex align-items-center text-decoration-none">
                         <div class="header-avatar">
                             @if(Auth::user()->avatar)
-                                <img src="{{ Storage::url(Auth::user()->avatar) }}" alt="Profile" class="avatar-image">
+                                <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Profile" class="avatar-image">
                             @else
                                 <div class="avatar-initials">
                                     {{ substr(Auth::user()->name, 0, 1) }}
