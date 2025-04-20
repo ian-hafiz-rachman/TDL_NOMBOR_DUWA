@@ -2,50 +2,60 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header py-3">
-                <h5 class="modal-title" id="editTaskModalLabel">Edit Task</h5>
+                <h5 class="modal-title" id="editTaskModalLabel">Edit Tugas</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body custom-scroll">
-                <form id="editTaskForm" method="POST">
+                <form id="editTaskForm" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="mb-4">
-                        <label for="edit_title" class="form-label">Task Title</label>
+                        <label for="edit_title" class="form-label">Judul Tugas</label>
                         <input type="text" class="form-control form-control-lg" id="edit_title" name="title" required 
-                               placeholder="Enter task title">
+                               placeholder="Masukkan judul tugas">
                     </div>
                     <div class="mb-4">
-                        <label for="edit_description" class="form-label">Description</label>
+                        <label for="edit_description" class="form-label">Deskripsi</label>
                         <textarea class="form-control" id="edit_description" name="description" 
-                                  rows="4" placeholder="Enter task description"></textarea>
+                                  rows="4" placeholder="Masukkan deskripsi tugas"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="edit_image" class="form-label">Gambar Tugas (Opsional)</label>
+                        <input type="file" class="form-control" id="edit_image" name="image" accept="image/*">
+                        <div class="mt-2">
+                            <small class="text-muted">Format yang didukung: JPG, JPEG, PNG, GIF. Maksimal 2MB.</small>
+                        </div>
+                        <div id="editImagePreview" class="mt-3">
+                            <img src="" alt="Preview" class="img-thumbnail" style="max-height: 200px;">
+                        </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col-md-6">
-                            <label for="edit_end_date" class="form-label">Due Date</label>
+                            <label for="edit_end_date" class="form-label">Tanggal</label>
                             <input type="date" class="form-control" id="edit_end_date" 
                                    name="end_date" required>
                         </div>
                         <div class="col-md-6">
-                            <label for="edit_priority" class="form-label">Priority</label>
+                            <label for="edit_priority" class="form-label">Prioritas</label>
                             <select class="form-select" id="edit_priority" name="priority" required>
-                                <option value="low">Low Priority</option>
-                                <option value="medium">Medium Priority</option>
-                                <option value="high">High Priority</option>
+                                <option value="low">Rendah</option>
+                                <option value="medium">Sedang</option>
+                                <option value="high">Tinggi</option>
                             </select>
                         </div>
                     </div>
                     <div class="mb-4">
                         <label for="edit_status" class="form-label">Status</label>
                         <select class="form-select" id="edit_status" name="status" required>
-                            <option value="pending">Pending</option>
-                            <option value="completed">Completed</option>
+                            <option value="pending">Belum Selesai</option>
+                            <option value="completed">Selesai</option>
                         </select>
                     </div>
                 </form>
             </div>
             <div class="modal-footer py-2">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" form="editTaskForm" class="btn btn-primary px-4">Update Task</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="submit" form="editTaskForm" class="btn btn-primary px-4">Simpan</button>
             </div>
         </div>
     </div>
@@ -71,6 +81,17 @@ function openEditTaskModal(taskId) {
             document.getElementById('edit_priority').value = task.priority;
             document.getElementById('edit_status').value = task.status;
             
+            // Handle image preview
+            const imagePreview = document.getElementById('editImagePreview');
+            const previewImg = imagePreview.querySelector('img');
+            
+            if (task.image_path) {
+                previewImg.src = `/storage/${task.image_path}`;
+                imagePreview.style.display = 'block';
+            } else {
+                imagePreview.style.display = 'none';
+            }
+            
             // Show modal
             new bootstrap.Modal(document.getElementById('editTaskModal')).show();
         })
@@ -80,14 +101,29 @@ function openEditTaskModal(taskId) {
         });
 }
 
+// Preview image when selected
+document.getElementById('edit_image').addEventListener('change', function(e) {
+    const preview = document.getElementById('editImagePreview');
+    const previewImg = preview.querySelector('img');
+    const file = e.target.files[0];
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewImg.src = e.target.result;
+            preview.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+    }
+});
+
 // Handle form submission
 document.getElementById('editTaskForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
-    const form = this;
-    const formData = new FormData(form);
+    const formData = new FormData(this);
     
-    fetch(form.action, {
+    fetch(this.action, {
         method: 'POST',
         body: formData,
         headers: {

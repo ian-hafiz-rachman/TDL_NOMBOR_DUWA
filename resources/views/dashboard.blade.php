@@ -646,14 +646,16 @@
                                             <div class="form-check">
                                                 <form class="task-status-form" action="{{ route('tasks.toggle-status', $task->id) }}" method="POST">
                                                     @csrf
-                                                    <input class="form-check-input task-checkbox" 
-                                                           type="checkbox" 
-                                                           id="task-{{ $task->id }}"
-                                                           {{ $task->status === 'completed' ? 'checked' : '' }}>
+                                                    <button type="submit" 
+                                                            class="btn btn-sm {{ $task->status === 'completed' ? 'btn-success' : 'btn-outline-success' }}"
+                                                            style="width: 100px;">
+                                                        @if($task->status === 'completed')
+                                                            <i class="fas fa-check-circle"></i> Selesai
+                                                        @else
+                                                            <i class="far fa-circle"></i> Belum
+                                                        @endif
+                                                    </button>
                                                 </form>
-                                                <label class="form-check-label ms-2 {{ $task->status === 'completed' ? 'text-decoration-line-through text-muted' : 'text-dark' }}">
-                                                    {{ $task->status === 'completed' ? 'Selesai' : 'Belum Selesai' }}
-                                                </label>
                                             </div>
                                         </td>
                                         <td class="px-4 py-3">
@@ -1039,74 +1041,43 @@ document.addEventListener('DOMContentLoaded', function() {
         initializeCharts();
     });
 
-    // Task checkbox handling
-    $(document).ready(function() {
-        $('.task-checkbox').on('change', function(e) {
-            e.preventDefault();
-            
-            const checkbox = $(this);
-            const form = checkbox.closest('form.task-status-form');
-            const taskItem = checkbox.closest('.task-item');
-            
-            // Disable checkbox while processing
-            checkbox.prop('disabled', true);
-            
-            // Submit form via AJAX
-            $.ajax({
-                url: form.attr('action'),
-                type: 'POST',
-                data: {
-                    _token: $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-                    if (response.success) {
-                        // Show success notification
-                        showNotification(response.message, 'success');
-                        
-                        // Refresh the page after a short delay
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 1000);
-                } else {
-                        // Revert checkbox state
-                        checkbox.prop('checked', !checkbox.prop('checked'));
-                        showNotification(response.message || 'Gagal mengubah status tugas', 'danger');
-                    }
-                },
-                error: function(xhr) {
-                    // Revert checkbox state
-                    checkbox.prop('checked', !checkbox.prop('checked'));
-                    showNotification('Terjadi kesalahan saat mengubah status tugas', 'danger');
-                    console.error('Error:', xhr.responseText);
-                },
-                complete: function() {
-                    // Re-enable checkbox
-                    checkbox.prop('disabled', false);
-                }
-        });
+    // Initialize tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
     });
 
-    // Notification function
-    function showNotification(message, type = 'success') {
-            // Remove existing notifications
-            $('.notification').remove();
+    // Task status form handling
+    document.querySelectorAll('.task-status-form').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // Create and show new notification
-            const notification = $(`
-                <div class="alert alert-${type} alert-dismissible fade show notification" role="alert">
-            ${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            `);
+            const button = this.querySelector('button');
+            button.disabled = true;
             
-            // Add to body
-            $('body').append(notification);
-            
-            // Auto hide after 3 seconds
-            setTimeout(() => {
-                notification.alert('close');
-        }, 3000);
-        }
+            fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this),
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.reload();
+                } else {
+                    alert(data.message || 'Gagal mengubah status tugas');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan saat mengubah status tugas');
+            })
+            .finally(() => {
+                button.disabled = false;
+            });
+        });
     });
 
     // Show task details in modal

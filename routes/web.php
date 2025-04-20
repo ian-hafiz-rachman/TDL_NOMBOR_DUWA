@@ -35,7 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
     Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
     Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
-    Route::post('/tasks/{task}/update-status', [TaskController::class, 'updateStatus'])->name('tasks.toggle-status');
+    Route::post('/tasks/{task}/update-status', [TaskController::class, 'toggleStatus'])->name('tasks.toggle-status');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');

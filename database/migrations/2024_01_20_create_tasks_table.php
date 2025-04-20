@@ -14,9 +14,10 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->dateTime('start_date');
-            $table->dateTime('end_date')->nullable();
+            $table->dateTime('end_date');
             $table->enum('priority', ['low', 'medium', 'high'])->default('medium');
             $table->enum('status', ['pending', 'completed'])->default('pending');
+            $table->string('image_path')->nullable();
             $table->timestamps();
         });
     }

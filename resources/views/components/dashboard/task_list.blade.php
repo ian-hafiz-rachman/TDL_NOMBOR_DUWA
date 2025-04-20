@@ -50,16 +50,19 @@
                             </td>
                             <td>
                                 <div class="form-check">
-                                    <form class="task-status-form" action="{{ route('tasks.toggle-status', $task->id) }}" method="POST">
+                                    <form class="task-status-form" data-task-id="{{ $task->id }}" action="{{ route('tasks.toggle-status', $task->id) }}" method="POST">
                                         @csrf
+                                        <input type="hidden" name="status" value="{{ $task->status === 'completed' ? 'pending' : 'completed' }}">
                                         <input class="form-check-input task-checkbox" 
                                                type="checkbox" 
+                                               name="checkbox"
                                                id="task-{{ $task->id }}"
                                                {{ $task->status === 'completed' ? 'checked' : '' }}>
+                                        <label class="form-check-label {{ $task->status === 'completed' ? 'text-decoration-line-through text-muted' : '' }}" 
+                                               for="task-{{ $task->id }}">
+                                            {{ $task->status === 'completed' ? 'Completed' : 'Pending' }}
+                                        </label>
                                     </form>
-                                    <label class="form-check-label {{ $task->status === 'completed' ? 'text-decoration-line-through text-muted' : '' }}">
-                                        {{ $task->status === 'completed' ? 'Completed' : 'Pending' }}
-                                    </label>
                                 </div>
                             </td>
                             <td class="text-end px-4">
@@ -194,12 +197,20 @@
 @section('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Get CSRF token from meta tag
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    
     // Task checkbox handling
     document.querySelectorAll('.task-checkbox').forEach(checkbox => {
         checkbox.addEventListener('change', function(e) {
+            // Prevent default behavior
             e.preventDefault();
             
             const form = this.closest('form.task-status-form');
+            const formData = new FormData(form);
+            
+            // Store the original checked state
+            const wasChecked = this.checked;
             
             // Disable checkbox while processing
             this.disabled = true;
@@ -208,31 +219,55 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(form.action, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                }
+                    'X-CSRF-TOKEN': csrfToken,
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                },
+                body: formData,
+                credentials: 'same-origin'
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data.success) {
                     // Show success notification
                     showNotification(data.message, 'success');
                     
-                    // Refresh the page after a short delay
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 1000);
+                    // Update UI without page reload
+                    const label = this.nextElementSibling;
+                    if (data.status === 'completed') {
+                        label.classList.add('text-decoration-line-through', 'text-muted');
+                        label.textContent = 'Completed';
+                        this.checked = true;
+                        
+                        // Update hidden status input
+                        form.querySelector('input[name="status"]').value = 'pending';
+                    } else {
+                        label.classList.remove('text-decoration-line-through', 'text-muted');
+                        label.textContent = 'Pending';
+                        this.checked = false;
+                        
+                        // Update hidden status input
+                        form.querySelector('input[name="status"]').value = 'completed';
+                    }
+                    
+                    // Update task statistics if they exist
+                    updateTaskStatistics();
                 } else {
-                    // Revert checkbox state
-                    this.checked = !this.checked;
+                    // Revert checkbox state on error
+                    this.checked = wasChecked;
                     showNotification(data.message || 'Failed to update task status', 'danger');
                 }
             })
             .catch(error => {
-                // Revert checkbox state
-                this.checked = !this.checked;
-                showNotification('Error updating task status', 'danger');
                 console.error('Error:', error);
+                // Revert checkbox state on error
+                this.checked = wasChecked;
+                showNotification('Error updating task status', 'danger');
             })
             .finally(() => {
                 // Re-enable checkbox
@@ -240,6 +275,39 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+    
+    // Function to update task statistics
+    function updateTaskStatistics() {
+        fetch('/tasks/statistics', {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json'
+            },
+            credentials: 'same-origin'
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Update statistics if elements exist
+            const totalElement = document.querySelector('.total-tasks');
+            const completedElement = document.querySelector('.completed-tasks');
+            const pendingElement = document.querySelector('.pending-tasks');
+            
+            if (totalElement) totalElement.textContent = data.totalTasks;
+            if (completedElement) completedElement.textContent = data.completedTasks;
+            if (pendingElement) pendingElement.textContent = data.pendingTasks;
+            
+            // Update progress percentage if it exists
+            const progressElement = document.querySelector('.progress-percentage');
+            if (progressElement && data.totalTasks > 0) {
+                const percentage = Math.round((data.completedTasks / data.totalTasks) * 100);
+                progressElement.textContent = percentage + '%';
+            }
+        })
+        .catch(error => {
+            console.error('Error updating statistics:', error);
+        });
+    }
     
     // Notification function
     function showNotification(message, type = 'success') {

@@ -63,6 +63,39 @@
     .overdue-card .task-item:hover {
         background-color: rgba(231, 74, 59, 0.05);
     }
+    .overdue-card .task-status-btn {
+        transition: all 0.2s;
+        cursor: pointer;
+        border: 1.5px solid #6c757d !important;
+        border-radius: 50px !important;
+        padding: 3px 10px !important;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: transparent !important;
+        font-size: 12px;
+        font-weight: 600;
+        color: #6c757d;
+        min-width: auto;
+    }
+    .overdue-card .task-status-btn i {
+        font-size: 11px;
+    }
+    .overdue-card .task-status-btn:hover {
+        transform: scale(1.02);
+        border-color: #28a745 !important;
+        color: #28a745;
+    }
+    .overdue-card .task-status-btn.completed {
+        background: #6c757d !important;
+        color: white;
+        border-color: #6c757d !important;
+    }
+    .overdue-card .task-status-btn.completed:hover {
+        border-color: #dc3545 !important;
+        background: transparent !important;
+        color: #dc3545;
+    }
 </style>
 
 <div class="overdue-card mb-3 px-3">
@@ -89,30 +122,26 @@
                     data-task-priority="{{ $task->priority }}"
                     data-task-status="{{ $task->status }}">
                     <div class="d-flex align-items-center">
-                        <div class="form-check me-3">
+                        <div class="form-check me-2">
                             <form class="task-status-form" action="{{ route('tasks.toggle-status', $task->id) }}" method="POST">
                                 @csrf
-                                <input type="checkbox" 
-                                    class="form-check-input task-checkbox" 
-                                    id="task-{{ $task->id }}"
-                                    {{ $task->status === 'completed' ? 'checked' : '' }}>
+                                <button type="submit" 
+                                        class="btn task-status-btn {{ $task->status === 'completed' ? 'completed' : '' }}"
+                                        data-bs-toggle="tooltip" 
+                                        data-bs-placement="top" 
+                                        title="{{ $task->status === 'completed' ? 'Tandai belum selesai' : 'Tandai selesai' }}">
+                                    <i class="fas fa-check"></i>
+                                    Selesai
+                                </button>
                             </form>
                         </div>
                         <div class="task-content">
-                            <h6 class="mb-1 task-title {{ $task->status === 'completed' ? 'text-decoration-line-through' : '' }}">
+                            <h6 class="mb-1 task-title {{ $task->status === 'completed' ? 'text-decoration-line-through text-muted' : '' }}">
                                 {{ $task->title }}
                             </h6>
                             <small class="text-danger">
                                 Tenggat: {{ \Carbon\Carbon::parse($task->end_date)->format('d M Y') }}
                             </small>
-                            <span class="task-status d-none {{ $task->status === 'completed' ? 'text-success' : 'text-warning' }}">
-                                {{ $task->status === 'completed' ? 'Selesai' : 'Belum Selesai' }}
-                            </span>
-                        </div>
-                        <div class="badge-container">
-                            <span class="badge bg-{{ $task->priority === 'high' ? 'danger' : ($task->priority === 'medium' ? 'warning' : 'success') }}">
-                                {{ $task->priority === 'high' ? 'Tinggi' : ($task->priority === 'medium' ? 'Sedang' : 'Rendah') }}
-                            </span>
                         </div>
                     </div>
                 </div>
