@@ -366,11 +366,19 @@ class TaskController extends Controller
     {
         try {
             $priority = $request->query('priority');
+            $sort = $request->query('sort');
+            $order = $request->query('order');
             
             $query = Task::where('user_id', auth()->id());
             
-            if ($priority !== 'all') {
+            // Apply priority filter if not 'all'
+            if ($priority && $priority !== 'all') {
                 $query->where('priority', $priority);
+            }
+            
+            // Apply sorting
+            if ($sort === 'time') {
+                $query->orderBy('end_date', $order ?: 'asc');
             }
             
             $tasks = $query->get()->map(function($task) {

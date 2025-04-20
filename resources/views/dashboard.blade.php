@@ -582,6 +582,58 @@
         font-size: 14px;
         color: #718096;
     }
+
+    /* Filter Button Active States */
+    .btn-outline-secondary.active-sort {
+        background-color: #f8f9fa;
+        border-color: #6c757d;
+        color: #6c757d;
+        font-weight: 500;
+    }
+
+    .btn-outline-secondary.active-sort i.sort-arrow {
+        margin-left: 4px;
+    }
+
+    .priority-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 6px;
+    }
+
+    .priority-dot.high {
+        background-color: #e74a3b;
+    }
+
+    .priority-dot.medium {
+        background-color: #f6c23e;
+    }
+
+    .priority-dot.low {
+        background-color: #1cc88a;
+    }
+
+    .priority-filter-btn.active {
+        background-color: #f8f9fa;
+    }
+
+    .priority-filter-btn.active[data-priority="high"] {
+        color: #e74a3b;
+    }
+
+    .priority-filter-btn.active[data-priority="medium"] {
+        color: #f6c23e;
+    }
+
+    .priority-filter-btn.active[data-priority="low"] {
+        color: #1cc88a;
+    }
+
+    .priority-filter-btn.active[data-priority="all"] {
+        color: #4e73df;
+    }
 </style>
 @endsection
 
@@ -625,22 +677,22 @@
                             <div class="d-flex align-items-center gap-2">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fas fa-clock me-1"></i> Urutkan Waktu
+                                        <i class="fas fa-clock me-1"></i> Urutkan Waktu <span class="sort-indicator"></span>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end">
-                                        <li><button class="dropdown-item sort-btn" data-sort="time" data-order="asc">Terlama ke Terbaru</button></li>
-                                        <li><button class="dropdown-item sort-btn" data-sort="time" data-order="desc">Terbaru ke Terlama</button></li>
+                                        <li><button class="dropdown-item sort-btn" data-sort="time" data-order="asc">Terlama ke Terbaru <i class="fas fa-arrow-up ms-1"></i></button></li>
+                                        <li><button class="dropdown-item sort-btn" data-sort="time" data-order="desc">Terbaru ke Terlama <i class="fas fa-arrow-down ms-1"></i></button></li>
                                     </ul>
                                 </div>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fas fa-flag me-1"></i> Filter Prioritas
+                                        <i class="fas fa-flag me-1"></i> Filter Prioritas <span class="priority-indicator"></span>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li><button class="dropdown-item priority-filter-btn" data-priority="all">Semua</button></li>
-                                        <li><button class="dropdown-item priority-filter-btn" data-priority="high">Prioritas Tinggi</button></li>
-                                        <li><button class="dropdown-item priority-filter-btn" data-priority="medium">Prioritas Sedang</button></li>
-                                        <li><button class="dropdown-item priority-filter-btn" data-priority="low">Prioritas Rendah</button></li>
+                                        <li><button class="dropdown-item priority-filter-btn" data-priority="high"><span class="priority-dot high"></span>Prioritas Tinggi</button></li>
+                                        <li><button class="dropdown-item priority-filter-btn" data-priority="medium"><span class="priority-dot medium"></span>Prioritas Sedang</button></li>
+                                        <li><button class="dropdown-item priority-filter-btn" data-priority="low"><span class="priority-dot low"></span>Prioritas Rendah</button></li>
                                     </ul>
                                 </div>
                                 <button type="button" class="btn btn-primary btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#addTaskModal">
@@ -1528,13 +1580,24 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.addEventListener('click', function() {
             const sort = this.dataset.sort;
             const order = this.dataset.order;
+            const activePriority = document.querySelector('.priority-filter-btn.active')?.dataset.priority || 'all';
             
             // Add loading state
             const tableBody = document.querySelector('tbody');
             tableBody.style.opacity = '0.5';
             
-            // Fetch sorted data
-            fetch(`/tasks/sort?sort=${sort}&order=${order}`, {
+            // Update active state and dropdown button text
+            document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Update dropdown button text and icon
+            const dropdownButton = this.closest('.btn-group').querySelector('.dropdown-toggle');
+            dropdownButton.classList.add('active-sort');
+            const sortIndicator = dropdownButton.querySelector('.sort-indicator');
+            sortIndicator.innerHTML = ` • ${order === 'asc' ? '<i class="fas fa-arrow-up sort-arrow"></i>' : '<i class="fas fa-arrow-down sort-arrow"></i>'}`;
+            
+            // Fetch filtered & sorted data
+            fetch(`/tasks/filter?priority=${activePriority}&sort=${sort}&order=${order}`, {
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
                 }
@@ -1542,7 +1605,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Update table with new data
                     updateTaskTable(data.tasks);
                 }
             })
@@ -1556,13 +1618,34 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.priority-filter-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const priority = this.dataset.priority;
+            const activeSort = document.querySelector('.sort-btn.active');
+            const sort = activeSort?.dataset.sort || 'time';
+            const order = activeSort?.dataset.order || 'asc';
             
             // Add loading state
             const tableBody = document.querySelector('tbody');
             tableBody.style.opacity = '0.5';
             
-            // Fetch filtered data
-            fetch(`/tasks/filter?priority=${priority}`, {
+            // Update active state and dropdown button text
+            document.querySelectorAll('.priority-filter-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Update dropdown button text
+            const dropdownButton = this.closest('.btn-group').querySelector('.dropdown-toggle');
+            dropdownButton.classList.add('active-sort');
+            const priorityIndicator = dropdownButton.querySelector('.priority-indicator');
+            
+            if (priority === 'all') {
+                priorityIndicator.innerHTML = '';
+                dropdownButton.classList.remove('active-sort');
+            } else {
+                const priorityText = priority === 'high' ? 'Tinggi' : (priority === 'medium' ? 'Sedang' : 'Rendah');
+                const dotColor = priority === 'high' ? 'high' : (priority === 'medium' ? 'medium' : 'low');
+                priorityIndicator.innerHTML = ` • <span class="priority-dot ${dotColor}"></span>${priorityText}`;
+            }
+            
+            // Fetch filtered & sorted data
+            fetch(`/tasks/filter?priority=${priority}&sort=${sort}&order=${order}`, {
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
                 }
@@ -1570,7 +1653,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Update table with new data
                     updateTaskTable(data.tasks);
                 }
             })
