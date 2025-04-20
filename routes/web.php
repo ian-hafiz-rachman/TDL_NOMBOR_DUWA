@@ -46,6 +46,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
     Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar');
+    
+    // Task sorting and filtering routes
+    Route::get('/tasks/sort', [TaskController::class, 'sort'])->name('tasks.sort');
+    Route::get('/tasks/filter', [TaskController::class, 'filter'])->name('tasks.filter');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

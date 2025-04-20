@@ -331,4 +331,63 @@ class TaskController extends Controller
             'pendingTasks' => $pendingTasks
         ]);
     }
+
+    public function sort(Request $request)
+    {
+        try {
+            $sort = $request->query('sort');
+            $order = $request->query('order');
+            
+            $query = Task::where('user_id', auth()->id());
+            
+            if ($sort === 'time') {
+                $query->orderBy('end_date', $order);
+            }
+            
+            $tasks = $query->get()->map(function($task) {
+                $task->end_date_human = $task->end_date->diffForHumans();
+                return $task;
+            });
+            
+            return response()->json([
+                'success' => true,
+                'tasks' => $tasks
+            ]);
+            
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan saat mengurutkan tugas'
+            ], 500);
+        }
+    }
+
+    public function filter(Request $request)
+    {
+        try {
+            $priority = $request->query('priority');
+            
+            $query = Task::where('user_id', auth()->id());
+            
+            if ($priority !== 'all') {
+                $query->where('priority', $priority);
+            }
+            
+            $tasks = $query->get()->map(function($task) {
+                $task->end_date_human = $task->end_date->diffForHumans();
+                return $task;
+            });
+            
+            return response()->json([
+                'success' => true,
+                'tasks' => $tasks
+            ]);
+            
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan saat memfilter tugas'
+            ], 500);
+        }
+    }
 } 

@@ -622,9 +622,31 @@
                                 <i class="fas fa-tasks me-2"></i>
                                 Daftar Semua Tugas
                             </h5>
-                            <button type="button" class="btn btn-primary btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#addTaskModal">
-                                <i class="fas fa-plus me-1"></i> Tambah Tugas Baru
-                            </button>
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-clock me-1"></i> Urutkan Waktu
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><button class="dropdown-item sort-btn" data-sort="time" data-order="asc">Terlama ke Terbaru</button></li>
+                                        <li><button class="dropdown-item sort-btn" data-sort="time" data-order="desc">Terbaru ke Terlama</button></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-flag me-1"></i> Filter Prioritas
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><button class="dropdown-item priority-filter-btn" data-priority="all">Semua</button></li>
+                                        <li><button class="dropdown-item priority-filter-btn" data-priority="high">Prioritas Tinggi</button></li>
+                                        <li><button class="dropdown-item priority-filter-btn" data-priority="medium">Prioritas Sedang</button></li>
+                                        <li><button class="dropdown-item priority-filter-btn" data-priority="low">Prioritas Rendah</button></li>
+                                    </ul>
+                                </div>
+                                <button type="button" class="btn btn-primary btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#addTaskModal">
+                                    <i class="fas fa-plus me-1"></i> Tambah Tugas Baru
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body p-0">
@@ -1500,6 +1522,135 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize listeners for initial page load
     initializeTaskListeners();
     attachPaginationHandlers();
+
+    // Sort buttons click handler
+    document.querySelectorAll('.sort-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const sort = this.dataset.sort;
+            const order = this.dataset.order;
+            
+            // Add loading state
+            const tableBody = document.querySelector('tbody');
+            tableBody.style.opacity = '0.5';
+            
+            // Fetch sorted data
+            fetch(`/tasks/sort?sort=${sort}&order=${order}`, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update table with new data
+                    updateTaskTable(data.tasks);
+                }
+            })
+            .finally(() => {
+                tableBody.style.opacity = '1';
+            });
+        });
+    });
+
+    // Priority filter buttons click handler
+    document.querySelectorAll('.priority-filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const priority = this.dataset.priority;
+            
+            // Add loading state
+            const tableBody = document.querySelector('tbody');
+            tableBody.style.opacity = '0.5';
+            
+            // Fetch filtered data
+            fetch(`/tasks/filter?priority=${priority}`, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update table with new data
+                    updateTaskTable(data.tasks);
+                }
+            })
+            .finally(() => {
+                tableBody.style.opacity = '1';
+            });
+        });
+    });
+
+    // Function to update task table with new data
+    function updateTaskTable(tasks) {
+        const tableBody = document.querySelector('tbody');
+        
+        if (tasks.length === 0) {
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="5" class="text-center py-5">
+                        <div class="text-muted">
+                            <i class="fas fa-tasks fa-3x mb-3"></i>
+                            <p class="mb-0 h5">Tidak ada tugas</p>
+                            <p class="text-muted">Silakan tambah tugas baru</p>
+                        </div>
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        tableBody.innerHTML = tasks.map(task => `
+            <tr class="align-middle">
+                <td class="py-3">
+                    <div class="form-check">
+                        <form class="task-status-form" action="/tasks/${task.id}/toggle-status" method="POST">
+                            @csrf
+                            <button type="submit" 
+                                    class="btn task-status-btn ${task.status === 'completed' ? 'completed' : ''}"
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="top" 
+                                    title="${task.status === 'completed' ? 'Tandai belum selesai' : 'Tandai selesai'}">
+                                <i class="fas fa-check"></i>
+                                Selesai
+                            </button>
+                        </form>
+                    </div>
+                </td>
+                <td class="px-4 py-3">
+                    <div class="fw-medium text-dark">${task.title}</div>
+                    ${task.description ? `<small class="text-muted d-block mt-1">${task.description.substring(0, 50)}...</small>` : ''}
+                </td>
+                <td class="py-3">
+                    <div class="${new Date(task.end_date) < new Date() && task.status !== 'completed' ? 'text-danger' : 'text-dark'}">
+                        ${new Date(task.end_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
+                    </div>
+                    <small class="text-muted d-block">${task.end_date_human}</small>
+                </td>
+                <td class="py-3">
+                    <span class="badge bg-${task.priority === 'high' ? 'danger' : (task.priority === 'medium' ? 'warning' : 'success')} rounded-pill">
+                        ${task.priority === 'high' ? 'Tinggi' : (task.priority === 'medium' ? 'Sedang' : 'Rendah')}
+                    </span>
+                </td>
+                <td class="text-end px-4 py-3">
+                    <button type="button" 
+                        onclick="openEditTaskModal(${task.id})" 
+                        class="btn btn-sm btn-outline-primary me-1">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <form action="/tasks/${task.id}" method="POST" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus tugas ini?')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        `).join('');
+
+        // Reinitialize tooltips and event listeners
+        initializeTaskListeners();
+    }
 });
 </script>
 @endsection
