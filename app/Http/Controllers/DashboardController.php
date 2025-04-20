@@ -12,6 +12,11 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         
+        // Get all tasks with pagination
+        $tasks = Task::where('user_id', $user->id)
+                    ->orderBy('end_date', 'asc')
+                    ->paginate(10);
+        
         // Upcoming deadlines - hanya tampilkan yang belum selesai (pending)
         $upcomingDeadlines = Task::where('user_id', $user->id)
             ->where('end_date', '>=', now())
@@ -79,6 +84,7 @@ class DashboardController extends Controller
         $percentage = $totalTasks > 0 ? floor(($completedTasks / $totalTasks) * 100) : 0;
 
         return view('dashboard', compact(
+            'tasks',
             'upcomingDeadlines',
             'overdueTasks',
             'totalTasks',

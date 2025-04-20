@@ -3,6 +3,28 @@
 @section('styles')
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
 <style>
+    /* Dashboard Container Spacing */
+    .dashboard-container {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    /* Task List Table Styling */
+    .table th {
+        font-weight: 600;
+        color: #4e73df;
+    }
+    .table td {
+        vertical-align: middle;
+    }
+    .badge {
+        font-weight: 500;
+    }
+    .form-check-input:checked {
+        background-color: #4e73df;
+        border-color: #4e73df;
+    }
+
     /* Task Detail Modal Styling */
     .modal-content {
         border: none;
@@ -356,12 +378,143 @@
             margin-top: 0.5rem;
         }
     }
+
+    /* Task List Styling */
+    #taskListSection {
+        scroll-margin-top: 20px;
+    }
+    
+    #taskListSection .card {
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    #taskListSection .card-header {
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    #taskListSection .table th {
+        font-weight: 600;
+        color: #4e73df;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    #taskListSection .table td {
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    #taskListSection .table tr:last-child td {
+        border-bottom: none;
+    }
+
+    #taskListSection .table tr:hover {
+        background-color: #f8f9ff;
+    }
+
+    #taskListSection .badge {
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+    }
+
+    #taskListSection .btn-sm {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    #taskListSection .form-check-input {
+        width: 1.2rem;
+        height: 1.2rem;
+        border-color: #e0e0e0;
+        cursor: pointer;
+    }
+
+    #taskListSection .form-check-input:checked {
+        background-color: #4e73df;
+        border-color: #4e73df;
+    }
+
+    #taskListSection .form-check-label {
+        cursor: pointer;
+        user-select: none;
+    }
+
+    /* Fixed Pagination Styling */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .pagination > li {
+        margin: 0;
+    }
+
+    .pagination > li > a,
+    .pagination > li > span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 36px;
+        height: 36px;
+        padding: 0 12px;
+        margin: 0;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 36px;
+        text-decoration: none;
+        background-color: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        color: #4a5568;
+        transition: all 0.2s ease;
+    }
+
+    .pagination > li > a:hover {
+        background-color: #f7fafc;
+        border-color: #cbd5e0;
+        color: #2d3748;
+        z-index: 2;
+    }
+
+    .pagination > .active > a,
+    .pagination > .active > span {
+        background-color: #4e73df !important;
+        border-color: #4e73df !important;
+        color: #fff !important;
+        z-index: 3;
+    }
+
+    .pagination > .disabled > span,
+    .pagination > .disabled > a {
+        color: #a0aec0 !important;
+        background-color: #f7fafc !important;
+        border-color: #e2e8f0 !important;
+        cursor: not-allowed;
+    }
+
+    .pagination > li:first-child > a,
+    .pagination > li:last-child > a {
+        padding: 0 12px;
+        font-weight: 600;
+    }
+
+    .pagination-info {
+        margin-top: 12px;
+        font-size: 14px;
+        color: #718096;
+    }
 </style>
 @endsection
 
 @section('content')
 <div id="alert-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>
-<div class="dashboard-container">
+<div class="dashboard-container" style="margin-top: 0.5rem;">
     <div class="container-fluid">
         <!-- Calendar and Tasks Section -->
         <div class="row" style="height: 100%;">
@@ -383,6 +536,108 @@
                 <x-dashboard.overdue_task_card
                 :overdueTasks="$overdueTasks"
                 />
+            </div>
+        </div>
+
+        <!-- Task List Section -->
+        <div class="row mt-4" id="taskListSection">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-white py-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0 text-primary">
+                                <i class="fas fa-tasks me-2"></i>
+                                Daftar Semua Tugas
+                            </h5>
+                            <a href="{{ route('tasks.create') }}" class="btn btn-primary btn-sm">
+                                <i class="fas fa-plus"></i> Tambah Tugas Baru
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr class="bg-light">
+                                        <th scope="col" class="px-4 py-3">Judul</th>
+                                        <th scope="col" class="py-3">Tenggat</th>
+                                        <th scope="col" class="py-3">Prioritas</th>
+                                        <th scope="col" class="py-3">Status</th>
+                                        <th scope="col" class="text-end px-4 py-3">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse($tasks as $task)
+                                    <tr class="align-middle">
+                                        <td class="px-4 py-3">
+                                            <div class="fw-medium text-dark">{{ $task->title }}</div>
+                                            @if($task->description)
+                                                <small class="text-muted d-block mt-1">{{ Str::limit($task->description, 50) }}</small>
+                                            @endif
+                                        </td>
+                                        <td class="py-3">
+                                            <div class="{{ $task->end_date < now() && $task->status !== 'completed' ? 'text-danger' : 'text-dark' }}">
+                                                {{ \Carbon\Carbon::parse($task->end_date)->format('d M Y, H:i') }}
+                                            </div>
+                                            <small class="text-muted d-block">{{ \Carbon\Carbon::parse($task->end_date)->diffForHumans() }}</small>
+                                        </td>
+                                        <td class="py-3">
+                                            <span class="badge bg-{{ $task->priority === 'high' ? 'danger' : ($task->priority === 'medium' ? 'warning' : 'success') }} rounded-pill">
+                                                {{ $task->priority === 'high' ? 'Tinggi' : ($task->priority === 'medium' ? 'Sedang' : 'Rendah') }}
+                                            </span>
+                                        </td>
+                                        <td class="py-3">
+                                            <div class="form-check">
+                                                <form class="task-status-form" action="{{ route('tasks.toggle-status', $task->id) }}" method="POST">
+                                                    @csrf
+                                                    <input class="form-check-input task-checkbox" 
+                                                           type="checkbox" 
+                                                           id="task-{{ $task->id }}"
+                                                           {{ $task->status === 'completed' ? 'checked' : '' }}>
+                                                </form>
+                                                <label class="form-check-label ms-2 {{ $task->status === 'completed' ? 'text-decoration-line-through text-muted' : 'text-dark' }}">
+                                                    {{ $task->status === 'completed' ? 'Selesai' : 'Belum Selesai' }}
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td class="text-end px-4 py-3">
+                                            <a href="{{ route('tasks.edit', $task) }}" class="btn btn-sm btn-outline-primary me-1">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus tugas ini?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @empty
+                                    <tr>
+                                        <td colspan="5" class="text-center py-5">
+                                            <div class="text-muted">
+                                                <i class="fas fa-tasks fa-3x mb-3"></i>
+                                                <p class="mb-0 h5">Tidak ada tugas</p>
+                                                <p class="text-muted">Silakan tambah tugas baru</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                @if(isset($tasks) && $tasks->hasPages())
+                <div class="d-flex flex-column align-items-center mt-4">
+                    {{ $tasks->links() }}
+                    <div class="pagination-info">
+                        Showing {{ $tasks->firstItem() }} to {{ $tasks->lastItem() }} of {{ $tasks->total() }} tasks
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>
@@ -730,10 +985,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         showNotification(response.message, 'success');
                         
                         // Refresh the page after a short delay
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 1000);
-                    } else {
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
                         // Revert checkbox state
                         checkbox.prop('checked', !checkbox.prop('checked'));
                         showNotification(response.message || 'Gagal mengubah status tugas', 'danger');
@@ -749,19 +1004,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Re-enable checkbox
                     checkbox.prop('disabled', false);
                 }
-            });
         });
-        
-        // Notification function
-        function showNotification(message, type = 'success') {
+    });
+
+    // Notification function
+    function showNotification(message, type = 'success') {
             // Remove existing notifications
             $('.notification').remove();
             
             // Create and show new notification
             const notification = $(`
                 <div class="alert alert-${type} alert-dismissible fade show notification" role="alert">
-                    ${message}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             `);
             
@@ -771,7 +1026,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Auto hide after 3 seconds
             setTimeout(() => {
                 notification.alert('close');
-            }, 3000);
+        }, 3000);
         }
     });
 
@@ -1067,6 +1322,22 @@ document.addEventListener('DOMContentLoaded', function() {
             // Re-enable pointer events
             document.body.style.pointerEvents = '';
         }, 300);
+    });
+
+    // Scroll to task list function
+    function scrollToTaskList() {
+        const taskList = document.getElementById('taskListSection');
+        if (taskList) {
+            taskList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    // Add click event to "View All Tasks" button
+    document.querySelectorAll('[data-action="view-all-tasks"]').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            scrollToTaskList();
+        });
     });
 });
 </script>
